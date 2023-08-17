@@ -4,10 +4,10 @@ This is HatBazzar - an ecommerce project that is built to help people who are in
 
 The project is supossed to have the following features inside the app:
 
-1# Seller and buyer login page .
-2# Dashboard for both seller and buyer .
-2# Catergories of items and goods.
-3# Intregation of Payment gateway.
-4# Filter or sort items.
-5# Product/goods rating , and feedback section.
-6# Logout button.
+1)Seller and buyer login page .
+2) Dashboard for both seller and buyer .
+3) Catergories of items and goods.
+4) Intregation of Payment gateway.
+5) Filter or sort items.
+6) Product/goods rating , and feedback section.
+7) Logout button.

@@ -1,1 +1,13 @@
-# HatBazzar
+## HatBazzar
+
+This is HatBazzar - an ecommerce project that is built to help people who are intrested in digital market. I am optimistic that this project is going to provide a brief overview of how an e-commerce web works in todays world.
+
+The project is supossed to have the following features inside the app:
+
+1# Seller and buyer login page .
+2# Dashboard for both seller and buyer .
+2# Catergories of items and goods.
+3# Intregation of Payment gateway.
+4# Filter or sort items.
+5# Product/goods rating , and feedback section.
+6# Logout button.

@@ -11,4 +11,4 @@ The project is supossed to have the following features inside the app:
 - [ ] Filter or sort items .
 - [ ] Add items to cart and check out .
 - [ ] Product/goods rating , and feedback section .
-- [ ] Logout button .
+

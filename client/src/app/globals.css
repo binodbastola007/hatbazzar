@@ -1,0 +1,108 @@
+*{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container{
+  background-color: #5c80b5;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.registerBox{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid black;
+  width: max-content;
+  margin: auto;
+  height: max-content;
+  padding:20px 50px;
+  padding-bottom: 32px;
+  background-color:  rgb(255 137 76);
+}
+.form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  }
+ .form input{
+   margin: 5px;
+   text-align: center;
+   padding: 3px 2px;
+   width: 100%;
+ } 
+ .errors{
+  color: darkred;
+  font-size: 0.8rem;
+ }
+ .submitBtn{
+  width: 100%;
+  margin: 5px;
+  text-align: center;
+  padding: 3px 2px;
+  cursor: pointer;
+ }
+ .submitBtn:hover{
+  background-color: #5c80b5;
+  color: white;
+ }
+ .link{
+  font-size: 0.7rem;
+  margin: 10px 0px;
+ }
+ .linkBtn{
+  color: white;
+ }
+.linkBtn:hover{
+  color: #5c80b5
+}
+
+.miniForm{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: max-content;
+}
+.miniForm input{
+  text-align: center;
+  margin: 0px 5px;
+  padding: 1px 0px;
+  font-size: 0.8rem;
+}
+.navBar{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  height: 110px;
+  background-color: rgb(255 137 76);
+}
+.logo{
+  border: 1px solid white;
+  border-radius: 8px;
+}
+.miniLinkBox{
+  font-size: 0.7rem;
+  text-align: left;
+  margin-left: 5px;
+  margin-top: 5px;
+}
+.navSubmitBtn{
+  margin-left: 3px;
+  font-size: 0.7rem;
+  padding: 4px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
+.navSubmitBtn:hover{
+  background-color: #5c80b5;
+  color: white;
+}

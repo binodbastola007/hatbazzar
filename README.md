@@ -13,5 +13,5 @@ The project is supossed to have the following features inside the app:
 - [ ] Product rating/review.
 - [ ] Add products to cart/wish list.
 - [ ] Edit / delete his/her account.
-- [ ] view list of all user.
+- [ ] View list of all user.
 

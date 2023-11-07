@@ -5,6 +5,7 @@ import { Formik, Form, Field , resetForm} from 'formik';
 import * as Yup from 'yup';
 import Image from 'next/image';
 import Link from 'next/link';
+import Navbar from '../components/Navbar';
 
 const SignupSchema = Yup.object().shape({
   phoneNumber: Yup.string()
@@ -20,6 +21,7 @@ const SignupSchema = Yup.object().shape({
 const index=()=>{
   return (
     <>
+    <Navbar/>
     <div className='container'> 
     <div className='registerBox' >
      <h1>login</h1>

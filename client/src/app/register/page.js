@@ -5,6 +5,7 @@ import { Formik, Form, Field , resetForm} from 'formik';
 import * as Yup from 'yup';
 import Image from 'next/image';
 import Link from 'next/link';
+import Navbar from '../components/Navbar';
 
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -35,7 +36,7 @@ const index=()=>{
  
  const handleRegister= async(values) => {
   const res = await fetch('http://localhost:4000/register',{
-    method:'post',
+    method:'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(values)
   })
@@ -45,6 +46,7 @@ const index=()=>{
 
   return (
     <>
+     <Navbar/>
      <div className='container'>
      <div className='registerBox' >
      <h1>Sign Up</h1>

@@ -1,44 +1,50 @@
-import React from 'react';
+import React ,{useState} from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Formik, Form, Field , resetForm} from 'formik';
-import * as Yup from 'yup';
-
+import { FaCartShopping } from 'react-icons/fa6';
+import {RiAccountCircleFill} from 'react-icons/ri';
+import { useRouter } from 'next/navigation';
+ 
 const Navbar = () => {
+   const router = useRouter();
+   const [loggedIn,setLoggedIn]=useState(false);
+
   return (
     <div className='navBar'> 
     <Image
      src='/logo.png'
      alt='logo'
-     height={90}
-     width={90}
+     height={75}
+     width={75}
      className='logo'
+     onClick={()=>router.push('/')}
     />
-   <div>
-    <Formik
-      initialValues={{
-        phoneNumber:'',
-        password: '',
-      }}
-      onSubmit={(values,{resetForm}) => {
-        resetForm();
-        
-      }}
-    >
-      {({ errors, touched }) => (
-        <Form className='miniForm'>
-          <Field  placeholder="Phone number"  name="phoneNumber" />
 
-          <Field  placeholder="Password"  name="password" />
-          
-          <button className='navSubmitBtn' type="submit" >Submit</button>
-        </Form>
+   <div className='searchBar'>
+      <input type='text' placeholder='Search here in hatbazzar'/>
+    </div>
+    <div className='account'>
+      {!loggedIn &&
+      (
+      <>
+        <Link href='/login'  className='links'><span>Login</span></Link>
+        <Link href='/register' className='links'><span>Signup</span></Link>
+         </>
       )}
-    </Formik>
-    <div className='miniLinkBox'>
-        Don't have an account ? <Link className='linkBtn' href='/register'>Sign up</Link> instead
+      {loggedIn && 
+      (
+        <div className='icon'>
+          <RiAccountCircleFill/>
+          <span>Your account</span>
+        </div>
+      )}
+      
+      <div className='icon'>
+      <FaCartShopping color='white'/>
+      <text>0</text>
      </div>
-  </div>
+  
+    </div>
    </div>
   )
 }

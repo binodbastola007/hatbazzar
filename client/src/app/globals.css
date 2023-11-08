@@ -43,7 +43,8 @@
    text-align: center;
    padding: 3px 2px;
    width: 100%;
- } 
+   font-size: 0.8rem;
+ }
  .errors{
   color: darkred;
   font-size: 0.8rem;
@@ -95,7 +96,7 @@
 .searchBar input{
   padding: 5px;
   width: 100%;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
 }
 
 .navSubmitBtn{

@@ -48,6 +48,9 @@ const index=()=>{
   type: res.status == 200 ? 'success': 'error',
   content: data.msg,
   });
+  if(res.status ==200){
+    resetForm();
+  }
  }
 
   return (
@@ -67,9 +70,7 @@ const index=()=>{
        }}
        validationSchema={SignupSchema}
        onSubmit={(values,{resetForm}) => {
-         handleRegister(values);
-         resetForm();
-         
+         handleRegister(values);        
        }}
      >
        {({ errors, touched }) => (

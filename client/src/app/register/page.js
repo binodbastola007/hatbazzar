@@ -6,6 +6,8 @@ import * as Yup from 'yup';
 import Image from 'next/image';
 import Link from 'next/link';
 import Navbar from '../components/Navbar';
+import {  message } from 'antd';
+import Footer from '../components/Footer';
 
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -33,6 +35,7 @@ const SignupSchema = Yup.object().shape({
   
 });
 const index=()=>{
+  const [messageApi, contextHolder] = message.useMessage();
  
  const handleRegister= async(values) => {
   const res = await fetch('http://localhost:4000/register',{
@@ -41,13 +44,16 @@ const index=()=>{
     body: JSON.stringify(values)
   })
   const data = await res.json();
-  console.log(data.msg);
+  messageApi.open({
+  type: res.status == 200 ? 'success': 'error',
+  content: data.msg,
+  });
  }
 
   return (
     <>
      <Navbar/>
-     <div className='container'>
+     <div className='body'>
      <div className='registerBox' >
      <h1>Sign Up</h1>
      <Formik
@@ -68,6 +74,7 @@ const index=()=>{
      >
        {({ errors, touched }) => (
          <Form className='form' >
+         {contextHolder}
            <Field  placeholder="Firstname" name="firstName" />
            {errors.firstName && touched.firstName ? (
              <div  className='errors'>{errors.firstName}</div>
@@ -102,7 +109,7 @@ const index=()=>{
      </Formik>
    </div>
      </div>
-  
+     <Footer/>
     </>
   );
 }

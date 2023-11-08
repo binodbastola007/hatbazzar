@@ -23,13 +23,21 @@ connection();
 
 
 app.post('/register',async(req,res)=>{
-    const data = await User.create(req.body);
-    if(data){
-      res.json({msg:"Registered sucessfully"})
-     }
-     else{
-      res.json({msg:"Couldn't register the user.please try registering again"})
-     }
+    const userExists = await User.findOne({phoneNumber:req.body.phoneNumber});
+    if(userExists){
+      res.status(409).json({msg:"Phone number already taken"})
+    }
+    else{
+      const data = await User.create(req.body);
+
+      if(data){
+        res.json({msg:"Registered sucessfully"})
+       }
+       else{
+        res.json({msg:"Couldn't register the user.please try registering again"})
+       }
+    }
+    
 })
 app.get('/users',async(req,res)=>{
   const data = await User.find();

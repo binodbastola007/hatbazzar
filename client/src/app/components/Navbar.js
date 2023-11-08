@@ -10,16 +10,17 @@ const Navbar = () => {
    const [loggedIn,setLoggedIn]=useState(false);
 
   return (
+    <div>
     <div className='navBar'> 
     <Image
      src='/logo.png'
      alt='logo'
-     height={75}
-     width={75}
+     height={70}
+     width={70}
      className='logo'
      onClick={()=>router.push('/')}
     />
-
+   
    <div className='searchBar'>
       <input type='text' placeholder='Search here in hatbazzar'/>
     </div>
@@ -40,12 +41,21 @@ const Navbar = () => {
       )}
       
       <div className='icon'>
-      <FaCartShopping color='white'/>
+      <FaCartShopping color='white' size={30}/>
       <text>0</text>
      </div>
   
     </div>
    </div>
+    <div className='categories'>
+      <span>All</span>
+      <span>Clothing </span>
+      <span>Electronics</span>
+      <span>Electronic assoceries</span>
+      <span>Mobiles and watches</span>
+      <span>Groceries</span>
+    </div>
+    </div>  
   )
 }
 

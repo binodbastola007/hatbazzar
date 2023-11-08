@@ -4,12 +4,20 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 const index=()=>{
   return (
-    <div className='background'>
-     <Navbar/>
-    </div>
+    <>
+    <Navbar/>
+        <div className='body'>
+        
+        </div>
+     <Footer/>
+
+    </>
+
+ 
   );
 }
 export default index;

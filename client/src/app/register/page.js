@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Formik, Form, Field , resetForm} from 'formik';
+import { Formik, Form, Field ,resetForm} from 'formik';
 import * as Yup from 'yup';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -48,9 +48,6 @@ const index=()=>{
   type: res.status == 200 ? 'success': 'error',
   content: data.msg,
   });
-  if(res.status ==200){
-    resetForm();
-  }
  }
 
   return (
@@ -70,7 +67,8 @@ const index=()=>{
        }}
        validationSchema={SignupSchema}
        onSubmit={(values,{resetForm}) => {
-         handleRegister(values);        
+         handleRegister(values);
+         resetForm();        
        }}
      >
        {({ errors, touched }) => (

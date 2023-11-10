@@ -58,6 +58,7 @@
   background-color: #9ddacc;
   border: none;
   border-radius: 10px;
+  color: black;
  }
  .submitBtn:hover{
   background-color: white;
@@ -93,10 +94,13 @@
 .searchBar{
   width: 40%;
 }
-.searchBar input{
-  padding: 5px;
-  width: 100%;
-  font-size: 0.8rem;
+.searchBar button{
+  background-color:#9ddacc;
+  color: black;
+}
+
+.search{
+  width: 220%;
 }
 
 .navSubmitBtn{
@@ -123,7 +127,12 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  margin: 0px 10px;
 }
+.accountIcon{
+  margin-top: 4px;
+}
+
 .account span{
   font-size: 0.8rem;
   padding: 5px;
@@ -183,3 +192,16 @@
   background-color: rgb(255 137 76);
   
 }
+.dropdown:hover{
+ background-color: black;
+}
+.productForm{
+  margin: 30px auto;
+  font-size: 1rem;
+}
+.productForm h3{
+  text-align: center;
+  padding: 10px;
+ 
+}
+

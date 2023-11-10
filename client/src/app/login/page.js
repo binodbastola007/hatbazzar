@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import {  message } from 'antd';
 
 const SignupSchema = Yup.object().shape({
   phoneNumber: Yup.string()
@@ -20,11 +21,28 @@ const SignupSchema = Yup.object().shape({
   
 });
 const index=()=>{
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const handleLogin = async(values) => {
+    const res = await fetch('http://localhost:4000/login', {
+        method:'POST', 
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values)
+      })
+      const data = await res.json()
+        messageApi.open({
+          type: res.status == 200 ? 'success': 'error',
+          content: data.msg,
+        });
+      console.log(res)
+    }
+
   return (
     <>
     <Navbar/>
     <div className='body'> 
     <div className='registerBox' >
+    {contextHolder}
      <h1>login</h1>
      <Formik
        initialValues={{
@@ -33,7 +51,7 @@ const index=()=>{
        }}
        validationSchema={SignupSchema}
        onSubmit={(values,{resetForm}) => {
-         handleRegister(values);
+         handleLogin(values);
          resetForm();
          
        }}

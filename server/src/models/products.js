@@ -9,6 +9,7 @@ const productSchema = new Schema({
     colors: [{type:String,required:true}],
     currency : {type:String , required:true},
     description: {type:String , required:true},
+    imageUrl : [{type:String,required:true}]
   })
 const ProductCard = mongoose.model('ProductCard',productSchema); 
   

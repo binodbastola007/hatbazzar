@@ -198,6 +198,7 @@
 .productForm{
   margin: 30px auto;
   font-size: 1rem;
+  width: 50%;
 }
 .productForm h3{
   text-align: center;

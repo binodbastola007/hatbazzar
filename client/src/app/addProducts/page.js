@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React ,{useEffect, useState} from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { InboxOutlined, UploadOutlined } from '@ant-design/icons';
@@ -21,6 +21,11 @@ import {
   Upload,
 } from 'antd';
 import {  message } from 'antd';
+import { FaS } from 'react-icons/fa6';
+
+
+const url = 'https://api.cloudinary.com/v1_1/dwnuwdsdb/image/upload';
+const preset_key = 'ml_default';
 
 const { Option } = Select;
 const formItemLayout = {
@@ -31,8 +36,11 @@ const formItemLayout = {
     span: 14,
   },
 };
+
+
+
 const normFile = (e) => {
-    console.log('Upload event:', e);
+   console.log('Upload event:', e);
     if (Array.isArray(e)) {
       return e;
     }
@@ -43,8 +51,25 @@ const page = () => {
 
   const [messageApi, contextHolder] = message.useMessage();
   const [form] = Form.useForm();
+  const [loading,setLoading]=useState(false);
   
   const onFinish = async(values) => {
+    setLoading(true);
+    const URL = [];
+    for(let i=0;i<values.upload.length;i++){
+      const file =  values.upload[i].originFileObj;
+      const formData = new FormData();
+      formData.append('file',file);
+      formData.append("upload_preset",preset_key);
+  
+      const res = await fetch(url,{
+        method:'POST',
+        body:formData,
+      })
+      const data = await res.json();
+      URL.push(data.url);
+    }
+    values.upload = URL;
     const res = await fetch('http://localhost:4000/products/add',{
       method:'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -55,12 +80,19 @@ const page = () => {
     type: res.status == 200 ? 'success': 'error',
     content: data.msg,
     });
-    form.resetFields();
+    form.resetFields();  
+    setLoading(false);
   };
 
-
   const suffixSelector = (
-    <Form.Item name="suffix" noStyle>
+    <Form.Item
+      rules={[
+          {
+            required: true,
+            message: 'Please choose the currency from right ',
+          },
+          ]}
+     name="suffix" noStyle>
       <Select
         style={{
           width: 70,
@@ -91,13 +123,11 @@ const page = () => {
       'color-picker': null,
     }}
     style={{
-      width: 800,
       backgroundColor:'rgba(0, 0, 0,0.05)'
     }}
   >
      {contextHolder}
    <h3>Add product in hatbazzar</h3>
-
    <Form.Item
         name="productname"
         label="Product name"
@@ -184,8 +214,8 @@ const page = () => {
       getValueFromEvent={normFile}
       extra=""
     >
-      <Upload name="logo" action="/upload.do" listType="picture">
-        <Button icon={<UploadOutlined />}>Click to upload</Button>
+      <Upload name="logo" action='/upload.do' listType="picture">
+        <Button icon={<UploadOutlined />} >Click to upload</Button>
       </Upload>
     </Form.Item>
 
@@ -213,10 +243,10 @@ const page = () => {
       }}
     >
       <Space>
-        <Button type="primary" htmlType="submit" className='submitBtn'>
+        <Button loading={loading} type="primary" htmlType="submit" className='submitBtn'>
           Submit
         </Button>
-        <Button htmlType="reset">reset</Button>
+        <Button onClick={()=>setLoading(false)} htmlType="reset">reset</Button>
       </Space>
     </Form.Item>
   </Form>

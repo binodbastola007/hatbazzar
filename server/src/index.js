@@ -59,7 +59,7 @@ app.post('/login',async (req,res)=>{
 })
 
 
-app.post('/products/add',async(req,res)=>{
+app.post('/products/add',async(req,res)=>{   
    const product={
     productName:req.body.productname,
     price:req.body.price,
@@ -67,7 +67,8 @@ app.post('/products/add',async(req,res)=>{
     category:req.body.select,
     colors:req.body['select-multiple'],
     currency:req.body.suffix,
-    description:req.body.intro
+    description:req.body.intro,
+    imageUrl:req.body.upload
    }
    try{
     

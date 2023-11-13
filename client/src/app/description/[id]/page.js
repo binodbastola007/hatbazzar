@@ -1,0 +1,119 @@
+'use client'
+import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import Navbar from '@/app/components/Navbar';
+import Footer from '@/app/components/Footer';
+import { message } from 'antd';
+import { useParams } from 'next/navigation';
+import { Rate } from 'antd';
+import '../../styles/description.css';
+
+const page = () => {
+
+   const [data, setData] = useState({});
+   const [images, setImages] = useState([]);
+   const [path, setPath] = useState('');
+   const [colors,setColors] = useState([]);
+   const [messageApi, contextHolder] = message.useMessage();
+   const params = useParams();
+
+   const handleImageClick=()=>{
+      console.log("Do something here");
+   }
+   const fetchProduct = async (id) => {
+      try {
+         const res = await fetch(`http://localhost:4000/product/${id}`);
+         const result = await res.json();
+         if (result.data) {
+            setData(result.data);
+            setImages(result.data.imageUrl);
+            setColors(result.data.colors)
+         }
+         else {
+            messageApi.open({
+               type: 'error',
+               content: result.msg,
+            });
+         }
+      }
+      catch (err) {
+         console.log(err);
+      }
+   }
+
+   useEffect(() => {
+      fetchProduct(params.id);
+   }, [])
+
+   return (
+      <>
+         <Navbar />
+         {contextHolder}
+         <div className='body'>
+            <div className='container'>
+               <div className='details'>
+               <div className='imagesArray'>
+               {images.map((item,index)=>{
+                  return (
+                     <>
+                     <Image key={index}  onClick={()=>setPath(item)} src={item} alt=''height={70} width={70} className='img'/> &nbsp;
+                     </>
+                     )
+               })}
+             </div>
+                  <div className='productImg'>
+                     <Image
+                        src={path?path:images[0]}
+                        alt='product_img'
+                        width={550}
+                        height={550}
+                        className='img'
+                        priority
+                        style={{border:'none'}}
+                     />
+                  </div>
+                  <div className='productDetails'>
+                     <span className='name'>Product name: {data.productName}</span>
+                     <span className='category'>Category: {data.category}</span>
+                     <span className='colors'>
+                     Available colors:&nbsp;
+                     {(colors.length>0) && 
+                     (colors.map((item,index)=>{
+                        if(index===colors.length-1){
+                           return item;
+                        }
+                        return item + ','+' ';
+                     })
+                     )
+                     }
+                     </span>
+                     <span className='price'>Price: {data.currency} {data.price}</span>
+                     <Rate disabled value={data.rating} />
+
+                      <div className='productButtons'>
+                      <button className='buyProduct'>Buy now</button>
+                      <button className='addIntoCart'>Add to cart</button>
+                      </div>
+
+                     <div className='descriptionBox'>
+                        <h4>Product Details</h4>
+                        <div className='description'>
+                           <span>{data.description}</span>
+                        </div>
+                        <div className='rating'>
+                           <span>({data.rating}/5) </span>
+                           <Rate disabled value={data.rating} />
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <Footer />
+      </>
+
+   )
+}
+
+export default page;

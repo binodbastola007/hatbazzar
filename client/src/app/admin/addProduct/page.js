@@ -1,7 +1,7 @@
 'use client'
 import React ,{useEffect, useState} from 'react'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
+import Navbar from '@/app/components/Navbar';
+import Footer from '../../components/Footer';
 import { InboxOutlined, UploadOutlined } from '@ant-design/icons';
 import {
   Button,
@@ -22,6 +22,7 @@ import {
 } from 'antd';
 import {  message } from 'antd';
 import { FaS } from 'react-icons/fa6';
+import '../../styles/addProducts.css';
 
 
 const url = 'https://api.cloudinary.com/v1_1/dwnuwdsdb/image/upload';
@@ -140,7 +141,7 @@ const page = () => {
           },
         ]}
       >
-        <Input />
+        <Input showCount maxLength={25} />
       </Form.Item>
    
     <Form.Item
@@ -155,11 +156,14 @@ const page = () => {
       ]}
     >
       <Select placeholder="Please select category of the product">
-        <Option value="fashion">Fashion</Option>
+        <Option value="fashion and beauty">Fashion and beauty</Option>
         <Option value="electronics">Electronics</Option>
+        <Option value="laptops">Laptops</Option>
         <Option value="electronic assoceries">Electronic assoceries</Option>
         <Option value="mobiles and watches">Mobiles and watches</Option>
-        <Option value="Groceries and pets">Groceries and pets</Option>
+        <Option value="groceries and pets">Groceries and pets</Option>
+        <Option value="games and sports">Games and sports</Option>
+        <Option value="musical instruments">Musical instruments</Option>
       </Select>
     </Form.Item>
 
@@ -184,7 +188,7 @@ const page = () => {
         <Option value="orange">Orange</Option>
         <Option value="purple">Purple</Option>
         <Option value="grey">Grey</Option>
-        <Option value="grey">Golden</Option>
+        <Option value="golden">Golden</Option>
       </Select>
     </Form.Item>
     <Form.Item
@@ -212,7 +216,12 @@ const page = () => {
       label="Product image"
       valuePropName="fileList"
       getValueFromEvent={normFile}
-      extra=""
+      rules={[
+        {
+          required: true,
+          message: 'Please upload the image of your product!',
+        },
+      ]}
     >
       <Upload name="logo" action='/upload.do' listType="picture">
         <Button icon={<UploadOutlined />} >Click to upload</Button>
@@ -233,7 +242,7 @@ const page = () => {
           },
         ]}
       >
-        <Input.TextArea showCount maxLength={100} placeholder='Please provide the description of the product' />
+        <Input.TextArea showCount maxLength={1000} placeholder='Please provide the description of the product' />
       </Form.Item>
 
     <Form.Item

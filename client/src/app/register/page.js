@@ -8,6 +8,7 @@ import Link from 'next/link';
 import Navbar from '../components/Navbar';
 import {  message } from 'antd';
 import Footer from '../components/Footer';
+import '../styles/register.css';
 
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string()

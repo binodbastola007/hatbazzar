@@ -58,6 +58,16 @@ app.post('/login',async (req,res)=>{
 
 })
 
+app.get('/products/all',async(req,res)=>{
+  const data = await ProductCard.find();
+  
+  if(data.length>0){
+    res.json({data});
+   }
+   else{
+    res.json({msg:"No products in hatbazzar"});
+   }
+})
 
 app.post('/products/add',async(req,res)=>{   
    const product={
@@ -85,14 +95,36 @@ app.post('/products/add',async(req,res)=>{
    }
 
 })
-app.get('/products/all',async(req,res)=>{
-    const data = await ProductCard.find();
-    if(data.length>0){
+
+app.delete('/product/delete/:id',async(req,res)=>{
+  try{
+    const data = await ProductCard.deleteOne({_id:req.params.id});
+    if(data){
+      res.json({msg:"Removed product from the listing"});
+     }
+     else{
+      res.json({msg:"Couln't remove the product"})
+     }
+  }
+  catch(err){
+    console.log(err);
+  }
+  
+})
+app.get('/product/:id',async(req,res)=>{
+  try{
+    const data = await ProductCard.findById(req.params.id);
+    if(data){
       res.json({data});
      }
      else{
-      res.json({msg:"No products found"})
+      res.json({msg:"Couln't find the product description"})
      }
+  }
+  catch(err){
+    res.json({msg:"Invalid product id"})
+  }
+  
 })
 
 app.listen(port, () => {

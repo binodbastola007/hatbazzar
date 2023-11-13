@@ -5,7 +5,6 @@
 }
 
 .body{
-  /* background-color: #ffc15d; */
   background-image: linear-gradient(#ffc15d,#ff894c);
   min-height: 75.7vh;
   max-height: max-content;
@@ -16,193 +15,80 @@
   align-items: center;
   position: relative;
   box-shadow: 0px 4px 10px 1px #ffc15d;
-
 }
-.registerBox{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: 2px solid black;
-  width: max-content;
-  margin: auto;
-  margin-top: 4%;
+
+/* ======Product card======= */
+.cardList{
+  width: 95vw;
   height: max-content;
-  padding:20px 50px;
-  padding-bottom: 32px;
-  background-color:  rgb(255 137 76);
-  
-}
-.form{
-  display: flex;
-  flex-direction: column;
+  margin: 40px 100px;
+  display:flex ;
+  flex-direction: row;
   align-items: center;
-  justify-content: space-around;
-  }
- .form input{
-   margin: 5px;
-   text-align: center;
-   padding: 3px 2px;
-   width: 100%;
-   font-size: 0.8rem;
- }
- .errors{
-  color: darkred;
-  font-size: 0.8rem;
- }
- .submitBtn{
-  width: 100%;
-  margin: 5px;
-  text-align: center;
-  padding: 3px 2px;
-  cursor: pointer;
-  background-color: #9ddacc;
-  border: none;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.card{
+  height: 390px;
+  width: 290px;
   border-radius: 10px;
-  color: black;
- }
- .submitBtn:hover{
-  background-color: white;
- }
- .link{
-  font-size: 0.7rem;
-  margin: 10px 0px;
- }
- .linkBtn{
-  color: white;
- }
-.linkBtn:hover{
-  color: #9ddacc;
+  border: 1px solid black;
+  margin: 25px 25px;
 }
-
-
-
-/* ----------------NavbarCss-------------- */
-
-.navBar{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
-  height: 10vh;
-  background-color: rgb(255 137 76);
+.card:hover{
+  box-shadow: 3px 4px 13px 3px rgba(0, 0, 0, 0.333);
+  transform: translate(1px,-1px)
 }
-.logo{
-  border: 1px solid white;
-  border-radius: 8px;
+.cardPic{
+  height:70%;
+  width: 100%;
+}
+.cardPic img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
   cursor: pointer;
+  border-radius: 10px 10px 0px 0px;
 }
-.searchBar{
-  width: 40%;
-}
-.searchBar button{
-  background-color:#9ddacc;
-  color: black;
-}
-
-.search{
-  width: 220%;
-}
-
-.navSubmitBtn{
-  margin-left: 3px;
-  font-size: 0.7rem;
-  padding: 4px;
-  cursor: pointer;
-  border: none;
-  border-radius: 5px;
-}
-.navSubmitBtn:hover{
-  background-color: #9ddacc;
-}
-.account{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;  
-}
-
-.icon{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  margin: 0px 10px;
-}
-.accountIcon{
-  margin-top: 4px;
-}
-
-.account span{
-  font-size: 0.8rem;
-  padding: 5px;
-  border-radius: 8px;
-  margin: 0px 5px;
-  background-color:#9ddacc ;
-  cursor: pointer;
-}
-.account span:hover{
-  background-color: white;
-}
-.account text{
-  font-size: 0.7rem;
-  color: darkred;
-  margin-left: 4px;
-}
-
-.links{
-  text-decoration: none;
-  color: black;
-}
-
-
-
-/* -------HomeCss----------- */
-
-.categories{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0px 5px 10px 3px rgb(255 137 76);
-  background-color: #fff;
-  position: relative;
-  z-index: 9;
-}
-.categories span{
-  font-size: 0.7rem;
-  background-color: rgb(255 137 76);
-  margin: 2px 8px;
-  padding: 5px;
-  border-radius: 5px;
-  
-  }
-.categories span:hover{
-  background-color: #9ddacc;
-  cursor: pointer;
-  }
-
-.footer{
-  font-size: 0.7rem;
+.cardDescription{
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  height: 10vh;
-  background-color: rgb(255 137 76);
-  
+  background-image: linear-gradient(#ffc15d,#ff894c);
+  height: 30%;
+  position:relative;
+  padding: 0px 5px;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  border-radius:  0px 0px 10px 10px;
 }
-.dropdown:hover{
- background-color: black;
+.cardDescription span{
+  font-size: 0.8rem;
+  margin :3px 0px;
 }
-.productForm{
-  margin: 30px auto;
-  font-size: 1rem;
-  width: 50%;
+.cardTitle{
+  font-weight: bolder;
 }
-.productForm h3{
-  text-align: center;
-  padding: 10px;
- 
+.cardBtn button{
+font-size: 0.8rem;
+padding: 3px;
+border-radius: 5px;
+background-color: #9ddacc;
 }
-
+.buyNow{
+  position: absolute;
+  bottom:8px;
+  left: 12px;
+  cursor: pointer;
+}
+.buyNow:hover{
+  background-color: white;
+}
+.addToCart{
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+  cursor: pointer;
+}
+.addToCart:hover{
+  background-color: white;
+}

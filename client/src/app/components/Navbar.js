@@ -1,13 +1,17 @@
+'use client';
+
 import React ,{useState} from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaCartShopping } from 'react-icons/fa6';
+import { FaCartShopping, FaS } from 'react-icons/fa6';
 import {RiAccountCircleFill} from 'react-icons/ri';
 import { useRouter } from 'next/navigation';
 import { Dropdown, Space } from 'antd';
 import { Input } from 'antd';
 const { Search } = Input;
 import { AudioOutlined } from '@ant-design/icons';
+import { Button} from 'antd';
+import '../styles/navBar.css'
 
 const suffix = (
   <AudioOutlined
@@ -40,9 +44,27 @@ const items = [
 ];
 
 const Navbar = () => {
+
    const router = useRouter();
    const [loggedIn,setLoggedIn]=useState(false);
    const [user,setUser] = useState('admin');
+   const [loadings,setLoadings]=useState([]);
+
+
+   const enterLoading = (index) => {
+    setLoadings((prevLoadings) => {
+      const newLoadings = [...prevLoadings];
+        newLoadings[index] = true;
+        return newLoadings;
+    });
+  //   setTimeout(() => {
+  //     setLoadings((prevLoadings) => {
+  //       const newLoadings = [...prevLoadings];
+  //       newLoadings[index] = false;
+  //       return newLoadings;
+  //     });
+  //   }, 6000);
+  }
 
   return (
     <div>
@@ -53,6 +75,7 @@ const Navbar = () => {
      height={70}
      width={70}
      className='logo'
+     priority
      onClick={()=>router.push('/')}
     />
    
@@ -109,22 +132,37 @@ const Navbar = () => {
     {(user==='admin')&&
       (
         <>
-          <span >All products</span>
-          <span onClick={()=>router.push('/addProducts')}>Add products</span>
-          <span>Remove products</span>
-          <span>Delete user</span>
-          <span>Orders</span>
+          <Button loading={loadings[0]} style={{color:'black'}}
+           onClick={()=>{
+              enterLoading(0);
+              router.push('/');
+            }
+           }>All products</Button>
+          <Button loading={loadings[1]} style={{color:'black'}} 
+             onClick={()=>{
+              enterLoading(1);
+              router.push('/admin/addProduct');
+            }
+            }>Add products</Button>
+          <Button loading={loadings[2]} style={{color:'black'}}>Edit product details</Button>
+          <Button loading={loadings[3]} style={{color:'black'}} onClick={()=>{
+          enterLoading(3);
+          router.push('/admin/removeProduct');
+          }
+          }>Remove product</Button>
+          <Button loading={loadings[4]} style={{color:'black'}}>Delete user</Button>
+          <Button loading={loadings[5]} style={{color:'black'}}>Orders</Button>
         </>
       )}
      {(user==='user')&&
       (
         <>
-      <span>All</span>
-      <span>Fashion</span>
-      <span>Electronics</span>
-      <span>Electronic assoceries</span>
-      <span>Mobiles and watches</span>
-      <span>Groceries and pets</span>
+      <Button loading={loading} style={{color:'black'}}>All</Button>
+      <Button loading={loading} style={{color:'black'}}>Fashion</Button>
+      <Button loading={loading} style={{color:'black'}}>Electronics</Button>
+      <Button loading={loading} style={{color:'black'}}>Electronic assoceries</Button>
+      <Button loading={loading} style={{color:'black'}}>Mobiles and watches</Button>
+      <Button loading={loading} style={{color:'black'}}>Groceries and pets</Button>
         </>
       )}      
 
@@ -134,4 +172,4 @@ const Navbar = () => {
   )
 }
 
-export default Navbar
+export default Navbar;

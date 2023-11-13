@@ -1,0 +1,103 @@
+.navBar{
+   width: 100vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    height: 10vh;
+    background-color: rgb(255 137 76);
+  }
+  .logo{
+    border: 1px solid white;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  .searchBar{
+    width: 40%;
+  }
+  .searchBar button{
+    background-color:#9ddacc;
+    color: black;
+  }
+  
+  .search{
+    width: 220%;
+  }
+  
+  .navSubmitBtn{
+    margin-left: 3px;
+    font-size: 0.7rem;
+    padding: 4px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+  }
+  .navSubmitBtn:hover{
+    background-color: #9ddacc;
+  }
+  .account{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;  
+  }
+  
+  .icon{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 0px 10px;
+  }
+  .accountIcon{
+    margin-top: 4px;
+  }
+  
+  .account span{
+    font-size: 0.8rem;
+    padding: 5px;
+    border-radius: 8px;
+    margin: 0px 5px;
+    background-color:#9ddacc ;
+    cursor: pointer;
+  }
+  .account span:hover{
+    background-color: white;
+  }
+  .account text{
+    font-size: 0.7rem;
+    color: darkred;
+    margin-left: 4px;
+  }
+  
+  .links{
+    text-decoration: none;
+    color: black;
+  }
+  .categories{
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 5px 10px 3px rgb(255 137 76);
+    background-color: #fff;
+    position: relative;
+    z-index: 9;
+  }
+  .categories button{
+    font-size: 0.7rem;
+    background-color: rgb(255 137 76);
+    margin: 2px 8px;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    
+    }
+  .categories button:hover{
+    background-color: #9ddacc;
+    cursor: pointer;
+    }
+
+  

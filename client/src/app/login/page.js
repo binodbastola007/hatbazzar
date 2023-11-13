@@ -8,6 +8,7 @@ import Link from 'next/link';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import {  message } from 'antd';
+import '../styles/login.css';
 
 const SignupSchema = Yup.object().shape({
   phoneNumber: Yup.string()
@@ -41,7 +42,7 @@ const index=()=>{
     <>
     <Navbar/>
     <div className='body'> 
-    <div className='registerBox' >
+    <div className='loginBox' >
     {contextHolder}
      <h1>login</h1>
      <Formik

@@ -68,7 +68,7 @@ const page = () => {
                         alt='product_img'
                         width={550}
                         height={550}
-                        className='img'
+                       
                         priority
                         style={{border:'none'}}
                      />

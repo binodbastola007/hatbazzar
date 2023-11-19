@@ -144,7 +144,12 @@ const Navbar = () => {
               router.push('/admin/addProduct');
             }
             }>Add products</Button>
-          <Button loading={loadings[2]} style={{color:'black'}}>Edit product details</Button>
+          <Button loading={loadings[2]} style={{color:'black'}}
+              onClick={()=>{
+              enterLoading(2);
+              router.push('/admin/editProduct');
+            }
+          }>Edit product details</Button>
           <Button loading={loadings[3]} style={{color:'black'}} onClick={()=>{
           enterLoading(3);
           router.push('/admin/removeProduct');

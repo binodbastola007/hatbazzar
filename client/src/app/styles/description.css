@@ -8,6 +8,7 @@
 }
 .imagesArray{
     height: max-content;
+    width:100px;
     background-color: rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
@@ -17,20 +18,23 @@
 .img{
     cursor: pointer;
     margin: 3px 3px;
+    width: 90%;
 }
 .img:hover{
     border: 1px solid black;
 }
 .details{
-    display: flex;
-    flex-direction: row;
+    display:flex;
+    flex-direction:row;
     margin:20px 0px;
     gap: 80px;
+    width: 100%;
 }
 .productDetails{
     display: flex;
     flex-direction: column;
     line-height: 1.7rem;
+    width: 60%;
 }
 .name{
     font-size: 0.9rem;

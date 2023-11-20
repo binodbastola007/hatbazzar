@@ -157,7 +157,7 @@ const Navbar = () => {
      {(user==='customer')&&
       (
         <>
-      <Button loading={loadings[0]} onClick={()=>{enterLoading(0)}} style={{color:'black'}}>All</Button>
+      <Button loading={loadings[0]} onClick={()=>{enterLoading(0);router.push('/')}} style={{color:'black'}}>All</Button>
       <Button loading={loadings[1]} onClick={()=>{enterLoading(1)}} style={{color:'black'}}>Fashion and beauty</Button>
       <Button loading={loadings[2]} onClick={()=>{enterLoading(2)}} style={{color:'black'}}>Electronics</Button>
       <Button loading={loadings[3]} onClick={()=>{enterLoading(3)}} style={{color:'black'}}>Laptops</Button>

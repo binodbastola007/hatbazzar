@@ -103,3 +103,28 @@
 .newInput{
     font-size: 0.7rem;
 }
+.imageContainer{
+    position: relative;
+}
+.deleteImageArr{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+}
+.image{
+    border: 1px solid black;
+    margin: 0px 4px;
+}
+.imageDeleteBtn{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: white;
+    border-radius: 10px;
+    padding: 5px;
+    cursor: pointer;
+}
+.imageDeleteBtn:hover{
+    box-shadow: 0px 4px 10px 1px #c90808;  
+}

@@ -8,7 +8,7 @@
     background-color: rgb(255 137 76);
   }
   .logo{
-    border: 1px solid white;
+    border: 1px solid rgb(0, 0, 0);
     border-radius: 8px;
     cursor: pointer;
   }

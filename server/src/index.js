@@ -155,6 +155,26 @@ app.get('/product/:id',async(req,res)=>{
   
 })
 
+
+app.patch('/product/deleteimg/:id',async(req,res)=>{
+  try{
+    const id = req.params.id;
+    const updatedData = {imageUrl:req.body.images};
+    const options = { new: true };
+    const data = await ProductCard.findByIdAndUpdate(id,updatedData,options);
+    if(data){
+      res.json({msg:"Succesfully deleted the image"});
+     }
+     else{
+      res.json({msg:"Couln't delete the image"});
+     }
+  }
+  catch(err){
+    console.log(err);
+  }
+  
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })

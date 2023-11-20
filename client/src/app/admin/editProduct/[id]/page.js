@@ -3,11 +3,13 @@ import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Navbar from '@/app/components/Navbar';
 import Footer from '@/app/components/Footer';
-import { EditOutlined } from '@ant-design/icons'
+import { EditOutlined } from '@ant-design/icons';
+import { RiDeleteBin7Fill } from 'react-icons/ri';
 import { useRouter, useParams } from 'next/navigation';
 import { Modal } from 'antd';
 import '../../../styles/editProduct.css';
 import { InboxOutlined, UploadOutlined } from '@ant-design/icons';
+import { Popconfirm } from 'antd';
 import {
    Button,
    Checkbox,
@@ -27,6 +29,7 @@ import {
 } from 'antd';
 import { message } from 'antd';
 import { FaS } from 'react-icons/fa6';
+import index from '@/app/page';
 
 const url = 'https://api.cloudinary.com/v1_1/dwnuwdsdb/image/upload';
 const preset_key = 'ml_default';
@@ -61,15 +64,21 @@ const page = () => {
    const [path, setPath] = useState('');
    const [colors, setColors] = useState([]);
    const [isModalOpen, setIsModalOpen] = useState(false);
+   const [isModal2Open, setIsModal2Open] = useState(false);
 
    const showModal = () => {
       setIsModalOpen(true);
    };
+   const showModal2 = () => {
+      setIsModal2Open(true);
+   }
    const handleOk = () => {
       setIsModalOpen(false);
+      setIsModal2Open(false);
    };
    const handleCancel = () => {
       setIsModalOpen(false);
+      setIsModal2Open(false);
    };
 
    const [messageApi, contextHolder] = message.useMessage();
@@ -78,7 +87,7 @@ const page = () => {
 
    const onFinish = async (values) => {
       setLoading(true);
-      const URL = [];
+      const URL = [...images];
       for (let i = 0; i < values.upload.length; i++) {
          const file = values.upload[i].originFileObj;
          const formData = new FormData();
@@ -103,7 +112,6 @@ const page = () => {
          type: res.status == 200 ? 'success' : 'error',
          content: data.msg,
       });
-      form.resetFields();
       setLoading(false);
       setIsModalOpen(false);
       fetchProduct(params.id);
@@ -130,6 +138,25 @@ const page = () => {
          </Select>
       </Form.Item>
    );
+
+   const handleDelete = async (item, index) => {
+      images.splice(index, 1);
+      const res = await fetch(`http://localhost:4000/product/deleteimg/${params.id}`, {
+         method: 'PATCH',
+         headers: { 'Content-Type': 'application/json' },
+         body: JSON.stringify({ images })
+      })
+      const data = await res.json();
+      console.log(data);
+      messageApi.open({
+         type: res.status == 200 ? 'success' : 'error',
+         content: data.msg,
+      });
+      handleCancel();
+
+
+
+   }
 
 
    const fetchProduct = async (id) => {
@@ -167,16 +194,18 @@ const page = () => {
                <div className='settings'>
                   <h3 className='title'>Update your product details</h3>
                   <div className='editBoxes' onClick={showModal}>Edit your product name <EditOutlined /></div>
-                  <div className='editBoxes' onClick={showModal}>Add/Delete product image <EditOutlined /></div>
+                  <div className='editBoxes' onClick={showModal}>Add product image <EditOutlined /></div>
+                  <div className='editBoxes' onClick={showModal2}>Delete product image <EditOutlined /></div>
                   <div className='editBoxes' onClick={showModal}>Change product category <EditOutlined /> </div>
                   <div className='editBoxes' onClick={showModal}>Edit product colors <EditOutlined /></div>
                   <div className='editBoxes' onClick={showModal}>Edit product price <EditOutlined /></div>
                   <div className='editBoxes' onClick={showModal}>Change product rating <EditOutlined /></div>
                   <div className='editBoxes' onClick={showModal}>Edit product description <EditOutlined /></div>
-                  <Modal title="Update your product details" 
-                   open={isModalOpen}
-                   onOk={handleOk} onCancel={handleCancel}
-                   footer={null}>
+                  <Modal title="Update your product details"
+                     centered
+                     open={isModalOpen}
+                     onOk={handleOk} onCancel={handleCancel}
+                     footer={null}>
                      <Form
                         form={form}
                         className='productForm'
@@ -184,14 +213,18 @@ const page = () => {
                         {...formItemLayout}
                         onFinish={onFinish}
                         initialValues={{
-                           'input-number': 3,
-                           'checkbox-group': ['A', 'B'],
-                           rate: 3.5,
-                           'color-picker': null,
+                           'productname': data.productName,
+                           'select': data.category,
+                           'select-multiple': [...colors],
+                           'price': data.price,
+                           'suffix': data.currency,
+                           'rate': data.rating,
+                           'upload': [],
+                           'intro': data.description
                         }}
                         style={{
                            backgroundColor: 'rgba(0, 0, 0,0.05)',
-                           padding:'10px'
+                           padding: '10px'
                         }}
                      >
                         {contextHolder}
@@ -284,7 +317,7 @@ const page = () => {
                            getValueFromEvent={normFile}
                            rules={[
                               {
-                                 required: true,
+                                 required: false,
                                  message: 'Please upload the image of your product!',
                               },
                            ]}
@@ -319,12 +352,38 @@ const page = () => {
                         >
                            <Space>
                               <Button loading={loading} type="primary" htmlType="submit" className='submitBtn'>
-                                 Submit
+                                 Save changes
                               </Button>
-                              <Button onClick={() => setLoading(false)} htmlType="reset">reset</Button>
                            </Space>
                         </Form.Item>
                      </Form>
+                  </Modal>
+                  <Modal title="Delete product image/s"
+                     centered
+                     open={isModal2Open}
+                     onOk={handleOk} onCancel={handleCancel}
+                     footer={null}>
+                     <div className='deleteImageArr'>
+                        {images.map((item, index) => {
+                           return (<div className='imageContainer'><Image
+                              src={item}
+                              alt=''
+                              height={140}
+                              width={140}
+                              className='image'
+                           />
+                              <Popconfirm
+                                 title="Delete the image"
+                                 description="Are you sure to delete this image?"
+                                 okText="Yes"
+                                 cancelText="No"
+                                 onConfirm={()=>handleDelete(item, index)}
+                              >
+                                 <RiDeleteBin7Fill size={20} color='#c90808' className='imageDeleteBtn' />
+                              </Popconfirm>
+                           </div>)
+                        })}
+                     </div>
                   </Modal>
                </div>
                <div className='productDetails'>

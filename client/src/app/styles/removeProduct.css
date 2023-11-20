@@ -1,7 +1,7 @@
 .card{
     position: relative;
 }
-.deleteBtn{
+.editBtn{
     position: absolute;
     color:#c90808;
     top: 3px;
@@ -9,6 +9,20 @@
     padding: 6px;
     cursor: pointer;
     border-radius: 20px;
+    background-color: white;
+}
+.editBtn:hover{
+    box-shadow: 0px 4px 10px 1px #c90808;   
+}
+.deleteBtn{
+    position: absolute;
+    color:#c90808;
+    top: 3px;
+    left: 5px;
+    padding: 6px;
+    cursor: pointer;
+    border-radius: 20px;
+    background-color: white;
 }
 .deleteBtn:hover{
     box-shadow: 0px 4px 10px 1px #c90808;   

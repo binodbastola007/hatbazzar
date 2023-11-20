@@ -9,15 +9,18 @@ import { Card } from 'antd';
 const { Meta } = Card;
 import { Rate } from 'antd';
 import { message } from 'antd';
+import { Tooltip } from 'antd';
 import { RiDeleteBin7Fill } from 'react-icons/ri';
+import { AiFillEdit } from "react-icons/ai";
 import { Button, Modal } from 'antd';
 import '../../styles/removeProduct.css';
-
+import { useRouter } from 'next/navigation';
 
 const page = () => {
 
    const [data, setData] = useState([]);
    const [messageApi, contextHolder] = message.useMessage();
+   const router = useRouter();
 
    const [open, setOpen] = useState(false);
    const showModal = () => {
@@ -76,7 +79,12 @@ const page = () => {
 
                         <div className='card' key={details._id} >
                            <>
+                             <Tooltip title="Edit details">
+                              <AiFillEdit size={30} className='editBtn' onClick={()=>router.push(`/admin/editProduct/${details._id}`)} />
+                             </Tooltip>
+                             <Tooltip title="Delete product">
                               <RiDeleteBin7Fill size={30} className='deleteBtn' onClick={()=>showModal()}/>
+                              </Tooltip>
                               <Modal
                                  title="Remove Product"
                                  mask={false}

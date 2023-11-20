@@ -21,7 +21,7 @@
 .cardList{
   width: 95vw;
   height: max-content;
-  margin: 40px 100px;
+  margin: 5px 100px;
   display:flex ;
   flex-direction: row;
   align-items: center;

@@ -96,6 +96,34 @@ app.post('/products/add',async(req,res)=>{
 
 })
 
+app.patch('/product/edit/:id',async(req,res)=>{
+  try{
+    const id = req.params.id;
+    const updatedData = {
+      productName:req.body.productname,
+      price:req.body.price,
+      rating:req.body.rate,
+      category:req.body.select,
+      colors:req.body['select-multiple'],
+      currency:req.body.suffix,
+      description:req.body.intro,
+      imageUrl:req.body.upload
+    };
+    const options = { new: true };
+    const data = await ProductCard.findByIdAndUpdate(id,updatedData,options);
+    if(data){
+      res.json({msg:"Succesfully updated the product"});
+     }
+     else{
+      res.json({msg:"Couln't update the product"})
+     }
+  }
+  catch(err){
+    console.log(err);
+  }
+  
+})
+
 app.delete('/product/delete/:id',async(req,res)=>{
   try{
     const data = await ProductCard.deleteOne({_id:req.params.id});

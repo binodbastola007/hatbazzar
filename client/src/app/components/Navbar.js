@@ -47,7 +47,7 @@ const Navbar = () => {
 
    const router = useRouter();
    const [loggedIn,setLoggedIn]=useState(false);
-   const [user,setUser] = useState('admin');
+   const [user,setUser] = useState('customer');
    const [loadings,setLoadings]=useState([]);
 
 
@@ -144,30 +144,28 @@ const Navbar = () => {
               router.push('/admin/addProduct');
             }
             }>Add products</Button>
-          <Button loading={loadings[2]} style={{color:'black'}}
-              onClick={()=>{
-              enterLoading(2);
-              router.push('/admin/editProduct');
-            }
-          }>Edit product details</Button>
-          <Button loading={loadings[3]} style={{color:'black'}} onClick={()=>{
-          enterLoading(3);
+  
+          <Button loading={loadings[2]} style={{color:'black'}} onClick={()=>{
+          enterLoading(2);
           router.push('/admin/removeProduct');
           }
-          }>Remove product</Button>
-          <Button loading={loadings[4]} style={{color:'black'}}>Delete user</Button>
-          <Button loading={loadings[5]} style={{color:'black'}}>Orders</Button>
+          }>Update/remove product</Button>
+          <Button loading={loadings[3]} style={{color:'black'}}>Delete user</Button>
+          <Button loading={loadings[4]} style={{color:'black'}}>Orders</Button>
         </>
       )}
-     {(user==='user')&&
+     {(user==='customer')&&
       (
         <>
-      <Button loading={loading} style={{color:'black'}}>All</Button>
-      <Button loading={loading} style={{color:'black'}}>Fashion</Button>
-      <Button loading={loading} style={{color:'black'}}>Electronics</Button>
-      <Button loading={loading} style={{color:'black'}}>Electronic assoceries</Button>
-      <Button loading={loading} style={{color:'black'}}>Mobiles and watches</Button>
-      <Button loading={loading} style={{color:'black'}}>Groceries and pets</Button>
+      <Button loading={loadings[0]} onClick={()=>{enterLoading(0)}} style={{color:'black'}}>All</Button>
+      <Button loading={loadings[1]} onClick={()=>{enterLoading(1)}} style={{color:'black'}}>Fashion and beauty</Button>
+      <Button loading={loadings[2]} onClick={()=>{enterLoading(2)}} style={{color:'black'}}>Electronics</Button>
+      <Button loading={loadings[3]} onClick={()=>{enterLoading(3)}} style={{color:'black'}}>Laptops</Button>
+      <Button loading={loadings[4]} onClick={()=>{enterLoading(4)}} style={{color:'black'}}>Electronic assoceries</Button>
+      <Button loading={loadings[5]} onClick={()=>{enterLoading(5)}} style={{color:'black'}}>Mobiles and watches</Button>
+      <Button loading={loadings[6]} onClick={()=>{enterLoading(6)}} style={{color:'black'}}>Groceries and pets</Button>
+      <Button loading={loadings[7]} onClick={()=>{enterLoading(7)}} style={{color:'black'}}>Games and sports</Button>
+      <Button loading={loadings[8]} onClick={()=>{enterLoading(8)}} style={{color:'black'}}>Musical instruments</Button>
         </>
       )}      
 

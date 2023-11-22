@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FaCartShopping, FaS } from 'react-icons/fa6';
 import { RiAccountCircleFill } from 'react-icons/ri';
+import { ImCancelCircle } from "react-icons/im";
 import { useRouter } from 'next/navigation';
 import { Dropdown, Space } from 'antd';
 import { Input } from 'antd';
@@ -13,14 +14,6 @@ import { AudioOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import '../styles/navBar.css'
 
-const suffix = (
-  <AudioOutlined
-    style={{
-      fontSize: 16,
-      color: '#9ddacc',
-    }}
-  />
-);
 
 const items = [
   {
@@ -48,7 +41,9 @@ const Navbar = (props) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState('customer');
   const [loadings, setLoadings] = useState([]);
-
+  const [keyword,setKeyword]= useState('');
+  const [searchedData,setSearchedData] = useState([]);
+  const [selectedItem, setSelecetedItem]= useState(-1);
 
   const enterLoading = (index) => {
     setLoadings((prevLoadings) => {
@@ -64,6 +59,43 @@ const Navbar = (props) => {
     //   });
     // },6000);
   }
+
+  const suffix = (
+    <>
+    <ImCancelCircle onClick={()=>{
+      setKeyword('');
+      setSearchedData([]);
+      setSelecetedItem(-1);
+    }} size={20} style={{cursor:'pointer'}}/>
+    </>
+  );
+
+  const handleKeyDown = (e)=>{
+    if(e.key === "ArrowUp" && selectedItem>0){
+      setSelecetedItem(prev => prev -1);
+    }
+    else if(e.key === "ArrowDown" && selectedItem < searchedData.length-1){
+      setSelecetedItem(prev => prev+1);
+    }
+    else if(e.key == "Enter" && selectedItem>=0){
+      const enterItem = searchedData[selectedItem];
+      setKeyword(enterItem.productName);
+    }
+  }
+
+ const handleSuggestionClick=(productName)=>{
+       setKeyword(productName);
+ }
+
+ useEffect(()=>{
+  if(keyword!==''){
+    const newFilteredData = props.allData.filter((items)=>{
+      return items.productName.toLowerCase().includes(keyword)
+    })
+    setSearchedData(newFilteredData);
+  }
+
+ },[keyword])
 
   return (
     <div>
@@ -83,12 +115,24 @@ const Navbar = (props) => {
             <Search
               className='search'
               placeholder="Search here in hatbazzar"
-              enterButton="Search"
+              enterButton= "Search"
               size="large"
               suffix={suffix}
+              value={keyword}
+              onKeyDown={handleKeyDown}
+              onChange={(e)=>setKeyword(e.target.value)}
               onSearch={(value)=>props.setSearch(value)}
             />
           </Space>
+          { searchedData.length>0 &&
+            <div className='searchSuggesstion'>
+              {searchedData.slice(0,10).map((items,index)=>{
+                  return <div key={index} onClick={()=>handleSuggestionClick(items.productName)} 
+                  className={selectedItem === index ?"activeDiv":"suggestionsDiv"} >{items.productName}</div>
+              })}
+            </div>
+          }
+
         </div>
         <div className='account'>
           {!loggedIn &&

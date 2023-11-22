@@ -187,7 +187,7 @@ const index = () => {
    return (
       <>
          {contextHolder}
-         <Navbar setCategory={setCategory} showDrawer={showDrawer} setSearch={setSearch}/>
+         <Navbar setCategory={setCategory} showDrawer={showDrawer} setSearch={setSearch}  allData={allData}/>
          <div className='body'>
             <button onClick={showDrawer} className='filterBtn'>
                <span style={{ color: 'white' }}>Filter</span>

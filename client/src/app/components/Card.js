@@ -2,8 +2,15 @@ import React from 'react';
 import { Tooltip } from 'antd';
 import { Rate } from 'antd';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 const Card = ({details}) => {
+
+    const router = useRouter();
+    
+   const handleCardClick = (id) => {
+    router.push(`description/${id}`)
+ }
     return (
         <div className='card'>
             <Tooltip mouseEnterDelay={1} title="Click on the image to view product details">

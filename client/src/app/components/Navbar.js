@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaCartShopping, FaS } from 'react-icons/fa6';
@@ -21,7 +21,6 @@ const suffix = (
     }}
   />
 );
-const onSearch = (value, _e, info) => console.log(info?.source, value);
 
 const items = [
   {
@@ -87,7 +86,7 @@ const Navbar = (props) => {
               enterButton="Search"
               size="large"
               suffix={suffix}
-              onSearch={onSearch}
+              onSearch={(value)=>props.setSearch(value)}
             />
           </Space>
         </div>
@@ -168,8 +167,6 @@ const Navbar = (props) => {
               <Button loading={loadings[8]} onClick={() => { enterLoading(8); props.setCategory('musical instruments') }} style={{ color: 'black' }}>Musical instruments</Button>
             </>
           )}
-
-
       </div>
     </div>
   )

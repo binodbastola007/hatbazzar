@@ -161,7 +161,7 @@ const page = () => {
 
    const fetchProduct = async (id) => {
       try {
-         const res = await fetch(`http://localhost:4000/product/${id}`);
+         const res = await fetch(`http://localhost:4000/product/description/${id}`);
          const result = await res.json();
          if (result.data) {
             setData(result.data);

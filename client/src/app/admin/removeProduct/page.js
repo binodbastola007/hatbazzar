@@ -5,7 +5,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Navbar from '@/app/components/Navbar';
 import Footer from '@/app/components/Footer';
-import Card from '@/app/components/Card';
 import { Rate } from 'antd';
 import { message } from 'antd';
 import { Tooltip } from 'antd';
@@ -18,6 +17,8 @@ import { useRouter } from 'next/navigation';
 const page = () => {
 
    const [data, setData] = useState([]);
+   const [allData, setAllData] = useState([]);
+   const [search, setSearch] = useState('');
    const [messageApi, contextHolder] = message.useMessage();
    const router = useRouter();
 
@@ -33,24 +34,25 @@ const page = () => {
       try {
          const res = await fetch('http://localhost:4000/products/all');
          const result = await res.json();
-         if(result.data.length>0){
+         if (result.data.length > 0) {
             setData(result.data);
+            setAllData(result.data);
          }
-         else{
+         else {
             messageApi.open({
-               type:'error',
+               type: 'error',
                content: result.msg,
-               });
-         }     
+            });
+         }
       }
-      catch(err){
+      catch (err) {
          console.log(err);
       }
    }
 
    useEffect(() => {
       fetchDetails();
-   },[])
+   }, [])
 
    const handleDelete = async (currentCard) => {
       const id = currentCard._id;
@@ -66,17 +68,74 @@ const page = () => {
       fetchDetails();
    }
 
+   useEffect(() => {
+
+      const searchedItem = allData.filter((item) => {
+         return (item.productName.toLowerCase().includes(search.toLocaleLowerCase()));
+      })
+      setData(searchedItem);
+      if (search !== '' && searchedItem == '') {
+         messageApi.open({
+            type: 'error',
+            content: "No products found, please search with different keyword",
+         });
+         setData([...allData]);
+      }
+   }, [search])
+
    return (
       <>
-         <Navbar />
+         <Navbar setSearch={setSearch} />
+         {contextHolder}
          {contextHolder}
          <div className='body'>
             <div className='cardList'>
                {
-                  (data.length>0) && data.map((details) => {
-                     return <Card details={details}/>
+                  (data.length > 0) && data.map((details) => {
+                     return (
+
+                        <div className='card' key={details._id} >
+                           <>
+                              <Tooltip title="Edit details">
+                                 <AiFillEdit size={30} className='editBtn' onClick={() => router.push(`/admin/editProduct/${details._id}`)} />
+                              </Tooltip>
+                              <Tooltip title="Delete product">
+                                 <RiDeleteBin7Fill size={30} className='deleteBtn' onClick={() => showModal()} />
+                              </Tooltip>
+                              <Modal
+                                 title="Remove Product"
+                                 mask={false}
+                                 open={open}
+                                 onOk={() => handleDelete(details)}
+                                 onCancel={hideModal}
+                                 okText="Yes"
+                                 cancelText="Cancel"
+                              >
+                                 <p>Are you sure you want to remove this product?</p>
+                                 <br />
+                                 <p style={{ color: '#c90808' }}>(Note: Removing the product will permanently remove it from our database.)</p>
+                              </Modal>
+                           </>
+                           <div className='cardPic'>
+                              <Image
+                                 src={`${details.imageUrl[0]}`}
+                                 alt='product_card'
+                                 height={200}
+                                 width={200}
+                                 priority
+                              />
+                           </div>
+                           <div className='cardDescription'>
+                              <span className='cardTitle'>{details.productName}</span>
+                              <span>Price: {details.currency + ' ' + details.price}</span>
+                              <span>Ratings:<Rate disabled value={details.rating} /></span>
+                           </div>
+                        </div>
+
+                     )
                   })
-              }
+
+               }
             </div>
          </div>
          <Footer />

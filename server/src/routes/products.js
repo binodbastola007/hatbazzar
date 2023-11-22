@@ -83,7 +83,7 @@ router.post('/products/add',async(req,res)=>{
     }
     
   })
-  router.get('/product/:id',async(req,res)=>{
+  router.get('/product/description/:id',async(req,res)=>{
     try{
       const data = await ProductCard.findById(req.params.id);
       if(data){
@@ -118,5 +118,12 @@ router.post('/products/add',async(req,res)=>{
     }
     
   })
+  router.get('/product/categories',async(req,res)=>{
+    const categories = ['Fashion and beauty','Electronics', 'Laptops',
+     'Electronic assoceries', 'Mobiles and watchs', 'Groceries and pets',
+      'Games and sports', 'Musical instruments']
+      res.json({categories});
+   })
+
 
 module.exports=router;

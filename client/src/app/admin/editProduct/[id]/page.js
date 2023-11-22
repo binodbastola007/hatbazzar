@@ -377,7 +377,7 @@ const page = () => {
                                  description="Are you sure to delete this image?"
                                  okText="Yes"
                                  cancelText="No"
-                                 onConfirm={()=>handleDelete(item, index)}
+                                 onConfirm={() => handleDelete(item, index)}
                               >
                                  <RiDeleteBin7Fill size={20} color='#c90808' className='imageDeleteBtn' />
                               </Popconfirm>

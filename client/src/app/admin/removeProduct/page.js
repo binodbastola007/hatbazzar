@@ -5,8 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Navbar from '@/app/components/Navbar';
 import Footer from '@/app/components/Footer';
-import { Card } from 'antd';
-const { Meta } = Card;
+import Card from '@/app/components/Card';
 import { Rate } from 'antd';
 import { message } from 'antd';
 import { Tooltip } from 'antd';
@@ -75,50 +74,9 @@ const page = () => {
             <div className='cardList'>
                {
                   (data.length>0) && data.map((details) => {
-                     return (
-
-                        <div className='card' key={details._id} >
-                           <>
-                             <Tooltip title="Edit details">
-                              <AiFillEdit size={30} className='editBtn' onClick={()=>router.push(`/admin/editProduct/${details._id}`)} />
-                             </Tooltip>
-                             <Tooltip title="Delete product">
-                              <RiDeleteBin7Fill size={30} className='deleteBtn' onClick={()=>showModal()}/>
-                              </Tooltip>
-                              <Modal
-                                 title="Remove Product"
-                                 mask={false}
-                                 open={open}
-                                 onOk={()=>handleDelete(details)}
-                                 onCancel={hideModal}
-                                 okText="Yes"
-                                 cancelText="Cancel"
-                              >
-                                 <p>Are you sure you want to remove this product?</p>
-                                  <br/>
-                                 <p style={{color:'#c90808'}}>(Note: Removing the product will permanently remove it from our database.)</p>
-                              </Modal>
-                           </>
-                           <div className='cardPic'>
-                              <Image
-                                 src={`${details.imageUrl[0]}`}
-                                 alt='product_card'
-                                 height={200}
-                                 width={200}
-                                 priority
-                              />
-                           </div>
-                           <div className='cardDescription'>
-                              <span className='cardTitle'>{details.productName}</span>
-                              <span>Price: {details.currency + ' ' + details.price}</span>
-                              <span>Ratings:<Rate disabled value={details.rating} /></span>
-                           </div>
-                        </div>
-
-                     )
+                     return <Card details={details}/>
                   })
-
-               }
+              }
             </div>
          </div>
          <Footer />

@@ -1,15 +1,12 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import { Card } from 'antd';
-const { Meta } = Card;
+import Card from './components/Card';
 import { Rate } from 'antd';
 import { message } from 'antd';
-import { Tooltip } from 'antd';
 import { Button, Drawer } from 'antd';
 import { useRouter } from 'next/navigation';
 import { MdOutlineSettingsInputComponent } from "react-icons/md";
@@ -136,35 +133,8 @@ const index = () => {
             <div className='cardList'>
                {
                   (data.length > 0) && data.map((details) => {
-                     return (
-
-                        <div className='card'>
-                           <Tooltip mouseEnterDelay={1} title="Click on the image to view product details">
-                              <div className='cardPic' onClick={() => { handleCardClick(details._id) }}>
-                                 <Image
-                                    src={`${details.imageUrl[0]}`}
-                                    alt='product_card'
-                                    height={200}
-                                    width={200}
-                                    priority
-                                 />
-                              </div>
-                           </Tooltip>
-                           <div className='cardDescription'>
-                              <span className='cardTitle'>{details.productName}</span>
-                              <span>Price: {details.currency + ' ' + details.price}</span>
-                              <span>Ratings:<Rate disabled value={details.rating} /></span>
-                              <div className='cardBtn'>
-                                 <button className='buyNow'>Buy now</button>
-                                 <button className='addToCart'>Add to cart</button>
-                              </div>
-                           </div>
-
-                        </div>
-
-                     )
+                     return <Card details={details}/>
                   })
-
                }
             </div>
          </div>

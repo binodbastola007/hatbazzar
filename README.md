@@ -25,7 +25,7 @@ Here are the few screenshots of my project
 
 1) Logo
 <div align="center">
-    <img src="client/public/logo.png" alt="Logo" width="160" height="160">
+    <img src="client/public/logo.png" alt="Logo" width="320" height="320">
 </div>
 
 ## Contact

@@ -193,7 +193,6 @@ const index = () => {
                <span style={{ color: 'white' }}>Filter</span>
                <MdOutlineSettingsInputComponent size={18} color='#9ddacc' style={{ alignItems: 'center' }} />
             </button>
-            {JSON.stringify(categoryArr)}
             <div className='cardList'>
                {
                   (data.length > 0) && data.map((details) => {

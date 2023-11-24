@@ -1,4 +1,4 @@
- <h3 align="center">HatBazzar- an ecommerce webapp</h3>
+ <h1 align="center">HatBazzar- an ecommerce webapp</h1>
 
 This is HatBazzar - an ecommerce project that is built to help people who are intrested in digital market buying and selling goods online.As most of the businesses are moving rapidly towards the ecommerce ,most of the developers focus is on ecommerce. I am optimistic that this project is going to provide a brief overview of how an e-commerce web works in todays world.
 
@@ -25,7 +25,7 @@ Here are the few screenshots of my project
 
 1) Logo
 <div align="center">
-    <img src="client/public/logo.png" alt="Logo" width="80" height="80">
+    <img src="client/public/logo.png" alt="Logo" width="160" height="160">
 </div>
 
 ## Contact

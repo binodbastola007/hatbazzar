@@ -27,7 +27,7 @@ The project is supossed to have the following pages inside the app:
    *  View list of orders .
    *  Remove user/customer .
 
-2) Customer get follwowing features in the app:
+2) Customer get following features in the app:
    * Homepage/Landing page.
    * Browse through different products.
    * Search for desired product in search bar.

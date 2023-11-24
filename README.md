@@ -22,7 +22,7 @@ The project is supossed to have the following features inside the app:
 - [ ] View list of all user.
 
 1) Admin can do the following things in the app:
--[][] Add products in the database.
+-[ ][ ] Add products in the database.
 
 Here are the few screenshots of my project
 

@@ -6,7 +6,7 @@ This is HatBazzar - an ecommerce project that is built to help people who are in
 The major frameworks/libraries used to build the project are here below.
 
 * [![Next][Next.js]][Next-url]
-* [![Ant][ant.design]][ant-url]
+
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

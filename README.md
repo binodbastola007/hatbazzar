@@ -11,18 +11,29 @@ You can clone the repo using the following command in the terminal.
    git clone https://github.com/binodbastola007/hatbazzar.git
    ```
 
-The project is supossed to have the following features inside the app:
+The project is supossed to have the following pages inside the app:
 
 - [ ] Register and Login page .
-- [ ] Admin dashboard for managing products .
-- [ ] Browse through different products.
-- [ ] Filter products based on category, price and ratings.
-- [ ] Add products to cart.
-- [ ] Edit / delete his/her account.
-- [ ] View list of all user.
+- [ ] Admin dashboard for managing products.
+- [ ] Browse through different products(Product description page).
+- [ ] Filter products based on category, price and ratings(Filter sideBar/Drawer).
+- [ ] Add products to cart(Add product page).
+- [ ] View list of all user(User view page).
 
 1) Admin can do the following things in the app:
-   *  Add products in the database.
+   *  Add products .
+   *  Edit products .
+   *  Remove products .
+   *  View list of orders .
+   *  Remove user/customer .
+
+2) Customer get follwowing features in the app:
+   * Homepage/Landing page.
+   * Browse through different products.
+   * Search for desired product in search bar.
+   * Filter products based on Category , Price and rating through stylish drawer.
+   * Buy now or add to card feature in the product.
+
 
 
 Here are the few screenshots of my project

@@ -187,12 +187,13 @@ const index = () => {
    return (
       <>
          {contextHolder}
-         <Navbar setCategory={setCategory} showDrawer={showDrawer} setSearch={setSearch}  allData={allData}/>
+         <Navbar setCategory={setCategory} setCategoryArr={setCategoryArr} showDrawer={showDrawer} setSearch={setSearch}  allData={allData}/>
          <div className='body'>
             <button onClick={showDrawer} className='filterBtn'>
                <span style={{ color: 'white' }}>Filter</span>
                <MdOutlineSettingsInputComponent size={18} color='#9ddacc' style={{ alignItems: 'center' }} />
             </button>
+            {JSON.stringify(categoryArr)}
             <div className='cardList'>
                {
                   (data.length > 0) && data.map((details) => {

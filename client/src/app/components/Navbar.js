@@ -51,13 +51,13 @@ const Navbar = (props) => {
       newLoadings[index] = true;
       return newLoadings;
     });
-    // setTimeout(() => {
-    //   setLoadings((prevLoadings) => {
-    //     const newLoadings = [...prevLoadings];
-    //     newLoadings[index] = false;
-    //     return newLoadings;
-    //   });
-    // },6000);
+    setTimeout(() => {
+      setLoadings((prevLoadings) => {
+        const newLoadings = [...prevLoadings];
+        newLoadings[index] = false;
+        return newLoadings;
+      });
+    },1000);
   }
 
   const suffix = (
@@ -109,7 +109,8 @@ const Navbar = (props) => {
           priority
           onClick={() => {
             router.push('/');
-            props.setCategory('none')
+            props.setCategory('none');
+            props.setCategoryArr([]);
             }}
         />
 
@@ -203,7 +204,7 @@ const Navbar = (props) => {
         {(user === 'customer') &&
           (
             <>
-              <Button loading={loadings[0]} onClick={() => { enterLoading(0); props.setCategory('none') }} style={{ color: 'black' }}>All</Button>
+              <Button loading={loadings[0]} onClick={() => { enterLoading(0); props.setCategory('none');props.setCategoryArr([]); }} style={{ color: 'black' }}>All</Button>
               <Button loading={loadings[1]} onClick={() => { enterLoading(1); props.setCategory('fashion and beauty') }} style={{ color: 'black' }}>Fashion and beauty</Button>
               <Button loading={loadings[2]} onClick={() => { enterLoading(2); props.setCategory('electronics') }} style={{ color: 'black' }}>Electronics</Button>
               <Button loading={loadings[3]} onClick={() => { enterLoading(3); props.setCategory('laptops') }} style={{ color: 'black' }}>Laptops</Button>

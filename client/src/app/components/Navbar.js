@@ -74,7 +74,7 @@ const Navbar = (props) => {
     if(e.key === "ArrowUp" && selectedItem>0){
       setSelecetedItem(prev => prev -1);
     }
-    else if(e.key === "ArrowDown" && selectedItem < searchedData.length-1){
+    else if(e.key === "ArrowDown" && selectedItem <9){
       setSelecetedItem(prev => prev+1);
     }
     else if(e.key == "Enter" && selectedItem>=0){
@@ -107,13 +107,16 @@ const Navbar = (props) => {
           width={70}
           className='logo'
           priority
-          onClick={() => router.push('/')}
+          onClick={() => {
+            router.push('/');
+            props.setCategory('none')
+            }}
         />
 
         <div className='searchBar'>
           <Space direction='vertical'>
             <Search
-              className='search'
+              className={'search'}
               placeholder="Search here in hatbazzar"
               enterButton= "Search"
               size="large"
@@ -200,7 +203,7 @@ const Navbar = (props) => {
         {(user === 'customer') &&
           (
             <>
-              <Button loading={loadings[0]} onClick={() => { enterLoading(0); props.setCategory('') }} style={{ color: 'black' }}>All</Button>
+              <Button loading={loadings[0]} onClick={() => { enterLoading(0); props.setCategory('none') }} style={{ color: 'black' }}>All</Button>
               <Button loading={loadings[1]} onClick={() => { enterLoading(1); props.setCategory('fashion and beauty') }} style={{ color: 'black' }}>Fashion and beauty</Button>
               <Button loading={loadings[2]} onClick={() => { enterLoading(2); props.setCategory('electronics') }} style={{ color: 'black' }}>Electronics</Button>
               <Button loading={loadings[3]} onClick={() => { enterLoading(3); props.setCategory('laptops') }} style={{ color: 'black' }}>Laptops</Button>

@@ -2,14 +2,13 @@ import React from 'react';
 import Image from 'next/image';
 import '../styles/cart.css';
 
-const ProductQty = () => {
+const ProductQty = ({item}) => {
   return (
-    
     <div className='productContainer'>
-       <Image src={''} width={70} height={70} alt=''/>
+       <Image src={item.imageUrl} width={70} height={70} alt=''/>
        <div className='productInfo'>
-       <span>Product name: Badminton set </span>
-       <span>Product price: NPR 1450 </span>
+       <span>Product name: {item.productName} </span>
+       <span>Product price: {item.price} </span>
        <button className='deleteBtn'>Delete Item</button>
        </div>
       
@@ -17,7 +16,7 @@ const ProductQty = () => {
        <span>Product quantity</span>
        <div className='qtyBtn'>
        <button>-</button>
-       <input/>
+       <input value={item.quantity}/>
        <button>+</button>
        </div>
        </div>

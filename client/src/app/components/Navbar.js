@@ -128,7 +128,7 @@ const Navbar = (props) => {
               onSearch={(value)=>props.setSearch(value)}
             />
           </Space>
-          { searchedData.length>0 &&
+          { (searchedData.length>0 && keyword!=='') &&
             <div className='searchSuggesstion'>
               {searchedData.slice(0,10).map((items,index)=>{
                   return <div key={index} onClick={()=>handleSuggestionClick(items.productName)} 

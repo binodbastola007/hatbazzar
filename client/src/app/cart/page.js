@@ -12,7 +12,6 @@ import { changeProductList } from '../GlobalRedux/Features/cart.slice';
 const page = () => {
 
   const {productList} = useSelector(state => state.cart);
-    const dispatch = useDispatch();
 
   return (
     <>
@@ -20,12 +19,14 @@ const page = () => {
         <div className='body'>
             <div className='container'>
                 <div className='productList'>
-                    <ProductContainer/>
+                    {productList.length>0&& productList.map((item)=>{
+                        return <ProductContainer item={item}/>
+                    })
+                    }                 
                 </div>
                 <div className='totalPrice'>
                   <PriceContainer/>
                 </div>
-                {JSON.stringify(productList)}
             </div>
         </div>
        <Footer/>

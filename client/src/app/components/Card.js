@@ -19,6 +19,7 @@ const Card = ({ details }) => {
             quantity: 1
         }
       dispatch(changeProductList(productInfo));
+      router.push('/cart');
     }
 
     const handleCardClick = (id) => {

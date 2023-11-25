@@ -9,7 +9,7 @@
     height: max-content;
     padding:20px 50px;
     padding-bottom: 32px;
-    background-color: #ffc15d;
+    background-image: linear-gradient(#ff894c,#ffc15d);
     
   }
   .form{

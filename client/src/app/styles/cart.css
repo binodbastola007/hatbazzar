@@ -1,0 +1,102 @@
+.container{
+    width: 95%;
+    min-height: 70vh ;
+    max-height: max-content;
+    background-color: rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+
+}
+.productContainer{
+    width: 600px;
+    padding: 15px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ffff;
+    font-size: 0.8rem;
+    margin: 5px 10px;
+}
+.productInfo{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 8px;
+    margin-left: -40px;
+}
+.deleteBtn{
+    padding: 5px;
+    font-size: 0.8rem;
+    background-color:#c90808;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+.quantity{
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 150px;
+    height: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+.quantity span{
+    text-align: center;
+  
+}
+.qtyBtn{
+    width: 105px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+.qtyBtn input{
+    width: 35px;
+}
+.qtyBtn button{
+    cursor: pointer;
+    width: 30px;
+}
+.priceContainer{
+    width: 500px;
+    padding: 15px 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 8px;
+    border: 1px solid black;
+    margin: 5px 10px;
+    background-color: #fff;
+}
+.priceDetails{
+    font-size: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 12px;
+}
+.priceDetails span{
+    width: 260%;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    padding: 5px;
+}
+.payBtn{
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 5px;
+}
+.payBtn:hover{
+    background-color: #9ddacc;
+}

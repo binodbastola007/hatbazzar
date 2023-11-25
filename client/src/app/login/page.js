@@ -10,6 +10,7 @@ import Footer from '../components/Footer';
 import {  message } from 'antd';
 import '../styles/login.css';
 
+
 const SignupSchema = Yup.object().shape({
   phoneNumber: Yup.string()
     .min(9,'Too Short!')
@@ -22,7 +23,9 @@ const SignupSchema = Yup.object().shape({
   
 });
 const index=()=>{
+
   const [messageApi, contextHolder] = message.useMessage();
+  
 
   const handleLogin = async(values) => {
     const res = await fetch('http://localhost:4000/login', {

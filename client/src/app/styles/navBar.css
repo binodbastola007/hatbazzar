@@ -62,7 +62,7 @@
     background-color:#9ddacc ;
     cursor: pointer;
   }
-  .account span:hover{
+  .account text:hover{
     background-color: white;
   }
   

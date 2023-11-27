@@ -63,7 +63,7 @@ const Card = ({ details }) => {
                 <span>Ratings:<Rate disabled value={details.rating} /></span>
                 <div className='cardBtn'>
                     <button onClick={() => handlePurchase(details)} className='buyNow'>Buy now</button>
-                    <button onClick={()=> handleCart(details)} disabled={addStatus} className={addStatus?'addedToCart':'addToCart'}>{addStatus?'Added':'Add to cart'}</button>
+                    <button onClick={()=> handleCart(details)} disabled={addStatus} className={addStatus?'addedToCart':'addToCart'}>{addStatus?'Added !':'Add to cart'}</button>
                 </div>
             </div>
         </div>

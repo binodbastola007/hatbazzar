@@ -72,13 +72,13 @@
 font-size: 0.8rem;
 padding: 3px;
 border-radius: 5px;
-background-color: #9ddacc;
 }
 .buyNow{
   position: absolute;
   bottom:8px;
   left: 12px;
   cursor: pointer;
+  background-color: #9ddacc;
 }
 .buyNow:hover{
   background-color: white;
@@ -88,9 +88,19 @@ background-color: #9ddacc;
   bottom: 8px;
   right: 12px;
   cursor: pointer;
+  width: 34%;
+  background-color: #9ddacc;
 }
 .addToCart:hover{
   background-color: white;
+}
+.addedToCart{
+  background-color: white;
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+  cursor: default;
+  width: 34%;
 }
 .filterBtn{
   cursor: pointer;

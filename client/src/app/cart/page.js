@@ -7,7 +7,7 @@ import ProductContainer from '../components/ProductContainer';
 import PriceContainer from '../components/PriceContainer';
 import '../styles/cart.css'; 
 import { useDispatch, useSelector } from "react-redux";
-import { changeProductList } from '../GlobalRedux/Features/cart.slice';
+import { buyNow } from '../GlobalRedux/Features/cart.slice';
 
 const page = () => {
 

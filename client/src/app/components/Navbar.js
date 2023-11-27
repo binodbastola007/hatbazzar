@@ -12,7 +12,9 @@ import { Input } from 'antd';
 const { Search } = Input;
 import { AudioOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
-import '../styles/navBar.css'
+import '../styles/navBar.css';
+import { useSelector } from 'react-redux';
+import { Avatar, Badge } from 'antd';
 
 
 const items = [
@@ -41,9 +43,9 @@ const Navbar = (props) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState('customer');
   const [loadings, setLoadings] = useState([]);
-  const [keyword,setKeyword]= useState('');
-  const [searchedData,setSearchedData] = useState([]);
-  const [selectedItem, setSelecetedItem]= useState(-1);
+  const [keyword, setKeyword] = useState('');
+  const [searchedData, setSearchedData] = useState([]);
+  const [selectedItem, setSelecetedItem] = useState(-1);
 
   const enterLoading = (index) => {
     setLoadings((prevLoadings) => {
@@ -57,45 +59,47 @@ const Navbar = (props) => {
         newLoadings[index] = false;
         return newLoadings;
       });
-    },1000);
+    }, 1000);
   }
 
   const suffix = (
     <>
-    <ImCancelCircle onClick={()=>{
-      setKeyword('');
-      setSearchedData([]);
-      setSelecetedItem(-1);
-    }} size={20} style={{cursor:'pointer'}}/>
+      <ImCancelCircle onClick={() => {
+        setKeyword('');
+        setSearchedData([]);
+        setSelecetedItem(-1);
+      }} size={20} style={{ cursor: 'pointer' }} />
     </>
   );
 
-  const handleKeyDown = (e)=>{
-    if(e.key === "ArrowUp" && selectedItem>0){
-      setSelecetedItem(prev => prev -1);
+  const handleKeyDown = (e) => {
+    if (e.key === "ArrowUp" && selectedItem > 0) {
+      setSelecetedItem(prev => prev - 1);
     }
-    else if(e.key === "ArrowDown" && selectedItem <9){
-      setSelecetedItem(prev => prev+1);
+    else if (e.key === "ArrowDown" && selectedItem < 9) {
+      setSelecetedItem(prev => prev + 1);
     }
-    else if(e.key == "Enter" && selectedItem>=0){
+    else if (e.key == "Enter" && selectedItem >= 0) {
       const enterItem = searchedData[selectedItem];
       setKeyword(enterItem.productName);
     }
   }
 
- const handleSuggestionClick=(productName)=>{
-       setKeyword(productName);
- }
-
- useEffect(()=>{
-  if(keyword!==''){
-    const newFilteredData = props.allData.filter((items)=>{
-      return items.productName.toLowerCase().includes(keyword)
-    })
-    setSearchedData(newFilteredData);
+  const handleSuggestionClick = (productName) => {
+    setKeyword(productName);
   }
 
- },[keyword])
+  const { productCount } = useSelector(state => state.cart);
+
+  useEffect(() => {
+    if (keyword !== '') {
+      const newFilteredData = props.allData.filter((items) => {
+        return items.productName.toLowerCase().includes(keyword)
+      })
+      setSearchedData(newFilteredData);
+    }
+
+  }, [keyword])
 
   return (
     <div>
@@ -111,7 +115,7 @@ const Navbar = (props) => {
             router.push('/');
             props.setCategory('none');
             props.setCategoryArr([]);
-            }}
+          }}
         />
 
         <div className='searchBar'>
@@ -119,20 +123,20 @@ const Navbar = (props) => {
             <Search
               className={'search'}
               placeholder="Search here in hatbazzar"
-              enterButton= "Search"
+              enterButton="Search"
               size="large"
               suffix={suffix}
               value={keyword}
               onKeyDown={handleKeyDown}
-              onChange={(e)=>setKeyword(e.target.value)}
-              onSearch={(value)=>props.setSearch(value)}
+              onChange={(e) => setKeyword(e.target.value)}
+              onSearch={(value) => props.setSearch(value)}
             />
           </Space>
-          { (searchedData.length>0 && keyword!=='') &&
+          {(searchedData.length > 0 && keyword !== '') &&
             <div className='searchSuggesstion'>
-              {searchedData.slice(0,10).map((items,index)=>{
-                  return <div key={index} onClick={()=>handleSuggestionClick(items.productName)} 
-                  className={selectedItem === index ?"activeDiv":"suggestionsDiv"} >{items.productName}</div>
+              {searchedData.slice(0, 10).map((items, index) => {
+                return <div key={index} onClick={() => handleSuggestionClick(items.productName)}
+                  className={selectedItem === index ? "activeDiv" : "suggestionsDiv"} >{items.productName}</div>
               })}
             </div>
           }
@@ -142,8 +146,8 @@ const Navbar = (props) => {
           {!loggedIn &&
             (
               <>
-                <Link href='/login' className='links'><span>Login</span></Link>
-                <Link href='/register' className='links'><span>Signup</span></Link>
+                <Link href='/login' className='links'><text>Login</text></Link>
+                <Link href='/register' className='links'><text>Signup</text></Link>
               </>
             )}
 
@@ -169,8 +173,9 @@ const Navbar = (props) => {
             )}
 
           <div className='icon'>
+            <Badge count={productCount} showZero>
             <FaCartShopping color='white' size={30} />
-            <text>0</text>
+            </Badge>
           </div>
 
         </div>
@@ -197,6 +202,7 @@ const Navbar = (props) => {
                 router.push('/admin/removeProduct');
               }
               }>Update/remove product</Button>
+
               <Button loading={loadings[3]} style={{ color: 'black' }}>Delete user</Button>
               <Button loading={loadings[4]} style={{ color: 'black' }}>Orders</Button>
             </>
@@ -204,7 +210,7 @@ const Navbar = (props) => {
         {(user === 'customer') &&
           (
             <>
-              <Button loading={loadings[0]} onClick={() => { enterLoading(0); props.setCategory('none');props.setCategoryArr([]); }} style={{ color: 'black' }}>All</Button>
+              <Button loading={loadings[0]} onClick={() => { enterLoading(0); props.setCategory('none'); props.setCategoryArr([]); }} style={{ color: 'black' }}>All</Button>
               <Button loading={loadings[1]} onClick={() => { enterLoading(1); props.setCategory('fashion and beauty') }} style={{ color: 'black' }}>Fashion and beauty</Button>
               <Button loading={loadings[2]} onClick={() => { enterLoading(2); props.setCategory('electronics') }} style={{ color: 'black' }}>Electronics</Button>
               <Button loading={loadings[3]} onClick={() => { enterLoading(3); props.setCategory('laptops') }} style={{ color: 'black' }}>Laptops</Button>

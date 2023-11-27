@@ -54,7 +54,7 @@
     margin-top: 4px;
   }
   
-  .account span{
+  .account text{
     font-size: 0.8rem;
     padding: 5px;
     border-radius: 8px;
@@ -64,11 +64,6 @@
   }
   .account span:hover{
     background-color: white;
-  }
-  .account text{
-    font-size: 0.7rem;
-    color: darkred;
-    margin-left: 4px;
   }
   
   .links{

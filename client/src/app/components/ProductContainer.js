@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import '../styles/cart.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateProductList } from '../GlobalRedux/Features/cart.slice';
+import { updateProductList, updateQuantity } from '../GlobalRedux/Features/cart.slice';
 import { Button, Modal } from 'antd';
 
 const ProductQty = ({ item }) => {
@@ -30,6 +30,35 @@ const ProductQty = ({ item }) => {
       }
     })
   }
+  const handleIncrement = (itemId) =>{
+    const newList = [...productList];
+    const updatedList = newList.map((item,index)=>{
+      if(item.id === itemId){
+        const updatedItem = {...item};
+        updatedItem.quantity+=1;
+        return item = updatedItem ;
+      }
+      else{
+        return item;
+      }
+    })
+    dispatch(updateQuantity(updatedList));
+  }
+
+  const handleDecrement = (itemId) =>{
+    const newList = [...productList];
+    const updatedList = newList.map((item,index)=>{
+      if(item.id === itemId && item.quantity>0){
+        const updatedItem = {...item};
+        updatedItem.quantity-=1;
+        return item = updatedItem ;
+      }
+      else{
+        return item;
+      }
+    })
+    dispatch(updateQuantity(updatedList));
+  }
 
   return (
     <div className='productContainer'>
@@ -53,9 +82,9 @@ const ProductQty = ({ item }) => {
       <div className='quantity'>
         <span>Product quantity</span>
         <div className='qtyBtn'>
-          <button>-</button>
+          <button onClick={()=>{handleDecrement(item.id)}}>-</button>
           <input value={item.quantity} />
-          <button>+</button>
+          <button onClick={()=>handleIncrement(item.id)}>+</button>
         </div>
       </div>
 

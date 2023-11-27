@@ -174,7 +174,7 @@ const Navbar = (props) => {
 
           <div className='icon'>
             <Badge count={productCount} showZero>
-            <FaCartShopping color='white' size={30} />
+            <FaCartShopping color='white' size={30} onClick={()=>router.push('/cart')} />
             </Badge>
           </div>
 

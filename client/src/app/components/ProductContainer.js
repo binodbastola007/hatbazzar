@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import '../styles/cart.css';
 import { useSelector, useDispatch } from 'react-redux';
@@ -33,7 +33,8 @@ const ProductQty = ({ item }) => {
 
   return (
     <div className='productContainer'>
-      <Image src={item.imageUrl} width={70} height={70} alt='' />
+     <div className='info'>
+     <Image  src={item.imageUrl} width={70} height={70} alt='' />
       <div className='productInfo'>
         <span>Product name: {item.productName} </span>
         <span>Product price: {item.price} </span>
@@ -46,6 +47,8 @@ const ProductQty = ({ item }) => {
           </Modal>
         </>
       </div>
+
+     </div>
 
       <div className='quantity'>
         <span>Product quantity</span>

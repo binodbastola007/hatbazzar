@@ -20,6 +20,7 @@ const CartSlice = createSlice({
     },
     updateProductList : (state, actions) =>{
       state.productList = actions.payload;
+      state.productCount -= 1;
     }
   }
 });

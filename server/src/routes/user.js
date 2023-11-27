@@ -1,4 +1,6 @@
 const User = require('../models/user');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const express = require('express');
 const router = express.Router();
 
@@ -33,9 +35,10 @@ router.post('/register',async(req,res)=>{
        res.json({msg :'Invalid Credentials'})
      }else{
        const isMatched = await bcrypt.compare( req.body.password,userDetails.password )
-       console.log(isMatched)
+       // generate token for the users
+       var token = jwt.sign({phoneNumber:req.body.phoneNumber}, process.env.SECRET_KEY);
        if(isMatched){
-         res.json({msg :'Login Success'})
+         res.json({msg :'Login Success',token})
        }else{
          res.json({msg :'Incorrect password'})
        }

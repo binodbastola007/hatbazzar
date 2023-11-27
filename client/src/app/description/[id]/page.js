@@ -8,6 +8,9 @@ import { message } from 'antd';
 import { useParams } from 'next/navigation';
 import { Rate } from 'antd';
 import '../../styles/description.css';
+import { useRouter } from 'next/navigation';
+import { useDispatch, useSelector } from "react-redux";
+import { buyNow, addToCart } from "../../GlobalRedux/Features/cart.slice.js";
 
 const page = () => {
 
@@ -15,8 +18,71 @@ const page = () => {
    const [images, setImages] = useState([]);
    const [path, setPath] = useState('');
    const [colors,setColors] = useState([]);
+   const dispatch = useDispatch();
+   const [addStatus, setAddStatus] = useState(false);
+   const { productList } = useSelector(state => state.cart);
    const [messageApi, contextHolder] = message.useMessage();
    const params = useParams();
+   const router = useRouter();
+
+
+   const handlePurchase = async(details) => {
+
+      var newData = true;
+
+      await productList.map((items)=>{
+        if(items.id === details._id){
+            router.push('/cart');
+            newData = false;
+        }
+       })
+
+      if(newData){
+      
+        const productInfo = {
+            id: details._id,
+            productName: details.productName,
+            price: details.price,
+            imageUrl: details.imageUrl[0],
+            quantity: 1,
+
+        }
+        dispatch(buyNow(productInfo));
+        setAddStatus(true);
+        router.push('/cart');
+   }
+
+    }
+
+const handleCart = async(details) => {
+
+    var newData = true;
+
+    await productList.map((items)=>{
+        if(items.id === details._id){
+            newData = false;
+            messageApi.open({
+                type: 'error',
+                content: "Item already exist in the cart",
+             })
+        }
+       })
+
+   if(newData){
+    const productInfo = {
+        id: details._id,
+        productName: details.productName,
+        price: details.price,
+        imageUrl: details.imageUrl[0],
+        quantity: 1,
+
+    }
+    dispatch(addToCart(productInfo));
+    setAddStatus(true);
+   }
+
+
+}
 
    const handleImageClick=()=>{
       console.log("Do something here");
@@ -92,8 +158,8 @@ const page = () => {
                      <Rate disabled value={data.rating} />
 
                       <div className='productButtons'>
-                      <button className='buyProduct'>Buy now</button>
-                      <button className='addIntoCart'>Add to cart</button>
+                      <button  onClick={() => handlePurchase(data)}>Buy now</button>
+                      <button className={addStatus && 'addIntoCart'} onClick={() => handleCart(data)} disabled={addStatus}>{addStatus?'Added':'Add to cart'}</button>
                       </div>
 
                      <div className='descriptionBox'>

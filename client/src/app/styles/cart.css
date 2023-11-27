@@ -1,5 +1,5 @@
 .container{
-    width: 95%;
+    width: 95% !important;
     min-height: 70vh ;
     max-height: max-content;
     background-color: rgba(0, 0, 0, 0.1);
@@ -7,7 +7,7 @@
     flex-direction: row;
     align-items: flex-start;
     justify-content: space-between;
-    margin: 10px 0px;
+    margin: 10px 0px !important;
 }
 .productContainer{
     width: 600px;

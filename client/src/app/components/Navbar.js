@@ -121,7 +121,7 @@ const Navbar = () => {
           priority
           onClick={() => {
             router.push('/');
-            dispatch(setCategory('none'));
+            dispatch(setCategory(''));
             dispatch(setCategoryArr([]));
           }}
         />

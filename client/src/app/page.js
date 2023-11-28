@@ -11,7 +11,7 @@ import { Button, Drawer } from 'antd';
 import { useRouter } from 'next/navigation';
 import { MdOutlineSettingsInputComponent } from "react-icons/md";
 import { useSelector, useDispatch } from 'react-redux';
-import {setAllData, setCategory, setCategoryArr, setSearch} from '../app/GlobalRedux/Features/navbar.slice';
+import {setAllData, setCategory, setCategoryArr} from '../app/GlobalRedux/Features/navbar.slice';
 
 const index = () => {
 

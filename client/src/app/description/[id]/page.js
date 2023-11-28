@@ -159,7 +159,7 @@ const handleCart = async(details) => {
 
                       <div className='productButtons'>
                       <button  onClick={() => handlePurchase(data)}>Buy now</button>
-                      <button className={addStatus && 'addIntoCart'} onClick={() => handleCart(data)} disabled={addStatus}>{addStatus?'Added':'Add to cart'}</button>
+                      <button className={addStatus && 'addIntoCart'} onClick={() => handleCart(data)} disabled={addStatus}>{addStatus?'Added !':'Add to cart'}</button>
                       </div>
 
                      <div className='descriptionBox'>

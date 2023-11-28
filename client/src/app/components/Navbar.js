@@ -13,7 +13,8 @@ const { Search } = Input;
 import { AudioOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import '../styles/navBar.css';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import {setAllData, setCategory, setCategoryArr, setSearch } from '@/app/GlobalRedux/Features/navbar.slice'
 import { Avatar, Badge } from 'antd';
 
 
@@ -37,7 +38,7 @@ const items = [
   },
 ];
 
-const Navbar = (props) => {
+const Navbar = () => {
 
   const router = useRouter();
   const [loggedIn, setLoggedIn] = useState(false);
@@ -46,6 +47,10 @@ const Navbar = (props) => {
   const [keyword, setKeyword] = useState('');
   const [searchedData, setSearchedData] = useState([]);
   const [selectedItem, setSelecetedItem] = useState(-1);
+
+
+  const {allData, category, categoryArr, aearch} = useSelector(state=>state.navbar);
+  const dispatch = useDispatch();
 
   const enterLoading = (index) => {
     setLoadings((prevLoadings) => {
@@ -68,6 +73,7 @@ const Navbar = (props) => {
         setKeyword('');
         setSearchedData([]);
         setSelecetedItem(-1);
+        dispatch(setSearch(''));
       }} size={20} style={{ cursor: 'pointer' }} />
     </>
   );
@@ -92,13 +98,15 @@ const Navbar = (props) => {
   const { productCount } = useSelector(state => state.cart);
 
   useEffect(() => {
-    if (keyword !== '') {
-      const newFilteredData = props.allData.filter((items) => {
+    if (keyword!=='') {
+      const newFilteredData = allData.filter((items) => {
         return items.productName.toLowerCase().includes(keyword)
       })
       setSearchedData(newFilteredData);
     }
-
+    if(keyword==''){
+      dispatch(setSearch(''));
+    }
   }, [keyword])
 
   return (
@@ -113,8 +121,8 @@ const Navbar = (props) => {
           priority
           onClick={() => {
             router.push('/');
-            props.setCategory('none');
-            props.setCategoryArr([]);
+            dispatch(setCategory('none'));
+            dispatch(setCategoryArr([]));
           }}
         />
 
@@ -129,7 +137,7 @@ const Navbar = (props) => {
               value={keyword}
               onKeyDown={handleKeyDown}
               onChange={(e) => setKeyword(e.target.value)}
-              onSearch={(value) => props.setSearch(value)}
+              onSearch={(value) => dispatch(setSearch(value))}
             />
           </Space>
           {(searchedData.length > 0 && keyword !== '') &&
@@ -210,15 +218,15 @@ const Navbar = (props) => {
         {(user === 'customer') &&
           (
             <>
-              <Button loading={loadings[0]} onClick={() => { enterLoading(0); props.setCategory('none'); props.setCategoryArr([]); }} style={{ color: 'black' }}>All</Button>
-              <Button loading={loadings[1]} onClick={() => { enterLoading(1); props.setCategory('fashion and beauty') }} style={{ color: 'black' }}>Fashion and beauty</Button>
-              <Button loading={loadings[2]} onClick={() => { enterLoading(2); props.setCategory('electronics') }} style={{ color: 'black' }}>Electronics</Button>
-              <Button loading={loadings[3]} onClick={() => { enterLoading(3); props.setCategory('laptops') }} style={{ color: 'black' }}>Laptops</Button>
-              <Button loading={loadings[4]} onClick={() => { enterLoading(4); props.setCategory('electronic assoceries') }} style={{ color: 'black' }}>Electronic assoceries</Button>
-              <Button loading={loadings[5]} onClick={() => { enterLoading(5); props.setCategory('mobiles and watches') }} style={{ color: 'black' }}>Mobiles and watches</Button>
-              <Button loading={loadings[6]} onClick={() => { enterLoading(6); props.setCategory('groceries and pets') }} style={{ color: 'black' }}>Groceries and pets</Button>
-              <Button loading={loadings[7]} onClick={() => { enterLoading(7); props.setCategory('games and sports') }} style={{ color: 'black' }}>Games and sports</Button>
-              <Button loading={loadings[8]} onClick={() => { enterLoading(8); props.setCategory('musical instruments') }} style={{ color: 'black' }}>Musical instruments</Button>
+              <Button loading={loadings[0]} onClick={() => { enterLoading(0); dispatch(setCategory('none')); dispatch(setCategoryArr([]))}} style={{ color: 'black' }}>All</Button>
+              <Button loading={loadings[1]} onClick={() => { enterLoading(1); dispatch(setCategory('fashion and beauty')) }} style={{ color: 'black' }}>Fashion and beauty</Button>
+              <Button loading={loadings[2]} onClick={() => { enterLoading(2); dispatch(setCategory('electronics')) }} style={{ color: 'black' }}>Electronics</Button>
+              <Button loading={loadings[3]} onClick={() => { enterLoading(3); dispatch(setCategory('laptops')) }} style={{ color: 'black' }}>Laptops</Button>
+              <Button loading={loadings[4]} onClick={() => { enterLoading(4); dispatch(setCategory('electronic assoceries')) }} style={{ color: 'black' }}>Electronic assoceries</Button>
+              <Button loading={loadings[5]} onClick={() => { enterLoading(5); dispatch(setCategory('mobiles and watches')) }} style={{ color: 'black' }}>Mobiles and watches</Button>
+              <Button loading={loadings[6]} onClick={() => { enterLoading(6); dispatch(setCategory('groceries and pets')) }} style={{ color: 'black' }}>Groceries and pets</Button>
+              <Button loading={loadings[7]} onClick={() => { enterLoading(7); dispatch(setCategory('games and sports')) }} style={{ color: 'black' }}>Games and sports</Button>
+              <Button loading={loadings[8]} onClick={() => { enterLoading(8); dispatch(setCategory('musical instruments')) }} style={{ color: 'black' }}>Musical instruments</Button>
             </>
           )}
       </div>

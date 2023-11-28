@@ -10,7 +10,7 @@ const PriceDetails = () => {
   const sumPrice = () => {
     let totalPrice = 0;
     productList.map((item) => {
-      totalPrice = totalPrice + item.price;
+      totalPrice = totalPrice + (item.price*item.quantity);
     })
     setTotal(totalPrice);
   }

@@ -10,24 +10,20 @@ import { message } from 'antd';
 import { Button, Drawer } from 'antd';
 import { useRouter } from 'next/navigation';
 import { MdOutlineSettingsInputComponent } from "react-icons/md";
-
-
+import { useSelector, useDispatch } from 'react-redux';
+import {setAllData, setCategory, setCategoryArr, setSearch} from '../app/GlobalRedux/Features/navbar.slice';
 
 const index = () => {
 
-   const [allData, setAllData] = useState([]);
    const [data, setData] = useState([]);
-   const [category, setCategory] = useState([]);
-   const [categoryArr, setCategoryArr] = useState([]);
    const [minPrice, setMinPrice] = useState('');
    const [maxPrice, setMaxPrice] = useState('');
    const [rating, setRating] = useState('');
    const [messageApi, contextHolder] = message.useMessage();
-   const [search,setSearch] = useState('');
    const router = useRouter();
 
-
-
+   const {allData, category, categoryArr, search} = useSelector(state=>state.navbar);
+   const dispatch = useDispatch();
 
    const [open, setOpen] = useState(false);
    const showDrawer = () => {
@@ -44,7 +40,7 @@ const index = () => {
             const result = await res.json();
             console.log(result);
             if (result.data.length > 0) {
-               setAllData(result.data);
+               dispatch(setAllData(result.data));
                setData(result.data);
             }
             else {
@@ -125,13 +121,14 @@ const index = () => {
       let value = e.target.value;
       if (e.target.checked) {
          if (!categoryArr.includes(value)) {
-            setCategoryArr((prev) => [...prev, value]);
+            dispatch(setCategoryArr([...categoryArr, value]));
          }
       }
       else {
-         const index = categoryArr.indexOf(value);
-         categoryArr.splice(index, 1);
-         setCategoryArr([...categoryArr]);
+         const updatedArr = [...categoryArr];
+         const index = updatedArr.indexOf(value);
+         updatedArr.splice(index, 1);
+         dispatch(setCategoryArr([...updatedArr]));
       }
    }
 
@@ -187,12 +184,15 @@ const index = () => {
          });
          setData([...allData]);
       }
+      if(search==''){
+         setData([...allData]);
+      }
    },[search])
 
    return (
       <>
          {contextHolder}
-         <Navbar setCategory={setCategory} setCategoryArr={setCategoryArr} showDrawer={showDrawer} setSearch={setSearch}  allData={allData}/>
+         <Navbar />
          <div className='body'>
             <button onClick={showDrawer} className='filterBtn'>
                <span style={{ color: 'white' }}>Filter</span>

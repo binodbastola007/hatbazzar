@@ -49,7 +49,7 @@ const Navbar = () => {
   const [selectedItem, setSelecetedItem] = useState(-1);
 
 
-  const {allData, category, categoryArr, aearch} = useSelector(state=>state.navbar);
+  const {allData, searchBarClose} = useSelector(state=>state.navbar);
   const dispatch = useDispatch();
 
   const enterLoading = (index) => {
@@ -138,6 +138,7 @@ const Navbar = () => {
               onKeyDown={handleKeyDown}
               onChange={(e) => setKeyword(e.target.value)}
               onSearch={(value) => dispatch(setSearch(value))}
+              disabled={searchBarClose}
             />
           </Space>
           {(searchedData.length > 0 && keyword !== '') &&

@@ -7,11 +7,16 @@ import ProductContainer from '../components/ProductContainer';
 import PriceContainer from '../components/PriceContainer';
 import '../styles/cart.css'; 
 import { useDispatch, useSelector } from "react-redux";
-import { buyNow } from '../GlobalRedux/Features/cart.slice';
+import { setSearchBarClose } from '../GlobalRedux/Features/navbar.slice';
 
 const page = () => {
 
   const {productList} = useSelector(state => state.cart);
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(setSearchBarClose(true));
+  })
 
   return (
     <>

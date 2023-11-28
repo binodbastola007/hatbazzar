@@ -11,6 +11,7 @@ import '../../styles/description.css';
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from "react-redux";
 import { buyNow, addToCart } from "../../GlobalRedux/Features/cart.slice.js";
+import { setSearchBarClose } from '@/app/GlobalRedux/Features/navbar.slice';
 
 const page = () => {
 
@@ -110,6 +111,7 @@ const handleCart = async(details) => {
 
    useEffect(() => {
       fetchProduct(params.id);
+      dispatch(setSearchBarClose(true));
    }, [])
 
    return (

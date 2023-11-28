@@ -16,7 +16,7 @@ import { MdOutlineSettingsInputComponent } from "react-icons/md";
 import '../../styles/removeProduct.css';
 import { useRouter } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
-import { setAllData ,setCategory, setCategoryArr } from '@/app/GlobalRedux/Features/navbar.slice';
+import { setAllData ,setCategory, setCategoryArr, setSearchBarClose } from '@/app/GlobalRedux/Features/navbar.slice';
 
 const page = () => {
 
@@ -182,6 +182,7 @@ const page = () => {
 
    useEffect(() => {
       fetchDetails(category);
+      dispatch(setSearchBarClose(false));
    }, [category])
 
    const handleDelete = async (currentCard) => {

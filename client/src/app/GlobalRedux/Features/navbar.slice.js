@@ -5,6 +5,7 @@ export const initialState = {
   allData:[],
   category:[],
   categoryArr:[],
+  searchBarClose:true,
   search:''
 };
 
@@ -21,6 +22,10 @@ const navSlice = createSlice({
     setCategoryArr: (state, actions) => {
      state.categoryArr = actions.payload;
     },
+    setSearchBarClose: (state,actions) =>{
+     state.searchBarClose = actions.payload;
+     debugger;
+    },
     setSearch: (state, actions) => {
      state.search = actions.payload;
     },
@@ -28,5 +33,5 @@ const navSlice = createSlice({
   }
 });
 
-export const { setAllData, setCategory, setCategoryArr, setSearch} = navSlice.actions;
+export const { setAllData, setCategory, setCategoryArr, setSearch, setSearchBarClose} = navSlice.actions;
 export default navSlice.reducer;

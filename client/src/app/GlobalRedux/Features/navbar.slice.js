@@ -24,7 +24,6 @@ const navSlice = createSlice({
     },
     setSearchBarClose: (state,actions) =>{
      state.searchBarClose = actions.payload;
-     debugger;
     },
     setSearch: (state, actions) => {
      state.search = actions.payload;

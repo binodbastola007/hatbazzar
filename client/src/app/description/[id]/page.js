@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect ,useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Navbar from '@/app/components/Navbar';
@@ -11,7 +11,7 @@ import '../../styles/description.css';
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from "react-redux";
 import { buyNow, addToCart } from "../../GlobalRedux/Features/cart.slice.js";
-import { setSearchBarClose } from '@/app/GlobalRedux/Features/navbar.slice';
+import { setCategory, setSearchBarClose } from '@/app/GlobalRedux/Features/navbar.slice';
 
 const page = () => {
 
@@ -22,6 +22,7 @@ const page = () => {
    const dispatch = useDispatch();
    const [addStatus, setAddStatus] = useState(false);
    const { productList } = useSelector(state => state.cart);
+   const { category } = useSelector(state => state.navbar);
    const [messageApi, contextHolder] = message.useMessage();
    const params = useParams();
    const router = useRouter();
@@ -85,9 +86,6 @@ const handleCart = async(details) => {
 
 }
 
-   const handleImageClick=()=>{
-      console.log("Do something here");
-   }
    const fetchProduct = async (id) => {
       try {
          const res = await fetch(`http://localhost:4000/product/description/${id}`);
@@ -108,6 +106,17 @@ const handleCart = async(details) => {
          console.log(err);
       }
    }
+   
+  
+   const hasPageBeenRendered = useRef(false);
+   useEffect(()=>{
+      if(hasPageBeenRendered.current){
+        console.log(category);
+      }
+      hasPageBeenRendered.current = true;
+   },[category]);
+
+
 
    useEffect(() => {
       fetchProduct(params.id);

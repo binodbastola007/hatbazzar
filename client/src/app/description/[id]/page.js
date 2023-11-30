@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect ,useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Navbar from '@/app/components/Navbar';
@@ -7,6 +7,7 @@ import Footer from '@/app/components/Footer';
 import { message } from 'antd';
 import { useParams } from 'next/navigation';
 import { Rate } from 'antd';
+import { Breadcrumb } from 'antd';
 import '../../styles/description.css';
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from "react-redux";
@@ -18,7 +19,7 @@ const page = () => {
    const [data, setData] = useState({});
    const [images, setImages] = useState([]);
    const [path, setPath] = useState('');
-   const [colors,setColors] = useState([]);
+   const [colors, setColors] = useState([]);
    const dispatch = useDispatch();
    const [addStatus, setAddStatus] = useState(false);
    const { productList } = useSelector(state => state.cart);
@@ -27,64 +28,63 @@ const page = () => {
    const params = useParams();
    const router = useRouter();
 
-
-   const handlePurchase = async(details) => {
+   const handlePurchase = async (details) => {
 
       var newData = true;
 
-      await productList.map((items)=>{
-        if(items.id === details._id){
+      await productList.map((items) => {
+         if (items.id === details._id) {
             router.push('/cart');
             newData = false;
-        }
-       })
+         }
+      })
 
-      if(newData){
-      
-        const productInfo = {
+      if (newData) {
+
+         const productInfo = {
             id: details._id,
             productName: details.productName,
             price: details.price,
             imageUrl: details.imageUrl[0],
             quantity: 1,
 
-        }
-        dispatch(buyNow(productInfo));
-        setAddStatus(true);
-        router.push('/cart');
+         }
+         dispatch(buyNow(productInfo));
+         setAddStatus(true);
+         router.push('/cart');
+      }
+
    }
 
-    }
+   const handleCart = async (details) => {
 
-const handleCart = async(details) => {
+      var newData = true;
 
-    var newData = true;
-
-    await productList.map((items)=>{
-        if(items.id === details._id){
+      await productList.map((items) => {
+         if (items.id === details._id) {
             newData = false;
             messageApi.open({
-                type: 'error',
-                content: "Item already exist in the cart",
-             })
-        }
-       })
+               type: 'error',
+               content: "Item already exist in the cart",
+            })
+         }
+      })
 
-   if(newData){
-    const productInfo = {
-        id: details._id,
-        productName: details.productName,
-        price: details.price,
-        imageUrl: details.imageUrl[0],
-        quantity: 1,
+      if (newData) {
+         const productInfo = {
+            id: details._id,
+            productName: details.productName,
+            price: details.price,
+            imageUrl: details.imageUrl[0],
+            quantity: 1,
 
-    }
-    dispatch(addToCart(productInfo));
-    setAddStatus(true);
+         }
+         dispatch(addToCart(productInfo));
+         setAddStatus(true);
+      }
+
+
    }
-
-
-}
 
    const fetchProduct = async (id) => {
       try {
@@ -106,15 +106,15 @@ const handleCart = async(details) => {
          console.log(err);
       }
    }
-   
+
    const hasPageBeenRendered = useRef(false);
 
-   useEffect(()=>{
-      if(hasPageBeenRendered.current){
+   useEffect(() => {
+      if (hasPageBeenRendered.current) {
          router.push('/');
       }
       hasPageBeenRendered.current = true;
-   },[category]);
+   }, [category]);
 
 
 
@@ -129,49 +129,67 @@ const handleCart = async(details) => {
          {contextHolder}
          <div className='body'>
             <div className='container'>
+               <Breadcrumb
+                  separator='>'
+                  items={[
+                     {
+                        title: <a href="/">Home</a>,
+                     },
+                     {
+                        title: 'Category',
+                     },
+                     {
+                        title: `${data.category}`,
+                     },
+                     {
+                        title: `${data.productName}`,
+                     },
+                  ]}
+                  style={{marginLeft:'10px'}}
+               />
                <div className='details'>
-               <div className='imagesArray'>
-               {images.map((item,index)=>{
-                  return (
-                     <>
-                     <Image key={index}  onClick={()=>setPath(item)} src={item} alt=''height={70} width={70} className='img'/> &nbsp;
-                     </>
-                     )
-               })}
-             </div>
+                  <div className='imagesArray'>
+                     {images.map((item, index) => {
+                        return (
+                           <>
+                              <Image key={index} onClick={() => setPath(item)} src={item} alt='' height={70} width={70} className='img' /> &nbsp;
+                           </>
+                        )
+                     })}
+                  </div>
                   <div className='productImg'>
                      <Image
-                        src={path?path:images[0]}
+                        src={path ? path : images[0]}
                         alt='product_img'
                         width={550}
                         height={550}
-                       
+
                         priority
-                        style={{border:'none'}}
+                        style={{ border: 'none' }}
                      />
                   </div>
                   <div className='productDetails'>
                      <span className='name'>Product name: {data.productName}</span>
                      <span className='category'>Category: {data.category}</span>
                      <span className='colors'>
-                     Available colors:&nbsp;
-                     {(colors.length>0) && 
-                     (colors.map((item,index)=>{
-                        if(index===colors.length-1){
-                           return item;
+                        Available colors:&nbsp;
+                        {(colors.length > 0) &&
+                           (colors.map((item, index) => {
+                              if (index === colors.length - 1) {
+                                 return item;
+                              }
+                              return item + ',' + ' ';
+                           })
+                           )
                         }
-                        return item + ','+' ';
-                     })
-                     )
-                     }
                      </span>
                      <span className='price'>Price: {data.currency} {data.price}</span>
                      <Rate disabled value={data.rating} />
 
-                      <div className='productButtons'>
-                      <button  onClick={() => handlePurchase(data)}>Buy now</button>
-                      <button className={addStatus && 'addIntoCart'} onClick={() => handleCart(data)} disabled={addStatus}>{addStatus?'Added !':'Add to cart'}</button>
-                      </div>
+                     <div className='productButtons'>
+                        <button onClick={() => handlePurchase(data)}>Buy now</button>
+                        <button className={addStatus && 'addIntoCart'} onClick={() => handleCart(data)} disabled={addStatus}>{addStatus ? 'Added !' : 'Add to cart'}</button>
+                     </div>
 
                      <div className='descriptionBox'>
                         <h4>Product Details</h4>

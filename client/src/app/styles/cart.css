@@ -9,6 +9,45 @@
     justify-content: space-between;
     margin: 10px 0px !important;
 }
+.productList{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.saveBtn{
+    padding: 5px;
+    border-radius: 5px;
+    width: 600px;
+    cursor: pointer;
+    background-color: #9ddacc;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+.saveBtn:hover{
+    background-color: #fff;
+}
+.createdOrder{
+    padding: 5px;
+    border-radius: 5px;
+    width: 600px;
+    cursor: default;
+    background-color: #ffffff;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: black;
+}
+.emptyCart{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    width: 900px;
+    height: 50px;
+    font-weight: bold;
+}
 .productContainer{
     width: 600px;
     padding: 15px;
@@ -102,7 +141,10 @@
     cursor: pointer;
     padding: 4px;
     border-radius: 5px;
+    background-color: #60bb46;
+    color: white;
+    border: none;
 }
 .payBtn:hover{
-    background-color: #9ddacc;
+    color: black;
 }

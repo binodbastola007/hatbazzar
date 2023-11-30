@@ -6,6 +6,7 @@ const saltRounds = 10;
 const app = express();
 const userRoute = require('./routes/user');
 const productRoute = require('./routes/products');
+const orderRoute = require('./routes/order');
 const cors = require('cors');
 const port = process.env.PORT || 4000;
 
@@ -14,6 +15,7 @@ app.use(express.json({limit: '25mb'}));
 app.use(express.urlencoded({limit: '25mb'}));
 app.use(userRoute);
 app.use(productRoute);
+app.use(orderRoute);
 
 connection();
 

@@ -3,10 +3,12 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/products/all',async(req,res)=>{
-    const data = await ProductCard.find();
+    const skipCount = (req.query.page-1)*12;
+    const data = await ProductCard.find().limit(12).skip(skipCount);
+    const totalCount = await ProductCard.find().count();
     
     if(data.length>0){
-      res.json({data});
+      res.json({data,totalCount});
      }
      else{
       res.json({msg:"No products in hatbazzar"});

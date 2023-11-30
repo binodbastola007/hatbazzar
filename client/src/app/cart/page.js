@@ -27,7 +27,8 @@ const page = () => {
                     {productList.length>0&& productList.map((item)=>{
                         return <ProductContainer item={item}/>
                     })
-                    }                 
+                    }  
+                    <div><button>Save to Cart</button></div>               
                 </div>
                 <div className='totalPrice'>
                   <PriceContainer/>

@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const initialState = {
   allData:[],
-  category:[],
+  category:'',
   categoryArr:[],
   searchBarClose:true,
   search:''

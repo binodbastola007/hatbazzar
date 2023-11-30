@@ -107,11 +107,11 @@ const handleCart = async(details) => {
       }
    }
    
-  
    const hasPageBeenRendered = useRef(false);
+
    useEffect(()=>{
       if(hasPageBeenRendered.current){
-        console.log(category);
+         router.push('/');
       }
       hasPageBeenRendered.current = true;
    },[category]);

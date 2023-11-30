@@ -11,6 +11,7 @@ import { Button, Drawer } from 'antd';
 import { useRouter } from 'next/navigation';
 import { MdOutlineSettingsInputComponent } from "react-icons/md";
 import { useSelector, useDispatch } from 'react-redux';
+import { Pagination } from 'antd';
 import {setAllData, setCategory, setCategoryArr , setSearchBarClose} from '../app/GlobalRedux/Features/navbar.slice';
 
 const index = () => {
@@ -33,10 +34,10 @@ const index = () => {
       setOpen(false);
    };
 
-   const fetchDetails = async (category) => {
+   const fetchDetails = async(category,page=1) => {
       if (category == '') {
          try {
-            const res = await fetch('http://localhost:4000/products/all');
+            const res = await fetch('http://localhost:4000/products/all?page='+page);
             const result = await res.json();
             console.log(result);
             if (result.data.length > 0) {
@@ -169,6 +170,7 @@ const index = () => {
 
    useEffect(() => {
       fetchDetails(category);
+      console.log(category);
       dispatch(setSearchBarClose(false));
    }, [category])
 
@@ -208,6 +210,8 @@ const index = () => {
                   })
                }
             </div>
+            <Pagination onChange={(page)=>fetchDetails(category,page)} defaultCurrent={1} total={data.length} />
+            <br/>
          </div>
          <Footer />
          <Drawer title="Filter product/s" placement="right" onClose={onClose} open={open}>

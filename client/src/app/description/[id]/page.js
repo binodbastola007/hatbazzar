@@ -128,8 +128,8 @@ const page = () => {
          <Navbar />
          {contextHolder}
          <div className='body'>
-            <div className='container'>
-               <Breadcrumb
+         <div>
+         <Breadcrumb
                   separator='>'
                   items={[
                      {
@@ -145,8 +145,10 @@ const page = () => {
                         title: `${data.productName}`,
                      },
                   ]}
-                  style={{marginLeft:'10px'}}
+                  style={{marginTop:'10px',position:'absolute',top:'0',left:'10px'}}
                />
+         </div>
+            <div className='container'>
                <div className='details'>
                   <div className='imagesArray'>
                      {images.map((item, index) => {

@@ -190,7 +190,7 @@ const page = () => {
       <>
          <Navbar />
          <div className='body'>
-            <div className='container'>
+            <div className='containerBox'>
                <div className='settings'>
                   <h3 className='title'>Update your product details</h3>
                   <div className='editBoxes' onClick={showModal}>Edit your product name <EditOutlined /></div>

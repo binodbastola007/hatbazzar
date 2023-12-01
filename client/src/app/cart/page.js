@@ -41,7 +41,7 @@ const page = () => {
       {contextHolder}
       <Navbar />
       <div className='body'>
-        <div className='container'>
+        <div className='containerCart'>
           <div className='productList'>
             {productList.length > 0 && productList.map((item) => {
               return <ProductContainer item={item} />

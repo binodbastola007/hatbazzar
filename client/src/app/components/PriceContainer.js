@@ -16,8 +16,6 @@ const PriceDetails = () => {
   }
 
   const handlePayment = async (total) => {
-
-    
     const product_code = "EPAYTEST";
     const signedFieldsName =  'total, orderId, product_code';
 
@@ -81,7 +79,7 @@ try{
         <span>Price payable : {total}</span>
         <button className='payBtn' onClick={() => handlePayment(total)}>Pay with esewa</button>
       </div>
-        <div>
+        {/* <div>
         <form action="https://rc-epay.esewa.com.np/api/epay/main/v2/form" method="POST">
  <input type="text" id="amount" name="amount" value="100" required/>
  <input type="text" id="tax_amount" name="tax_amount" value ="10" required/>
@@ -96,7 +94,7 @@ try{
  <input type="text" id="signature" name="signature"  required />
  <input value="Submit" type="submit"/>
  </form>
-        </div>
+        </div> */}
     </div>
 
   )

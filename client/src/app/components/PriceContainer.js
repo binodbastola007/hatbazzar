@@ -17,10 +17,13 @@ const PriceDetails = () => {
 
   const handlePayment = async (total) => {
 
-    var hash = CryptoJS.HmacSHA256(orderId, "8gBm/:&EnhH.1/q");
-    var hashInBase64 = CryptoJS.enc.Base64.stringify(hash);
-    console.log(hashInBase64);
+    
     const product_code = "EPAYTEST";
+    const signedFieldsName =  'total, orderId, product_code';
+
+    var hash = CryptoJS.HmacSHA256(signedFieldsName, "8gBm/:&EnhH.1/q");
+    var hashInBase64 = CryptoJS.enc.Base64.stringify(hash);
+   
 
     const value = {
       amount: total,
@@ -29,20 +32,27 @@ const PriceDetails = () => {
       product_service_charge: 0,
       product_code: "EPAYTEST",
       signature: hashInBase64,
-      signed_field_names: total, orderId, product_code,
+      signed_field_names: signedFieldsName,
       success_url: "https://esewa.com.np",
       tax_amount: 0,
       total_amount: total,
       transaction_uuid: orderId
     }
+try{
+  const res = await fetch('https://rc-epay.esewa.com.np/api/epay/main/v2/form', {
+    method: 'POST',
+    headers: { 
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin' : '*'
+   },
+    body: JSON.stringify(value)
+  })
+  const data = await res.json();
+  console.log(data);
+}catch(err){
+  console.log(err);
+}
 
-    const res = await fetch('https://rc-epay.esewa.com.np/api/epay/main/v2/form', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(value)
-    })
-    const data = await res.json();
-    console.log(data);
 
   }
 
@@ -72,7 +82,7 @@ const PriceDetails = () => {
         <button className='payBtn' onClick={() => handlePayment(total)}>Pay with esewa</button>
       </div>
         <div>
-        {/* <form action="https://rc-epay.esewa.com.np/api/epay/main/v2/form" method="POST">
+        <form action="https://rc-epay.esewa.com.np/api/epay/main/v2/form" method="POST">
  <input type="text" id="amount" name="amount" value="100" required/>
  <input type="text" id="tax_amount" name="tax_amount" value ="10" required/>
  <input type="text" id="total_amount" name="total_amount" value="110" required/>
@@ -85,7 +95,7 @@ const PriceDetails = () => {
  <input type="text" id="signed_field_names" name="signed_field_names" value="total_amount,transaction_uuid,product_code" required />
  <input type="text" id="signature" name="signature"  required />
  <input value="Submit" type="submit"/>
- </form> */}
+ </form>
         </div>
     </div>
 

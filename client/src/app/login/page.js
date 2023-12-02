@@ -54,7 +54,7 @@ const index = () => {
     messageApi.open({
       type: 'success',
       content: "Login success",
-    }); 
+    });
   }
   if (session.status === 'unauthenticated') {
     messageApi.open({
@@ -122,16 +122,16 @@ const index = () => {
                 <div className='link'>
                   Don't have an account ? <Link className='linkBtn' href='/register'>Sign up</Link> instead
                 </div>
-                <div >
-                  <div style={{ fontSize: '0.8rem', textAlign: 'center' }}>OR</div>
-                  <button className='googleBtn' onClick={() => {signIn('google')}}>
-                    <Image src='/google_logo.png' width={30} height={30} />
-                    <span>Sign in with google</span>
-                  </button>
-                </div>
               </Form>
             )}
           </Formik>
+        </div>
+        <div >
+          <div style={{ fontSize: '0.8rem', textAlign: 'center' }}>OR</div>
+          <button className='googleBtn' onClick={() => { signIn('google') }}>
+            <Image src='/google_logo.png' width={30} height={30} />
+            <span>Sign in with google</span>
+          </button>
         </div>
       </div>
       <Footer />

@@ -9,6 +9,10 @@ import Navbar from '../components/Navbar';
 import {  message } from 'antd';
 import Footer from '../components/Footer';
 import '../styles/register.css';
+import { useRouter } from 'next/navigation';
+import { useRef,useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { signIn, useSession } from 'next-auth/react';
 
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -35,8 +39,37 @@ const SignupSchema = Yup.object().shape({
   .oneOf([Yup.ref("password")], "Passwords does not match")
   
 });
-const index=()=>{
+const index = ()=>{
   const [messageApi, contextHolder] = message.useMessage();
+  const {category} = useSelector(state=>state.navbar);
+  const router = useRouter();
+  const session = useSession();
+
+  const handleSignup=async()=>{
+    const res = await fetch('http://localhost:4000/register-googleuser',{
+      method:'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(session.data.user)
+    })
+    const data = await res.json();
+    messageApi.open({
+    type: res.status == 200 ? 'success': 'error',
+    content: data.msg,
+    });
+    if(res.status == 200){
+      router.push('/login');
+    }
+  }
+
+  if(session.status === 'authenticated'){
+  handleSignup();
+  }
+  if(session.status === 'unauthenticated'){
+    messageApi.open({
+      type: 'error',
+      content: "Couldnot signup , please try again later !",
+    });
+  }
  
  const handleRegister= async(values) => {
   const res = await fetch('http://localhost:4000/register',{
@@ -50,6 +83,15 @@ const index=()=>{
   content: data.msg,
   });
  }
+
+ const hasPageBeenRendered = useRef(false);
+ useEffect(() => {
+    if (hasPageBeenRendered.current) {
+       router.push('/');
+    }
+    hasPageBeenRendered.current = true;
+ }, [category]);
+
 
   return (
     <>
@@ -103,6 +145,13 @@ const index=()=>{
            <button className='submitBtn' type="submit" >Submit</button>
            <div className='link'>
            Already have an account ? <Link className='linkBtn' href="/login">Sign In</Link>  instead
+           </div>
+           <div>
+           <div style={{fontSize:'0.8rem',textAlign:'center'}}>OR</div>
+           <button className='googleBtn' onClick={()=>signIn('google')}>
+                <Image src='/google_logo.png' width={30} height={30}/>
+                 <span>Sign up with google</span>
+            </button>
            </div>
          </Form>
        )}

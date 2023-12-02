@@ -12,7 +12,7 @@ import { RiDeleteBin7Fill } from 'react-icons/ri';
 import { AiFillEdit } from "react-icons/ai";
 import { Button, Modal } from 'antd';
 import { Drawer } from 'antd';
-import { MdOutlineSettingsInputComponent } from "react-icons/md";
+import { IoSettings } from "react-icons/io5";
 import '../../styles/removeProduct.css';
 import { useRouter } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
@@ -223,10 +223,9 @@ const page = () => {
          {contextHolder}
          {contextHolder}
          <div className='body'>
-            <button onClick={showDrawer} className='filterBtn'>
-               <span style={{ color: 'white' }}>Filter</span>
-               <MdOutlineSettingsInputComponent size={18} color='#9ddacc' style={{ alignItems: 'center' }} />
-            </button>
+         <span className='filterBtn'>
+               <IoSettings onClick={showDrawer} size={25}/>
+            </span>
             <div className='cardList'>
                {
                   (data.length > 0) && data.map((details) => {

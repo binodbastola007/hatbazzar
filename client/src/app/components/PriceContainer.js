@@ -77,7 +77,12 @@ try{
         <span>Discount : N/A </span>
         <span> Delivery charge : N/A </span>
         <span>Price payable : {total}</span>
-        <button className='payBtn' onClick={() => handlePayment(total)}>Pay with esewa</button>
+
+        {(productList.length>0 && orderId!=='')&&
+          <button className='payBtn' onClick={() => handlePayment(total)}>Pay with esewa
+          </button>
+        }
+        
       </div>
         {/* <div>
         <form action="https://rc-epay.esewa.com.np/api/epay/main/v2/form" method="POST">

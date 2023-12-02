@@ -108,7 +108,6 @@ const page = () => {
    }
 
    const hasPageBeenRendered = useRef(false);
-
    useEffect(() => {
       if (hasPageBeenRendered.current) {
          router.push('/');

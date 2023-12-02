@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ProductContainer from '../components/ProductContainer';
@@ -11,12 +11,15 @@ import { setSearchBarClose } from '../GlobalRedux/Features/navbar.slice';
 import { setOrderId } from '../GlobalRedux/Features/cart.slice';
 import { message } from 'antd';
 import { BsFillCartXFill } from "react-icons/bs";
+import { useRouter } from 'next/navigation';
 
 const page = () => {
 
   const { productList, orderId } = useSelector(state => state.cart);
+  const { category } = useSelector(state => state.navbar);
   const [messageApi, contextHolder] = message.useMessage();
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const handleSave = async (products) => {
     const res = await fetch('http://localhost:4000/save-order', {
@@ -35,6 +38,15 @@ const page = () => {
   useEffect(() => {
     dispatch(setSearchBarClose(true));
   })
+
+  const hasPageBeenRendered = useRef(false);
+  useEffect(() => {
+     if (hasPageBeenRendered.current) {
+        router.push('/');
+     }
+     hasPageBeenRendered.current = true;
+  }, [category]);
+
 
   return (
     <>

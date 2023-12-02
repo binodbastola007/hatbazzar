@@ -53,3 +53,20 @@
   .linkBtn:hover{
     color: #9ddacc;
   }
+  .googleBtn{
+    padding: 5px;
+    font-size: 0.8rem;
+    margin-top: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .googleBtn img{
+    margin-right: 1px;
+    border-right: 1px solid black;
+  }
+  .googleBtn span{
+    margin-left: 3px;
+  }
+ 

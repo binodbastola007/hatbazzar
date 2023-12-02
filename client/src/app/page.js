@@ -9,7 +9,7 @@ import { Rate } from 'antd';
 import { message } from 'antd';
 import { Button, Drawer } from 'antd';
 import { useRouter } from 'next/navigation';
-import { MdOutlineSettingsInputComponent } from "react-icons/md";
+import { IoSettings } from "react-icons/io5";
 import { useSelector, useDispatch } from 'react-redux';
 import { Pagination } from 'antd';
 import {setAllData, setCategory, setCategoryArr , setSearchBarClose} from '../app/GlobalRedux/Features/navbar.slice';
@@ -66,7 +66,7 @@ const index = () => {
          const filteredData = allData.filter((item) => {
             return (item.category === category);
          })
-
+         setData(filteredData);
          return filteredData;
       }
       else if (category === 'laptops') {
@@ -199,10 +199,9 @@ const index = () => {
          {contextHolder}
          <Navbar />
          <div className='body'>
-            <button onClick={showDrawer} className='filterBtn'>
-               <span style={{ color: 'white' }}>Filter</span>
-               <MdOutlineSettingsInputComponent size={18} color='#9ddacc' style={{ alignItems: 'center' }} />
-            </button>
+            <span className='filterBtn'>
+               <IoSettings onClick={showDrawer} size={25}/>
+            </span>
             <div className='cardList'>
                {
                   (data.length > 0) && data.map((details) => {

@@ -85,9 +85,12 @@ const Navbar = () => {
     else if (e.key === "ArrowDown" && selectedItem < 9) {
       setSelecetedItem(prev => prev + 1);
     }
-    else if (e.key == "Enter" && selectedItem >= 0) {
+    else if (e.key == "Enter" && selectedItem >= 0 ) {
       const enterItem = searchedData[selectedItem];
-      setKeyword(enterItem.productName);
+      if(enterItem?.productName){
+        setKeyword(enterItem.productName);
+      }
+
     }
   }
 

@@ -18,4 +18,4 @@ const googleUserSchema = new Schema({
 const User = mongoose.model('User', userSchema);
 const GoogleUser = mongoose.model('GoogleUser', googleUserSchema);
 
-module.exports = User,GoogleUser;
+module.exports = {User,GoogleUser};

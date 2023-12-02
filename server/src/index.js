@@ -5,7 +5,6 @@ require('dotenv').config()
 const saltRounds = 10;
 const app = express();
 const userRoute = require('./routes/user');
-const googleUserRoute = require('./routes/googleuser');
 const productRoute = require('./routes/products');
 const orderRoute = require('./routes/order');
 const cors = require('cors');

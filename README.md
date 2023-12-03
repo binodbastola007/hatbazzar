@@ -48,11 +48,6 @@ Here are the few screenshots of my project
     <img src="client/public/logo.png" alt="Logo" width="320" height="320">
 </div>
 
-## Contact
-
-Linkedin - [@my_linkedin](https://www.linkedin.com/in/binod-bastola-538ab3236/) 
-
-
 
 
 <!-- MARKDOWN LINKS & IMAGES -->

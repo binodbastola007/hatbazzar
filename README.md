@@ -10,11 +10,6 @@ This is HatBazzar - an ecommerce project that is built to help people who are in
 * [![Express][Express.js]][Express-url]
 * [![MongoDb][MongoDB]][MongoDB-url]
 
-You can clone the repo using the following command in the terminal.
-   ```sh
-   git clone https://github.com/binodbastola007/hatbazzar.git
-   ```
-
 
 It is a MERN stack project where user retrive data stored in mongodb database.Reactjs is used at the frontend whereas expressjs is used to communicate frontend and backend. Morever it is an open source so you can contribute and provide a pull request to help change and add new functionalities.
 

@@ -88,7 +88,6 @@ border-radius: 5px;
   bottom: 8px;
   right: 12px;
   cursor: pointer;
-  width: 34%;
   background-color: #9ddacc;
 }
 .addToCart:hover{
@@ -151,6 +150,13 @@ border-radius: 5px;
 }
 .filterR{
   margin-top: 20px;
+}
+
+@media screen and (max-width:420px) {
+  .filterBtn{
+    right:0px;
+    top: 5px;
+  }  
 }
 
 

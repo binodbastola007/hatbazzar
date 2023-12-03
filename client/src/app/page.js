@@ -13,6 +13,7 @@ import { IoSettings } from "react-icons/io5";
 import { useSelector, useDispatch } from 'react-redux';
 import { Pagination } from 'antd';
 import {setAllData, setCategory, setCategoryArr , setSearchBarClose} from '../app/GlobalRedux/Features/navbar.slice';
+import Sider from 'antd/es/layout/Sider';
 
 const index = () => {
 

@@ -1,5 +1,5 @@
 .navBar{
-   width: 100vw;
+    width: 100vw;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -14,6 +14,7 @@
   }
   .searchBar{
     width: 40%;
+    margin-left: -40px;
   }
   .searchBar button{
     background-color:#9ddacc;
@@ -124,5 +125,37 @@
     border-radius: 8px;
   }
 
+@media screen and (max-width:767px) {
+  .navBar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: max-content;
+  }
+  .logo{
+    display: none;
+  }
+  .searchBar{
+    width: 50%;
+    margin-left: -80px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+  }
+  .search{
+    width:150%
+  }
+  .categories{
+    flex-direction: column;
+    display: none;
+  }
+  .searchSuggesstion{
+   width: 60%;
+  }
+  .account{
+    margin-bottom: 10px;
+  }
+}
 
   

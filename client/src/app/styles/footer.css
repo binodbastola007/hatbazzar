@@ -8,3 +8,8 @@
     background-color: rgb(255 137 76);
     width: 100vw;
   }
+  @media screen and (max-width:602px) {
+    .footer{
+      font-size: 0.1rem;
+    }
+  }

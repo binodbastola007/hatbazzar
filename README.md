@@ -3,9 +3,12 @@
 This is HatBazzar - an ecommerce project that is built to help people who are intrested in digital market buying and selling goods online.As most of the businesses are moving rapidly towards the ecommerce ,most of the developers focus is on ecommerce. I am optimistic that this project is going to provide a brief overview of how an e-commerce web works in todays world.
 
 
-### Built With
+### The project is built With following libraries and frameworks.
 
 * [![Next][Next.js]][Next-url]
+* [![Redux][Redux]][Next-url]
+* [![Express][Express.js]][Express-url]
+* [![MongoDb][MongoDB]][MongoDB-url]
 
 You can clone the repo using the following command in the terminal.
    ```sh
@@ -60,3 +63,9 @@ Linkedin - [@my_linkedin](https://www.linkedin.com/in/binod-bastola-538ab3236/)
 
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
+[Express.js]:https://img.shields.io/badge/Express.js-404D59?style=for-the-badge
+[Express-url]: https://expressjs.com/
+[Redux]: https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white
+[Redux-url]: https://redux.js.org/
+[MongoDB]: https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white
+[MongoDB-url]: https://www.mongodb.com/

@@ -11,7 +11,7 @@ This is HatBazzar - an ecommerce project that is built to help people who are in
 * [![MongoDb][MongoDB]][MongoDB-url]
 
 
-It is a MERN stack project where user retrive data stored in mongodb database.Reactjs is used at the frontend whereas expressjs is used to communicate frontend and backend. Morever it is an open source so you can contribute and provide a pull request to help change and add new functionalities.
+It is a MERN stack project where user retrive data stored in mongodb database.Nextjs is used at the frontend whereas expressjs is used to communicate frontend and backend. Morever it is an open source so you can contribute and provide a pull request to help change and add new functionalities.
 
 
 

@@ -7,6 +7,7 @@ This is HatBazzar - an ecommerce project that is built to help people who are in
 
 * [![Next][Next.js]][Next-url]
 * [![Redux][Redux]][Next-url]
+* [![Node][Node.js]][Node-url]
 * [![Express][Express.js]][Express-url]
 * [![MongoDb][MongoDB]][MongoDB-url]
 
@@ -58,6 +59,8 @@ Linkedin - [@my_linkedin](https://www.linkedin.com/in/binod-bastola-538ab3236/)
 
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
+[Node.js]: https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white
+[Node-url]: https://nodejs.org/en
 [Express.js]:https://img.shields.io/badge/Express.js-404D59?style=for-the-badge
 [Express-url]: https://expressjs.com/
 [Redux]: https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white

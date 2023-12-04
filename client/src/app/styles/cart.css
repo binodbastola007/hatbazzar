@@ -1,6 +1,6 @@
-.containerCart{
+.containerCart {
     width: 95% !important;
-    min-height: 70vh ;
+    min-height: 70vh;
     max-height: max-content;
     background-color: rgba(0, 0, 0, 0.1);
     display: flex;
@@ -9,36 +9,40 @@
     justify-content: space-between;
     margin: 10px 0px !important;
 }
-.productList{
+
+.productList {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 10px;
 }
-.saveBtn{
-    padding: 5px;
+
+.saveBtn {
     border-radius: 5px;
     width: 600px;
-    cursor: pointer;
-    background-color: #9ddacc;
-    font-size: 0.8rem;
     font-weight: bold;
-}
-.saveBtn:hover{
-    background-color: #fff;
-}
-.createdOrder{
+    font-size: 0.8rem;
     padding: 5px;
+    border: none;
+}
+.saveBtn:hover {
+   cursor: pointer;
+}
+
+.createdOrder {
     border-radius: 5px;
     width: 600px;
     cursor: default;
     background-color: #ffffff;
-    font-size: 0.8rem;
     font-weight: bold;
+    font-size: 0.8rem;
     color: black;
+    padding: 5px;
+    border: none;
 }
-.emptyCart{
+
+.emptyCart {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -48,7 +52,8 @@
     height: 50px;
     font-weight: bold;
 }
-.productContainer{
+
+.productContainer {
     width: 600px;
     padding: 15px;
     border: 1px solid black;
@@ -60,27 +65,22 @@
     font-size: 0.8rem;
     margin: 5px 10px;
 }
-.info{
+
+.info {
     display: flex;
     flex-direction: row;
     gap: 15px;
 }
-.productInfo{
+
+.productInfo {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
     gap: 8px;
 }
-.deleteBtn{
-    padding: 5px;
-    font-size: 0.8rem;
-    background-color:#ff4d4f;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-}
-.quantity{
+
+.quantity {
     background-color: rgba(0, 0, 0, 0.2);
     width: 150px;
     height: 90px;
@@ -90,11 +90,13 @@
     justify-content: center;
     gap: 8px;
 }
-.quantity span{
+
+.quantity span {
     text-align: center;
-  
+
 }
-.qtyBtn{
+
+.qtyBtn {
     width: 105px;
     display: flex;
     flex-direction: row;
@@ -102,16 +104,19 @@
     justify-content: center;
     gap: 5px;
 }
-.qtyBtn input{
+
+.qtyBtn input {
     width: 35px;
     text-align: center;
     font-size: 0.8rem;
 }
-.qtyBtn button{
+
+.qtyBtn button {
     cursor: pointer;
     width: 30px;
 }
-.priceContainer{
+
+.priceContainer {
     width: 500px;
     padding: 15px 25px;
     display: flex;
@@ -123,7 +128,14 @@
     margin: 5px 10px;
     background-color: #fff;
 }
-.priceDetails{
+
+.priceDetails {
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    width: 200%;
+}
+
+.priceDetails {
     font-size: 0.8rem;
     display: flex;
     flex-direction: column;
@@ -131,20 +143,61 @@
     justify-content: center;
     gap: 12px;
 }
-.priceDetails span{
-    width: 260%;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
-    padding: 5px;
-}
-.payBtn{
-    cursor: pointer;
-    padding: 4px;
-    border-radius: 5px;
-    background-color: #60bb46;
-    color: white;
-    border: none;
-}
-.payBtn:hover{
+
+.checkoutBtn,
+.deleteBtn {
+    font-size: 0.7rem;
+    background-color: #9ddacc;
     color: black;
+    cursor: pointer;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+.deleteBtn:hover {
+    color: #fff;
+}
+.checkoutBtn:hover {
+    color: #ffff;
+}
+.paymentPartners{
+    font-size: 0.8rem;
+    margin: 10px 0px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.shippingDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    min-height: 70vh;
+    max-height: max-content;
+    width: 90vw;
+}
+.shippingDetails h3{
+    text-align: center;
+}
+.shippingContainer{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.checkoutForm{
+    width: 50%;
+    background-color: #fff;
+    padding: 10px 0px;
+    padding-top: 40px;
+}
+.continueBtn{
+    background-color: #9ddacc;
+    color: black;
+}
+.continueBtn:hover{
+    color: white !important;
+    background-color: #9ddacc !important;
 }

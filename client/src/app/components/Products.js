@@ -7,7 +7,7 @@ import { Button, Modal } from 'antd';
 
 const ProductQty = ({ item }) => {
 
-  const { productList } = useSelector(state => state.cart);
+  const { productList , orderId } = useSelector(state => state.cart);
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
@@ -83,7 +83,7 @@ const ProductQty = ({ item }) => {
         <span>Product name: {item.productName} </span>
         <span>Product price: {item.price} </span>
         <>
-          <button className='deleteBtn' type="primary" onClick={showModal}>
+          <button disabled={(orderId!=='')} className='deleteBtn' type="primary" onClick={showModal}>
             Delete item
           </button>
           <Modal title="Remove item from cart" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
@@ -97,9 +97,9 @@ const ProductQty = ({ item }) => {
       <div className='quantity'>
         <span>Product quantity</span>
         <div className='qtyBtn'>
-          <button onClick={()=>{handleDecrement(item.id)}}>-</button>
-          <input value={item.quantity} onChange={(e)=>handleQuantityChange(item.id,e.target.value)}/>
-          <button onClick={()=>handleIncrement(item.id)}>+</button>
+          <button  disabled={(orderId!=='')} onClick={()=>{handleDecrement(item.id)}}>-</button>
+          <input   disabled={(orderId!=='')} value={item.quantity} onChange={(e)=>handleQuantityChange(item.id,e.target.value)}/>
+          <button  disabled={(orderId!=='')} onClick={()=>handleIncrement(item.id)}>+</button>
         </div>
       </div>
 

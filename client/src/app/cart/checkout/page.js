@@ -1,8 +1,9 @@
 "use client";
-import React ,{useEffect, useState} from 'react';
-import Image from 'next/image';
+import React ,{useEffect, useState , useRef} from 'react';
 import Navbar from '@/app/components/Navbar';
 import Footer from '@/app/components/Footer';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { Button, Form, Input, Select, Space, Tooltip, Typography } from 'antd';
 import { useSelector,useDispatch } from 'react-redux';
 import '@/app/styles/cart.css';
@@ -12,6 +13,8 @@ const page = () => {
 
     const [total, setTotal] = useState(0);
     const {productList , orderId} = useSelector(state=>state.cart);
+    const { category } = useSelector(state => state.navbar);
+    const router = useRouter();
     const { Option } = Select;
 
 
@@ -25,6 +28,16 @@ const page = () => {
         })
         setTotal(totalPrice);
       }
+
+
+      const hasPageBeenRendered = useRef(false);
+      useEffect(() => {
+        if (hasPageBeenRendered.current) {
+          router.push('/');
+        }
+        hasPageBeenRendered.current = true;
+      }, [category]);
+    
 
     useEffect(()=>{
         sumPrice();
@@ -189,7 +202,8 @@ const page = () => {
                   <span >Discount : N/A </span>
                   <span > Delivery charge : N/A </span>
                   <span >Price payable : {total}</span>
-
+                  <br/>
+                  <span>Order id : {orderId}</span>
                 </div>
 
                   <div className='paymentPartners'>

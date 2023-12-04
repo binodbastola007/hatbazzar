@@ -90,6 +90,7 @@ const page = () => {
   })
 
   const handleSave = async (products) => {
+    console.log(products);
     const res = await fetch('http://localhost:4000/save-order', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -153,7 +154,6 @@ const page = () => {
                   <span >Discount : N/A </span>
                   <span > Delivery charge : N/A </span>
                   <span >Price payable : {total}</span>
-
                 </div>
                 <br/>
                 {(productList.length > 0 && orderId !== '') &&

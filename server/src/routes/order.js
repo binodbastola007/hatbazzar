@@ -6,10 +6,10 @@ router.post('/save-order', async (req, res) => {
     try {
       const data = await Order.create({orderItems:req.body});
       if (data) {
-        res.json({ msg: "Sucessfully created your order" })
+        res.json({ msg: "Sucessfully saved your cart/order", orderId:data._id})
       }
       else {
-        res.json({ msg: "Couldn't create your order" , orderId:data._id})
+        res.json({ msg: "Couldn't create your order" })
       }
     }
     catch (err) {

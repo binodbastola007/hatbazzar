@@ -142,6 +142,7 @@
     align-items: flex-start;
     justify-content: center;
     gap: 12px;
+    border-radius: 10px;
 }
 
 .checkoutBtn,
@@ -164,7 +165,6 @@
 }
 .paymentPartners{
     font-size: 0.8rem;
-    margin: 10px 0px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -192,6 +192,7 @@
     background-color: #fff;
     padding: 10px 0px;
     padding-top: 40px;
+    border: 1px solid black;
 }
 .continueBtn{
     background-color: #9ddacc;

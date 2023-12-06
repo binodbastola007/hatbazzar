@@ -13,6 +13,7 @@ import { message } from 'antd';
 import { BsFillCartXFill } from "react-icons/bs";
 import { useRouter } from 'next/navigation';
 import { Button, Form, Input, Select, Space, Tooltip, Typography } from 'antd';
+import {Divider} from 'antd';
 const { Option } = Select;
 
 const page = () => {
@@ -155,7 +156,7 @@ const page = () => {
                   <span > Delivery charge : 0 </span>
                   <span >Price payable : {total}</span>
                 </div>
-                <br/>
+                <Divider style={{backgroundColor:'black'}} />
                 {(productList.length > 0 && orderId !== '') &&
                   (<>
                   <button className='checkoutBtn' onClick={() => router.push('/cart/checkout')}>Proceed to checkout

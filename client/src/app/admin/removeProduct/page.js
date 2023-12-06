@@ -21,6 +21,7 @@ import { setAllData ,setCategory, setCategoryArr, setSearchBarClose } from '@/ap
 const page = () => {
 
    const [data, setData] = useState([]);
+   const [searchedData, setSearchedData] = useState([]);
    const [minPrice, setMinPrice] = useState('');
    const [maxPrice, setMaxPrice] = useState('');
    const [rating, setRating] = useState('');
@@ -199,27 +200,23 @@ const page = () => {
       fetchDetails();
    }
 
-   useEffect(() => {
-
-      const searchedItem = allData.filter((item) => {
-         return (item.productName.toLowerCase().includes(search.toLocaleLowerCase()));
-      })
-      setData(searchedItem);
-      if (search !== '' && searchedItem == '') {
+   useEffect(()=>{
+      setData(searchedData);
+      if(search!=='' && searchedData==''){
          messageApi.open({
             type: 'error',
             content: "No products found, please search with different keyword",
          });
          setData([...allData]);
       }
-      if (search == '') {
+      if(search==''){
          setData([...allData]);
       }
-   }, [search])
+   },[search])
 
    return (
       <>
-         <Navbar />
+         <Navbar searchedData={searchedData} setSearchedData={setSearchedData}/>
          {contextHolder}
          {contextHolder}
          <div className='body'>

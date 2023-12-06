@@ -17,5 +17,13 @@ router.post('/save-order', async (req, res) => {
     }
   
   })
+  router.put('/add-checkout-details/:id',async(req,res)=>{
+      const data = await Order.findByIdAndUpdate({_id:req.params.id},req.body)
+      if(data){
+        res.json({msg:'Successfully added shipping details'});
+      }else{
+        res.json({msg:'Couldnot add shipping details'})
+      }
+  })
 
   module.exports = router;

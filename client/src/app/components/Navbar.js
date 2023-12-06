@@ -163,7 +163,7 @@ const Navbar = ({searchedData, setSearchedData}) => {
               disabled={searchBarClose}
             />
           </Space>
-          {(searchedData.length > 0 && keyword !== '' && suggestionDivOpen) &&
+          {(searchedData?.length > 0 && keyword !== '' && suggestionDivOpen) &&
             <div className='searchSuggesstion'>
               {searchedData.slice(0, 10).map((items, index) => {
                 return <div key={index} onClick={() => handleSuggestionClick(items.productName)}

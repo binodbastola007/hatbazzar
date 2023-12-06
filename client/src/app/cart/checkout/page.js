@@ -199,8 +199,8 @@ const page = () => {
                 <div className='priceDetails'>
                   <span >Total price : {total}</span>
                   <span >Quantity: {productList.length} items </span>
-                  <span >Discount : N/A </span>
-                  <span > Delivery charge : N/A </span>
+                  <span >Discount : 0 </span>
+                  <span > Delivery charge : 0 </span>
                   <span >Price payable : {total}</span>
                   <br/>
                   <span>Order id : {orderId}</span>

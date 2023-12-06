@@ -11,8 +11,9 @@ import { message } from 'antd';
 import '../styles/login.css';
 import { useRouter } from 'next/navigation';
 import { useRef, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { signIn, useSession } from 'next-auth/react';
+import userSlice, { setToken , setLoginDetails} from '../GlobalRedux/Features/user.slice';
 
 
 const SignupSchema = Yup.object().shape({
@@ -34,34 +35,35 @@ const index = () => {
   const [userName, setUserName] = useState('');
   const router = useRouter();
   const session = useSession();
+  const dispatch = useDispatch();
 
 
-  const handleSignIn = async () => {
-    const res = await fetch('http://localhost:4000/login-googleuser', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(session.data.user)
-    })
-    const data = await res.json();
-    console.log(data)
-    setUserName(data?.userDetails.name)
-    setUserImage(data?.userDetails.image);
-    router.push('/');
-  }
+  // const handleSignIn = async () => {
+  //   const res = await fetch('http://localhost:4000/login-googleuser', {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify(session.data.user)
+  //   })
+  //   const data = await res.json();
+  //   console.log(data)
+  //   setUserName(data?.userDetails.name)
+  //   setUserImage(data?.userDetails.image);
+  //   router.push('/');
+  // }
 
-  if (session.status === 'authenticated') {
-    handleSignIn();
-    messageApi.open({
-      type: 'success',
-      content: "Login success",
-    });
-  }
-  if (session.status === 'unauthenticated') {
-    messageApi.open({
-      type: 'error',
-      content: "Couldnot login , please try again later !",
-    });
-  }
+  // if (session.status === 'authenticated') {
+  //   // handleSignIn();
+  //   messageApi.open({
+  //     type: 'success',
+  //     content: "Login success",
+  //   });
+  // }
+  // if (session.status === 'unauthenticated') {
+  //   messageApi.open({
+  //     type: 'error',
+  //     content: "Couldnot login , please try again later !",
+  //   });
+  // }
 
 
 
@@ -76,7 +78,12 @@ const index = () => {
       type: res.status == 200 ? 'success' : 'error',
       content: data.msg,
     });
-    console.log(res)
+    if(data.token!==''){
+      dispatch(setToken(data.token));
+      dispatch(setLoginDetails(data.loginDetails));
+      router.push('/');
+    }
+
   }
 
   const hasPageBeenRendered = useRef(false);

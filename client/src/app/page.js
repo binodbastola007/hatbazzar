@@ -18,6 +18,7 @@ import Sider from 'antd/es/layout/Sider';
 const index = () => {
 
    const [data, setData] = useState([]);
+   const [searchedData, setSearchedData] = useState([]);
    const [minPrice, setMinPrice] = useState('');
    const [maxPrice, setMaxPrice] = useState('');
    const [rating, setRating] = useState('');
@@ -178,12 +179,8 @@ const index = () => {
 
 
    useEffect(()=>{
-      
-      const searchedItem = allData.filter((item)=>{
-         return (item.productName.toLowerCase().includes(search.toLocaleLowerCase()));
-      })
-      setData(searchedItem);
-      if(search!=='' && searchedItem==''){
+      setData(searchedData);
+      if(search!=='' && searchedData==''){
          messageApi.open({
             type: 'error',
             content: "No products found, please search with different keyword",
@@ -198,7 +195,7 @@ const index = () => {
    return (
       <>
          {contextHolder}
-         <Navbar />
+         <Navbar searchedData={searchedData} setSearchedData={setSearchedData} />
          <div className='body'>
             <span className='filterBtn'>
                <IoSettings onClick={showDrawer} size={25}/>

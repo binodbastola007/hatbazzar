@@ -128,4 +128,10 @@ router.get('/product/categories', async (req, res) => {
 })
 
 
+router.get('/search-products',async(req,res)=>{
+  const data= await ProductCard.find({productName: { $regex: req.query.name }})
+  res.json({productList: data})
+  })
+
+
 module.exports = router;

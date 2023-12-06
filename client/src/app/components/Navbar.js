@@ -38,15 +38,16 @@ const items = [
   },
 ];
 
-const Navbar = () => {
+const Navbar = ({searchedData, setSearchedData}) => {
 
   const router = useRouter();
   const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState('customer');
   const [loadings, setLoadings] = useState([]);
   const [keyword, setKeyword] = useState('');
-  const [searchedData, setSearchedData] = useState([]);
   const [selectedItem, setSelecetedItem] = useState(-1);
+  const [allProducts,setAllProducts] = useState('');
+  const [suggestionDivOpen,setSuggestionDivOpen] = useState(true); 
 
 
   const {allData, searchBarClose} = useSelector(state=>state.navbar);
@@ -79,6 +80,7 @@ const Navbar = () => {
   );
 
   const handleKeyDown = (e) => {
+    setSuggestionDivOpen(true);
     if (e.key === "ArrowUp" && selectedItem > 0) {
       setSelecetedItem(prev => prev - 1);
     }
@@ -96,21 +98,38 @@ const Navbar = () => {
 
   const handleSuggestionClick = (productName) => {
     setKeyword(productName);
+    setSuggestionDivOpen(false);
   }
 
   const { productCount } = useSelector(state => state.cart);
 
-  useEffect(() => {
-    if (keyword!=='') {
-      const newFilteredData = allData.filter((items) => {
-        return items.productName.toLowerCase().includes(keyword)
-      })
-      setSearchedData(newFilteredData);
+  // useEffect(() => {
+  //   if (keyword!=='') {
+  //     const newFilteredData = allData.filter((items) => {
+  //       return items.productName.toLowerCase().includes(keyword)
+  //     })
+  //     setSearchedData(newFilteredData);
+  //   }
+  //   if(keyword==''){
+  //     dispatch(setSearch(''));
+  //   }
+  // }, [keyword])
+
+  const fetchAllProducts = async()=>{
+    if(keyword!==''){
+      const res = await fetch('http://localhost:4000/search-products?name='+keyword);
+      const data = await res.json();
+      setSearchedData(data.productList);
     }
     if(keyword==''){
       dispatch(setSearch(''));
     }
-  }, [keyword])
+
+  }
+  useEffect(()=>{
+     fetchAllProducts();
+  },[keyword])
+
 
   return (
     <div>
@@ -144,7 +163,7 @@ const Navbar = () => {
               disabled={searchBarClose}
             />
           </Space>
-          {(searchedData.length > 0 && keyword !== '') &&
+          {(searchedData.length > 0 && keyword !== '' && suggestionDivOpen) &&
             <div className='searchSuggesstion'>
               {searchedData.slice(0, 10).map((items, index) => {
                 return <div key={index} onClick={() => handleSuggestionClick(items.productName)}

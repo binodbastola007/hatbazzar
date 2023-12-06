@@ -30,7 +30,8 @@ router.post('/register',async(req,res)=>{
    })
    
    router.post('/login',async (req,res)=>{
-     const userDetails = await User.findOne({phoneNumber: req.body.phoneNumber})
+     const userDetails = await User.findOne({phoneNumber: req.body.phoneNumber}).lean();
+     const {password,...loginDetails} = userDetails;
      if(!userDetails){
        res.json({msg :'Invalid Credentials'})
      }else{
@@ -38,7 +39,7 @@ router.post('/register',async(req,res)=>{
        // generate token for the users
        var token = jwt.sign({phoneNumber:req.body.phoneNumber}, process.env.SECRET_KEY);
        if(isMatched){
-         res.json({msg :'Login Success',token})
+         res.json({msg :'Login Success',token , loginDetails})
        }else{
          res.json({msg :'Incorrect password'})
        }

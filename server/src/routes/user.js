@@ -1,8 +1,10 @@
 const {User, GoogleUser} = require('../models/user');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const saltRounds = 10;
 const express = require('express');
 const router = express.Router();
+
 
 router.post('/register',async(req,res)=>{
     try{
@@ -31,6 +33,7 @@ router.post('/register',async(req,res)=>{
    
    router.post('/login',async (req,res)=>{
      const userDetails = await User.findOne({phoneNumber: req.body.phoneNumber}).lean();
+     console.log(userDetails);
      const {password,...loginDetails} = userDetails;
      if(!userDetails){
        res.json({msg :'Invalid Credentials'})

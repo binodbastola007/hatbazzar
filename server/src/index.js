@@ -1,8 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const connection = require('./db/connection');
-require('dotenv').config()
-const saltRounds = 10;
+require('dotenv').config();
 const app = express();
 const userRoute = require('./routes/user');
 const productRoute = require('./routes/products');

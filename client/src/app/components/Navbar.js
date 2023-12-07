@@ -15,39 +15,20 @@ import { Button } from 'antd';
 import '../styles/navBar.css';
 import { useSelector, useDispatch } from 'react-redux';
 import {setAllData, setCategory, setCategoryArr, setSearch } from '@/app/GlobalRedux/Features/navbar.slice'
+import { handleLogout } from '../GlobalRedux/Features/user.slice';
 import { Avatar, Badge } from 'antd';
 
-
-const items = [
-  {
-    label: <a href="https://www.antgroup.com">Account information</a>,
-    key: '0',
-  },
-  {
-    label: <a href="https://www.aliyun.com">Edit personal details</a>,
-    key: '1',
-  },
-  {
-    label: <a href="https://www.aliyun.com">Password and security</a>,
-    key: '2',
-  },
-  {
-    label: 'Log out',
-    key: '3',
-    danger: true
-  },
-];
 
 const Navbar = ({searchedData, setSearchedData}) => {
 
   const router = useRouter();
-  const [loggedIn, setLoggedIn] = useState(false);
   const [user, setUser] = useState('customer');
   const [loadings, setLoadings] = useState([]);
   const [keyword, setKeyword] = useState('');
   const [selectedItem, setSelecetedItem] = useState(-1);
   const [allProducts,setAllProducts] = useState('');
   const [suggestionDivOpen,setSuggestionDivOpen] = useState(true); 
+  const {isLoggedIn,userDetails} = useSelector(state=>state.user);
 
 
   const {allData, searchBarClose} = useSelector(state=>state.navbar);
@@ -67,6 +48,26 @@ const Navbar = ({searchedData, setSearchedData}) => {
       });
     }, 1000);
   }
+
+  const items = [
+    {
+      label: <span style={{cursor:'default',padding:'8px',borderRadius:'5px',textAlign:'center',fontWeight:'bold'}}>Hi {userDetails.firstName} !</span>,
+      key: '0',
+    },
+    {
+      label: <a href="https://www.aliyun.com">profile</a>,
+      key: '1',
+    },
+    {
+      label: <a href="https://www.aliyun.com">settings</a>,
+      key: '2',
+    },
+    {
+      label: <span onClick={()=>dispatch(handleLogout())}>Log out</span>,
+      key: '3',
+      danger: true
+    },
+  ];
 
   const suffix = (
     <>
@@ -174,7 +175,7 @@ const Navbar = ({searchedData, setSearchedData}) => {
 
         </div>
         <div className='account'>
-          {!loggedIn &&
+          {!isLoggedIn &&
             (
               <>
                 <Link href='/login' className='links'><text>Login</text></Link>
@@ -182,7 +183,7 @@ const Navbar = ({searchedData, setSearchedData}) => {
               </>
             )}
 
-          {loggedIn &&
+          {isLoggedIn &&
             (
               <div className='icon accountIcon'>
 

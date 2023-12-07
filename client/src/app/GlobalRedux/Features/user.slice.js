@@ -1,5 +1,6 @@
 'use client';
 import { createSlice } from "@reduxjs/toolkit";
+import { signOut} from 'next-auth/react';
 
 export const initialState = {
    userDetails:{},
@@ -21,6 +22,7 @@ const userSlice = createSlice({
     handleLogout:(state)=>{
       state.token = '';
       state.isLoggedIn = false;
+      signOut('google');
     }
   }
 });

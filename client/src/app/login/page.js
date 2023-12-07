@@ -13,7 +13,7 @@ import { useRouter } from 'next/navigation';
 import { useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { signIn, useSession } from 'next-auth/react';
-import userSlice, { setToken , setLoginDetails} from '../GlobalRedux/Features/user.slice';
+import userSlice, { setToken, setLoginDetails } from '../GlobalRedux/Features/user.slice';
 
 
 const SignupSchema = Yup.object().shape({
@@ -38,32 +38,39 @@ const index = () => {
   const dispatch = useDispatch();
 
 
-  // const handleSignIn = async () => {
-  //   const res = await fetch('http://localhost:4000/login-googleuser', {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify(session.data.user)
-  //   })
-  //   const data = await res.json();
-  //   console.log(data)
-  //   setUserName(data?.userDetails.name)
-  //   setUserImage(data?.userDetails.image);
-  //   router.push('/');
-  // }
+  const handleSignIn = async () => {
+    const res = await fetch('http://localhost:4000/login-googleuser', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(session.data.user)
+    })
+    const data = await res.json();
+    if (data.userDetails) {
+      setUserName(data?.userDetails.name)
+      setUserImage(data?.userDetails.image);
+      dispatch(setToken());
+      router.push('/');
+      messageApi.open({
+        type: 'success',
+        content: "Login success",
+      });
+    }else{
+      messageApi.open({
+        type: 'error',
+        content: "Coudnot login, please signup first !",
+      });
+    }
+  }
 
-  // if (session.status === 'authenticated') {
-  //   // handleSignIn();
-  //   messageApi.open({
-  //     type: 'success',
-  //     content: "Login success",
-  //   });
-  // }
-  // if (session.status === 'unauthenticated') {
-  //   messageApi.open({
-  //     type: 'error',
-  //     content: "Couldnot login , please try again later !",
-  //   });
-  // }
+  if (session.status === 'authenticated') {
+    handleSignIn();
+  }
+  if (session.status === 'unauthenticated') {
+    messageApi.open({
+      type: 'error',
+      content: "Couldnot login , please try again later !",
+    });
+  }
 
 
 
@@ -78,7 +85,7 @@ const index = () => {
       type: res.status == 200 ? 'success' : 'error',
       content: data.msg,
     });
-    if(data.token!==''){
+    if (data.token !== '') {
       dispatch(setToken(data.token));
       dispatch(setLoginDetails(data.loginDetails));
       router.push('/');
@@ -132,13 +139,13 @@ const index = () => {
               </Form>
             )}
           </Formik>
-        </div>
-        <div >
-          <div style={{ fontSize: '0.8rem', textAlign: 'center' }}>OR</div>
-          <button className='googleBtn' onClick={() => { signIn('google') }}>
-            <Image src='/google_logo.png' width={30} height={30} />
-            <span>Sign in with google</span>
-          </button>
+          <div >
+            <div style={{ fontSize: '0.8rem', textAlign: 'center' }}>OR</div>
+            <button className='googleBtn' onClick={() => { signIn('google') }}>
+              <Image src='/google_logo.png' width={30} height={30} />
+              <span>Sign in with google</span>
+            </button>
+          </div>
         </div>
       </div>
       <Footer />

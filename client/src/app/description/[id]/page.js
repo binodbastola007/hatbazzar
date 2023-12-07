@@ -111,6 +111,7 @@ const page = () => {
    useEffect(() => {
       if (hasPageBeenRendered.current) {
          router.push('/');
+         dispatch(setCategory('fashion and beauty'));
       }
       hasPageBeenRendered.current = true;
    }, [category]);

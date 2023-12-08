@@ -57,7 +57,7 @@ const index = () => {
     }else{
       messageApi.open({
         type: 'error',
-        content: "Coudnot login, please signup first !",
+        content: "Couldnot login, please signup first !",
       });
     }
   }

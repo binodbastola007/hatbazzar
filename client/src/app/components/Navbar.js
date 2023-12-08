@@ -63,7 +63,11 @@ const Navbar = ({searchedData, setSearchedData}) => {
       key: '2',
     },
     {
-      label: <span onClick={()=>dispatch(handleLogout())}>Log out</span>,
+      label: <span onClick={()=>{
+        dispatch(handleLogout());
+        router.push('/');  
+        }
+        }>Log out</span>,
       key: '3',
       danger: true
     },

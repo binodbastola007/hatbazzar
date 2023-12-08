@@ -96,6 +96,7 @@ const Navbar = ({searchedData, setSearchedData}) => {
       const enterItem = searchedData[selectedItem];
       if(enterItem?.productName){
         setKeyword(enterItem.productName);
+        setSuggestionDivOpen(false);
       }
 
     }

@@ -31,13 +31,11 @@ const index = () => {
 
   const [messageApi, contextHolder] = message.useMessage();
   const { category } = useSelector(state => state.navbar);
-  const [userImage, setUserImage] = useState('');
-  const [userName, setUserName] = useState('');
   const router = useRouter();
   const session = useSession();
   const dispatch = useDispatch();
 
-
+  console.log(session)
   const handleSignIn = async () => {
     const res = await fetch('http://localhost:4000/login-googleuser', {
       method: 'POST',
@@ -46,8 +44,7 @@ const index = () => {
     })
     const data = await res.json();
     if (data.userDetails) {
-      setUserName(data?.userDetails.name)
-      setUserImage(data?.userDetails.image);
+      dispatch(setLoginDetails(data.userDetails));
       dispatch(setToken());
       router.push('/');
       messageApi.open({

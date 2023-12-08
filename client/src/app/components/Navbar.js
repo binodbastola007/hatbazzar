@@ -49,9 +49,13 @@ const Navbar = ({searchedData, setSearchedData}) => {
     }, 1000);
   }
 
+  const greetings = {
+    cursor:'default',padding:'8px',borderRadius:'5px',textAlign:'center',fontWeight:'bold'
+  }
+
   const items = [
     {
-      label: <span style={{cursor:'default',padding:'8px',borderRadius:'5px',textAlign:'center',fontWeight:'bold'}}>Hi {userDetails.firstName} !</span>,
+      label: <span style={greetings}>Hi {userDetails.firstName || userDetails.name} !</span>,
       key: '0',
     },
     {
@@ -96,9 +100,8 @@ const Navbar = ({searchedData, setSearchedData}) => {
       const enterItem = searchedData[selectedItem];
       if(enterItem?.productName){
         setKeyword(enterItem.productName);
-        setSuggestionDivOpen(false);
       }
-
+      setSuggestionDivOpen(false);
     }
   }
 

@@ -162,3 +162,11 @@ border-radius: 5px;
 .filterR{
   margin-top: 20px;
 }
+.ant-pagination{
+  width: 87vw;
+  text-align: right;
+}
+.carouselImage{
+  width: 100vw;
+  object-fit: cover;
+}

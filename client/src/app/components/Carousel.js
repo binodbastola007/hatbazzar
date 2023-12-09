@@ -14,18 +14,18 @@ const contentStyle = {
 const Advertisement = () => {
   return (
     <>
-    <Carousel autoplay>
+    <Carousel  autoplay>
     <div>
-      <h3 style={contentStyle}>1</h3>
+       <img className='carouselImage' src='/1.jpg' style={contentStyle}/>
     </div>
     <div>
-      <h3 style={contentStyle}>2</h3>
+    <img className='carouselImage' src='/2.jpg' style={contentStyle}/>
     </div>
     <div>
-      <h3 style={contentStyle}>3</h3>
+    <img className='carouselImage' src='/3.png' style={contentStyle}/>
     </div>
     <div>
-      <h3 style={contentStyle}>4</h3>
+    <img className='carouselImage' src='/4.png' style={contentStyle}/>
     </div>
   </Carousel>
     </>

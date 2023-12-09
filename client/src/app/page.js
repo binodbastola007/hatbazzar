@@ -217,6 +217,7 @@ const index = () => {
                   })
                }
             </div>
+            <br/>
             <Pagination onChange={(page) => fetchDetails(category, page)} defaultCurrent={1} total={data.length} />
             <br />
          </div>

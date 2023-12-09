@@ -15,6 +15,7 @@ import { Pagination } from 'antd';
 import { setAllData, setCategory, setCategoryArr, setSearchBarClose } from '../app/GlobalRedux/Features/navbar.slice';
 import Sider from 'antd/es/layout/Sider';
 import Advertisement from './components/Carousel';
+import Scroll from './components/Scroll';
 
 
 const index = () => {
@@ -218,7 +219,10 @@ const index = () => {
                }
             </div>
             <br/>
+            <div className='pagination'>
             <Pagination onChange={(page) => fetchDetails(category, page)} defaultCurrent={1} total={data.length} />
+            <Scroll/>
+            </div>
             <br />
          </div>
          <Footer />

@@ -162,9 +162,9 @@ border-radius: 5px;
 .filterR{
   margin-top: 20px;
 }
-.ant-pagination{
-  width: 87vw;
-  text-align: right;
+.pagination{
+  display: flex;
+  flex-direction: row;
 }
 .carouselImage{
   width: 100vw;

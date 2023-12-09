@@ -16,12 +16,24 @@
   position: relative;
   box-shadow: 0px 4px 10px 1px #ffc15d;
 }
+.carousel{
+  width: 100vw;
+  margin-top: 5px;
+}
+.productHeading{
+  margin: 25px 0px;
+  width: 86vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
 
 /* ======Product card======= */
 .cardList{
   width: 95vw;
   height: max-content;
-  margin: 5px 100px;
+  margin: -20px 100px;
   display:flex ;
   flex-direction: row;
   align-items: center;
@@ -112,10 +124,9 @@ border-radius: 5px;
   background-color: #9ddacc !important;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 5px;
-  position: absolute;
-  top: 7px;
-  right: 25px;
+  width: 160px;
 }
 .filterHeading{
   margin-bottom: 12px;
@@ -151,12 +162,3 @@ border-radius: 5px;
 .filterR{
   margin-top: 20px;
 }
-
-@media screen and (max-width:420px) {
-  .filterBtn{
-    right:0px;
-    top: 5px;
-  }  
-}
-
-

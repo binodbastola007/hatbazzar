@@ -123,7 +123,9 @@ const page = () => {
       {contextHolder}
       <Navbar />
       <div className='body'>
-        <div className='containerCart'>
+       <div className='background'>
+        <h3 style={{textAlign:'center',marginTop:'10px'}}>Your shopping cart</h3>
+         <div className='containerCart'>
           <div className='productList'>
             {productList.length > 0 && productList.map((item) => {
               return <Products item={item} />
@@ -172,6 +174,7 @@ const page = () => {
             </div>
           </div>
         </div>
+       </div>
       </div>
       <Footer />
     </>

@@ -12,8 +12,10 @@ import { useRouter } from 'next/navigation';
 import { IoSettings } from "react-icons/io5";
 import { useSelector, useDispatch } from 'react-redux';
 import { Pagination } from 'antd';
-import {setAllData, setCategory, setCategoryArr , setSearchBarClose} from '../app/GlobalRedux/Features/navbar.slice';
+import { setAllData, setCategory, setCategoryArr, setSearchBarClose } from '../app/GlobalRedux/Features/navbar.slice';
 import Sider from 'antd/es/layout/Sider';
+import Advertisement from './components/Carousel';
+
 
 const index = () => {
 
@@ -25,7 +27,7 @@ const index = () => {
    const [messageApi, contextHolder] = message.useMessage();
    const router = useRouter();
 
-   const {allData, category, categoryArr, search} = useSelector(state=>state.navbar);
+   const { allData, category, categoryArr, search } = useSelector(state => state.navbar);
    const dispatch = useDispatch();
 
    const [open, setOpen] = useState(false);
@@ -36,10 +38,10 @@ const index = () => {
       setOpen(false);
    };
 
-   const fetchDetails = async(category,page=1) => {
+   const fetchDetails = async (category, page = 1) => {
       if (category == '') {
          try {
-            const res = await fetch('http://localhost:4000/products/all?page='+page);
+            const res = await fetch('http://localhost:4000/products/all?page=' + page);
             const result = await res.json();
             console.log(result);
             if (result.data.length > 0) {
@@ -178,28 +180,36 @@ const index = () => {
 
 
 
-   useEffect(()=>{
+   useEffect(() => {
       setData(searchedData);
-      if(search!=='' && searchedData==''){
+      if (search !== '' && searchedData == '') {
          messageApi.open({
             type: 'error',
             content: "No products found, please search with different keyword",
          });
          setData([...allData]);
       }
-      if(search==''){
+      if (search == '') {
          setData([...allData]);
       }
-   },[search])
+   }, [search])
 
    return (
       <>
          {contextHolder}
          <Navbar searchedData={searchedData} setSearchedData={setSearchedData} />
          <div className='body'>
-            <span className='filterBtn'>
-               <IoSettings onClick={showDrawer} size={25}/>
-            </span>
+            <div className='carousel'>
+               <Advertisement />
+            </div>
+            <div className='productHeading'>
+              <h3>Browse our products</h3>
+              <div className='filterBtn' onClick={showDrawer}>
+                <span>Filter products</span>
+               <IoSettings  size={25} />
+              </div>
+            </div>
+
             <div className='cardList'>
                {
                   (data.length > 0) && data.map((details) => {
@@ -207,8 +217,8 @@ const index = () => {
                   })
                }
             </div>
-            <Pagination onChange={(page)=>fetchDetails(category,page)} defaultCurrent={1} total={data.length} />
-            <br/>
+            <Pagination onChange={(page) => fetchDetails(category, page)} defaultCurrent={1} total={data.length} />
+            <br />
          </div>
          <Footer />
          <Drawer title="Filter product/s" placement="right" onClose={onClose} open={open}>

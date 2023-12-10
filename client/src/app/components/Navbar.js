@@ -93,7 +93,7 @@ const Navbar = ({searchedData, setSearchedData , setSearchBtnClick}) => {
     if (e.key === "ArrowUp" && selectedItem > 0) {
       setSelecetedItem(prev => prev - 1);
     }
-    else if (e.key === "ArrowDown" && selectedItem < 9) {
+    else if (e.key === "ArrowDown" && selectedItem < searchedData.length-1 && selectedItem < 9) {
       setSelecetedItem(prev => prev + 1);
     }
     else if (e.key == "Enter" && selectedItem >= 0 ) {

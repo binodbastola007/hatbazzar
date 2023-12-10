@@ -22,7 +22,7 @@ import { Avatar, Badge } from 'antd';
 const Navbar = ({searchedData, setSearchedData , setSearchBtnClick}) => {
 
   const router = useRouter();
-  const [user, setUser] = useState('customer');
+  const [user, setUser] = useState('admin');
   const [loadings, setLoadings] = useState([]);
   const [keyword, setKeyword] = useState('');
   const [selectedItem, setSelecetedItem] = useState(-1);

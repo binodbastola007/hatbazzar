@@ -18,6 +18,7 @@ import { useRouter } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
 import { setAllData ,setCategory, setCategoryArr, setSearchBarClose } from '@/app/GlobalRedux/Features/navbar.slice';
 import Scroll from '@/app/components/Scroll';
+import { Pagination } from 'antd';
 
 const page = () => {
 
@@ -48,10 +49,10 @@ const page = () => {
       setOpenDrawer(false);
    };
 
-   const fetchDetails = async (category) => {
-      if (category == '') {
+   const fetchDetails = async (category, page = 1) => {
+      if (category=='') {
          try {
-            const res = await fetch('http://localhost:4000/products/all');
+            const res = await fetch('http://localhost:4000/products/all?page=' + page);
             const result = await res.json();
             console.log(result);
             if (result.data.length > 0) {
@@ -69,69 +70,27 @@ const page = () => {
             console.log(err);
          }
       }
-      else if (category === 'fashion and beauty') {
-         const filteredData = allData.filter((item) => {
-            return (item.category === category);
-         })
-         setData(filteredData);
-         return filteredData;
-      }
-      else if (category === 'electronics') {
-         const filteredData = allData.filter((item) => {
-            return (item.category === category);
-         })
-
-         return filteredData;
-      }
-      else if (category === 'laptops') {
-         const filteredData = allData.filter((item) => {
-            return (item.category === category);
-         })
-         setData(filteredData);
-         return filteredData;
-      }
-      else if (category === 'electronic assoceries') {
-         const filteredData = allData.filter((item) => {
-            return (item.category === category);
-         })
-         setData(filteredData);
-         return filteredData;
-      }
-      else if (category === 'mobiles and watches') {
-         const filteredData = allData.filter((item) => {
-            return (item.category === category);
-         })
-         setData(filteredData);
-         return filteredData;
-      }
-      else if (category === 'groceries and pets') {
-         const filteredData = allData.filter((item) => {
-            return (item.category === category);
-         })
-         setData(filteredData);
-         return filteredData;
-      }
-      else if (category === 'games and sports') {
-         const filteredData = allData.filter((item) => {
-            return (item.category === category);
-         })
-         setData(filteredData);
-         return filteredData;
-      }
-      else if (category === 'musical instruments') {
-         const filteredData = allData.filter((item) => {
-            return (item.category === category);
-         })
-         setData(filteredData);
-         return filteredData;
-      }
       else {
-         setData(allData);
+         try {
+            const res = await fetch(`http://localhost:4000/products?page=${page}&category=${category}`);
+            const result = await res.json();
+            console.log(result);
+            if (result.data.length > 0) {
+               setData(result.data);
+            }
+            else {
+               messageApi.open({
+                  type: 'error',
+                  content: result.msg,
+               });
+            }
+         }
+         catch (err) {
+            console.log(err);
+         }
       }
-
-
+     
    }
-
    const handleCategoryFilter = (e) => {
       let value = e.target.value;
       if (e.target.checked) {
@@ -278,6 +237,7 @@ const page = () => {
             </div>
             <br/>
             <div className='pagination'>
+            <Pagination onChange={(page) => fetchDetails(category, page)} defaultCurrent={1} total={data.length} />
             <Scroll/>
             </div>
             <br/>

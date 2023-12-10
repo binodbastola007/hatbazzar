@@ -84,10 +84,10 @@ Here are the few screenshots of my project>>>>
 
 7) Search.
 <div align="center">
-    <img src="client/public/screenshots/search1.JPG" alt="" width="800" height="470">
+    <img src="client/public/screenshots/search2.JPG" alt="" width="800" height="470">
 </div>
 <div align="center">
-    <img src="client/public/screenshots/search2.JPG" alt="" width="800" height="470">
+    <img src="client/public/screenshots/search1.JPG" alt="" width="800" height="470">
 </div>
 <br/>
 

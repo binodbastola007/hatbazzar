@@ -12,6 +12,18 @@ const allProducts = async (req, res) => {
         res.json({ msg: "No products in hatbazzar" });
     }
 }
+const productsByCategory = async (req, res) => {
+    const skipCount = (req.query.page - 1) * 12;
+    const data = await ProductCard.find({category:req.query.category}).limit(12).skip(skipCount);
+    const totalCount = await ProductCard.find().count();
+
+    if (data.length > 0) {
+        res.json({ data, totalCount });
+    }
+    else {
+        res.json({msg: "No products found for this category"});
+    }
+}
 
 const addProducts = async (req, res) => {
     const product = {
@@ -131,7 +143,7 @@ const searchProducts = async (req, res) => {
     res.json({ productList: data })
 }
 
-module.exports = { allProducts, addProducts, editProduct, deleteProduct, productDetails, deleteProductImage, productCategories, searchProducts };
+module.exports = { allProducts,productsByCategory, addProducts, editProduct, deleteProduct, productDetails, deleteProductImage, productCategories, searchProducts };
 
 
 

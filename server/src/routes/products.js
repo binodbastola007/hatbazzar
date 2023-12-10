@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const { allProducts, addProducts, editProduct, deleteProduct, productDetails, deleteProductImage, productCategories, searchProducts } = require('../controllers/products');
+const { allProducts,productsByCategory, addProducts, editProduct, deleteProduct, productDetails, deleteProductImage, productCategories, searchProducts } = require('../controllers/products');
 
 router.get('/products/all', allProducts);
+
+router.get('/products', productsByCategory);
 
 router.post('/products/add', addProducts)
 

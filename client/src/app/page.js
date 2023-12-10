@@ -25,6 +25,7 @@ const index = () => {
    const [minPrice, setMinPrice] = useState('');
    const [maxPrice, setMaxPrice] = useState('');
    const [rating, setRating] = useState('');
+   const [searchBtnClick, setSearchBtnClick] = useState(false);
    const [messageApi, contextHolder] = message.useMessage();
    const router = useRouter();
 
@@ -40,7 +41,7 @@ const index = () => {
    };
 
    const fetchDetails = async (category, page = 1) => {
-      if (category == '') {
+      if (category=='') {
          try {
             const res = await fetch('http://localhost:4000/products/all?page=' + page);
             const result = await res.json();
@@ -60,67 +61,26 @@ const index = () => {
             console.log(err);
          }
       }
-      else if (category === 'fashion and beauty') {
-         const filteredData = allData.filter((item) => {
-            return (item.category === category);
-         })
-         setData(filteredData);
-         return filteredData;
-      }
-      else if (category === 'electronics') {
-         const filteredData = allData.filter((item) => {
-            return (item.category === category);
-         })
-         setData(filteredData);
-         return filteredData;
-      }
-      else if (category === 'laptops') {
-         const filteredData = allData.filter((item) => {
-            return (item.category === category);
-         })
-         setData(filteredData);
-         return filteredData;
-      }
-      else if (category === 'electronic assoceries') {
-         const filteredData = allData.filter((item) => {
-            return (item.category === category);
-         })
-         setData(filteredData);
-         return filteredData;
-      }
-      else if (category === 'mobiles and watches') {
-         const filteredData = allData.filter((item) => {
-            return (item.category === category);
-         })
-         setData(filteredData);
-         return filteredData;
-      }
-      else if (category === 'groceries and pets') {
-         const filteredData = allData.filter((item) => {
-            return (item.category === category);
-         })
-         setData(filteredData);
-         return filteredData;
-      }
-      else if (category === 'games and sports') {
-         const filteredData = allData.filter((item) => {
-            return (item.category === category);
-         })
-         setData(filteredData);
-         return filteredData;
-      }
-      else if (category === 'musical instruments') {
-         const filteredData = allData.filter((item) => {
-            return (item.category === category);
-         })
-         setData(filteredData);
-         return filteredData;
-      }
       else {
-         setData(allData);
+         try {
+            const res = await fetch(`http://localhost:4000/products?page=${page}&category=${category}`);
+            const result = await res.json();
+            console.log(result);
+            if (result.data.length > 0) {
+               setData(result.data);
+            }
+            else {
+               messageApi.open({
+                  type: 'error',
+                  content: result.msg,
+               });
+            }
+         }
+         catch (err) {
+            console.log(err);
+         }
       }
-
-
+     
    }
 
    const handleCategoryFilter = (e) => {
@@ -174,6 +134,12 @@ const index = () => {
    }
 
    useEffect(() => {
+      // 👇️ scroll to top on page load
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+   }, [data]);
+
+
+   useEffect(() => {
       fetchDetails(category);
       console.log(category);
       dispatch(setSearchBarClose(false));
@@ -198,17 +164,20 @@ const index = () => {
    return (
       <>
          {contextHolder}
-         <Navbar searchedData={searchedData} setSearchedData={setSearchedData} />
+         <Navbar searchedData={searchedData} setSearchedData={setSearchedData} setSearchBtnClick={setSearchBtnClick} />
          <div className='body'>
             <div className='carousel'>
-               <Advertisement />
+               {search == '' && <Advertisement />}
             </div>
             <div className='productHeading'>
-              <h3>Browse our products</h3>
-              <div className='filterBtn' onClick={showDrawer}>
-                <span>Filter products</span>
-               <IoSettings  size={25} />
-              </div>
+               {(search == '') ? <h3>Browse our products</h3> : <h3>Your search result/s:</h3>}
+
+               {search == '' &&
+                  <div className='filterBtn' onClick={showDrawer}>
+                     <span>Filter products</span>
+                     <IoSettings size={25} />
+                  </div>
+               }
             </div>
 
             <div className='cardList'>
@@ -218,10 +187,10 @@ const index = () => {
                   })
                }
             </div>
-            <br/>
+            <br />
             <div className='pagination'>
-            <Pagination onChange={(page) => fetchDetails(category, page)} defaultCurrent={1} total={data.length} />
-            <Scroll/>
+               <Pagination onChange={(page) => fetchDetails(category, page)} defaultCurrent={1} total={data.length} />
+               <Scroll />
             </div>
             <br />
          </div>

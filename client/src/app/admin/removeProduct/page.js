@@ -17,6 +17,7 @@ import '../../styles/removeProduct.css';
 import { useRouter } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
 import { setAllData ,setCategory, setCategoryArr, setSearchBarClose } from '@/app/GlobalRedux/Features/navbar.slice';
+import Scroll from '@/app/components/Scroll';
 
 const page = () => {
 
@@ -220,9 +221,13 @@ const page = () => {
          {contextHolder}
          {contextHolder}
          <div className='body'>
-         <span className='filterBtn'>
-               <IoSettings onClick={showDrawer} size={25}/>
-            </span>
+         <div className='productHeading'>
+              <h3>All products</h3>
+              <div className='filterBtn' onClick={showDrawer}>
+                <span>Filter products</span>
+               <IoSettings  size={25} />
+              </div>
+            </div>
             <div className='cardList'>
                {
                   (data.length > 0) && data.map((details) => {
@@ -271,6 +276,11 @@ const page = () => {
 
                }
             </div>
+            <br/>
+            <div className='pagination'>
+            <Scroll/>
+            </div>
+            <br/>
          </div>
          <Footer />
          <Drawer title="Filter product/s" placement="right" onClose={onClose} open={openDrawer}>

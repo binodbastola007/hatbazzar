@@ -197,16 +197,16 @@
 }
 .checkoutForm{
     width: 50%;
-    background-color: #9ddacc;
+    background-color: white;
     padding: 10px 0px;
     padding-top: 40px;
     border: 1px solid black;
 }
 .continueBtn{
-    background-color: white;
+    background-color: #9ddacc;
     color: black;
 }
 .continueBtn:hover{
     color: black !important;
-    background-color:rgba(0, 0, 0, 0.1) !important;
+    background-color:rgba(0, 0, 0, 0.2) !important;
 }

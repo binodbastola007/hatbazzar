@@ -131,19 +131,12 @@ const deleteProductImage = async (req, res) => {
 
 }
 
-const productCategories = async (req, res) => {
-    const categories = ['Fashion and beauty', 'Electronics', 'Laptops',
-        'Electronic assoceries', 'Mobiles and watchs', 'Groceries and pets',
-        'Games and sports', 'Musical instruments']
-    res.json({ categories });
-}
-
 const searchProducts = async (req, res) => {
     const data = await ProductCard.find({ "productName": { $regex: new RegExp(req.query.name, "i") } });
     res.json({ productList: data })
 }
 
-module.exports = { allProducts,productsByCategory, addProducts, editProduct, deleteProduct, productDetails, deleteProductImage, productCategories, searchProducts };
+module.exports = { allProducts,productsByCategory, addProducts, editProduct, deleteProduct, productDetails, deleteProductImage, searchProducts };
 
 
 

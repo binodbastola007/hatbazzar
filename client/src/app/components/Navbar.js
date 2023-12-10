@@ -156,7 +156,6 @@ const Navbar = ({searchedData, setSearchedData , setSearchBtnClick}) => {
           onClick={() => {
             router.push('/');
             dispatch(setCategory(''));
-            dispatch(setCategoryArr([]));
             dispatch(setSearch(''));
           }}
         />
@@ -254,7 +253,7 @@ const Navbar = ({searchedData, setSearchedData , setSearchBtnClick}) => {
         {(user === 'customer') &&
           (
             <>
-              <Button loading={loadings[0]} onClick={() => { enterLoading(0); dispatch(setCategory('')); dispatch(setCategoryArr([]));dispatch(setSearch(''))}} style={{ color: 'black' }}>All</Button>
+              <Button loading={loadings[0]} onClick={() => { enterLoading(0); dispatch(setCategory(''));dispatch(setSearch(''))}} style={{ color: 'black' }}>All</Button>
               <Button loading={loadings[1]} onClick={() => { enterLoading(1); dispatch(setCategory('fashion and beauty'));dispatch(setSearch('')) }} style={{ color: 'black' }}>Fashion and beauty</Button>
               <Button loading={loadings[2]} onClick={() => { enterLoading(2); dispatch(setCategory('electronics'));dispatch(setSearch('')) }} style={{ color: 'black' }}>Electronics</Button>
               <Button loading={loadings[3]} onClick={() => { enterLoading(3); dispatch(setCategory('laptops'));dispatch(setSearch('')) }} style={{ color: 'black' }}>Laptops</Button>

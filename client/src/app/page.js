@@ -12,7 +12,7 @@ import { useRouter } from 'next/navigation';
 import { IoSettings } from "react-icons/io5";
 import { useSelector, useDispatch } from 'react-redux';
 import { Pagination } from 'antd';
-import { setAllData, setCategory, setCategoryArr, setSearchBarClose } from '../app/GlobalRedux/Features/navbar.slice';
+import { setAllData, setCategory, setSearchBarClose } from '../app/GlobalRedux/Features/navbar.slice';
 import Sider from 'antd/es/layout/Sider';
 import Advertisement from './components/Carousel';
 import Scroll from './components/Scroll';
@@ -41,7 +41,7 @@ const index = () => {
    };
 
    const fetchDetails = async (category, page = 1) => {
-      if (category=='') {
+      if (category == '') {
          try {
             const res = await fetch('http://localhost:4000/products/all?page=' + page);
             const result = await res.json();
@@ -68,6 +68,7 @@ const index = () => {
             console.log(result);
             if (result.data.length > 0) {
                setData(result.data);
+               return result.data;
             }
             else {
                messageApi.open({
@@ -80,42 +81,17 @@ const index = () => {
             console.log(err);
          }
       }
-     
+
    }
 
    const handleCategoryFilter = (e) => {
       let value = e.target.value;
       if (e.target.checked) {
-         if (!categoryArr.includes(value)) {
-            dispatch(setCategoryArr([...categoryArr, value]));
-         }
-      }
-      else {
-         const updatedArr = [...categoryArr];
-         const index = updatedArr.indexOf(value);
-         updatedArr.splice(index, 1);
-         dispatch(setCategoryArr([...updatedArr]));
+         dispatch(setCategory(value));
+      } else {
+         dispatch(setCategory(''));
       }
    }
-
-   useEffect(() => {
-      if (categoryArr.length == 0) {
-         setData([...allData]);
-      }
-      else if (categoryArr.length > 0) {
-         categoryArr.map(async (items, index) => {
-            const filteredProducts = await fetchDetails(items);
-            if (index == 0) {
-               setData(filteredProducts);
-            }
-            else {
-               setData((prev) => [...prev, ...filteredProducts])
-            }
-         })
-      }
-      else return;
-
-   }, [categoryArr]);
 
    const handlePriceFilter = () => {
       const filteredData = allData.filter((item) => {
@@ -141,7 +117,6 @@ const index = () => {
 
    useEffect(() => {
       fetchDetails(category);
-      console.log(category);
       dispatch(setSearchBarClose(false));
    }, [category])
 
@@ -167,11 +142,13 @@ const index = () => {
          <Navbar searchedData={searchedData} setSearchedData={setSearchedData} setSearchBtnClick={setSearchBtnClick} />
          <div className='body'>
             <div className='carousel'>
-               {search == '' && <Advertisement />}
+               {(search == '' && category == '') && <Advertisement />}
             </div>
             <div className='productHeading'>
-               {(search == '') ? <h3>Browse our products</h3> : <h3>Your search result/s:</h3>}
-
+               {category ? <h3>Category: {category}</h3>
+                  :
+                  (search == '') ? <h3>Browse our products</h3> : <h3>Your search result/s:</h3>
+               }
                {search == '' &&
                   <div className='filterBtn' onClick={showDrawer}>
                      <span>Filter products</span>
@@ -182,14 +159,14 @@ const index = () => {
 
             <div className='cardList'>
                {
-                  (data.length > 0) && data.map((details) => {
+                  (data?.length > 0) && data.map((details) => {
                      return <Card details={details} />
                   })
                }
             </div>
             <br />
             <div className='pagination'>
-               <Pagination onChange={(page) => fetchDetails(category, page)} defaultCurrent={1} total={data.length} />
+               <Pagination onChange={(page) => fetchDetails(category, page)} defaultCurrent={1} total={data?.length} />
                <Scroll />
             </div>
             <br />

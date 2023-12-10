@@ -77,6 +77,7 @@ const page = () => {
             console.log(result);
             if (result.data.length > 0) {
                setData(result.data);
+               return data;
             }
             else {
                messageApi.open({
@@ -94,36 +95,13 @@ const page = () => {
    const handleCategoryFilter = (e) => {
       let value = e.target.value;
       if (e.target.checked) {
-         if (!categoryArr.includes(value)) {
-            dispatch(setCategoryArr([...categoryArr, value]));
-         }
-      }
-      else {
-         const updatedArr = [...categoryArr];
-         const index = updatedArr.indexOf(value);
-         updatedArr.splice(index, 1);
-         dispatch(setCategoryArr([...updatedArr]));
+        const filteredProducts = fetchDetails(value);
+        setData(filteredProducts);
+      }else{
+         setData([...allData]);
+         e.target.checked = false;
       }
    }
-
-   useEffect(() => {
-      if (categoryArr.length == 0) {
-         setData([...allData]);
-      }
-      else if (categoryArr.length > 0) {
-         categoryArr.map(async (items, index) => {
-            const filteredProducts = await fetchDetails(items);
-            if (index == 0) {
-               setData(filteredProducts);
-            }
-            else {
-               setData((prev) => [...prev, ...filteredProducts])
-            }
-         })
-      }
-      else return;
-
-   }, [categoryArr]);
 
    const handlePriceFilter = () => {
       const filteredData = allData.filter((item) => {

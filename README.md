@@ -50,68 +50,68 @@ Here are the few screenshots of my project
 
 2) Sign up page.
 <div align="center">
-    <img src="client/public/screenshots/Signup.JPG" alt="" width="800" height="800">
+    <img src="client/public/screenshots/Signup.JPG" alt="" width="800" height="600">
 </div>
 
 3) Login page.
 <div align="center">
-    <img src="client/public/screenshots/login.JPG" alt="" width="800" height="800">
+    <img src="client/public/screenshots/login.JPG" alt="" width="800" height="600">
 </div>
 
 4) Homepage.
 <div align="center">
-    <img src="client/public/screenshots/homepage1.JPG" alt="" width="800" height="800">
+    <img src="client/public/screenshots/homepage1.JPG" alt="" width="800" height="600">
 </div>
 <div align="center">
-    <img src="client/public/screenshots/homepage2.JPG" alt="" width="800" height="800">
+    <img src="client/public/screenshots/homepage2.JPG" alt="" width="800" height="600">
 </div>
 
 5) Description page.
 <div align="center">
-    <img src="client/public/screenshots/description.JPG" alt="" width="800" height="800">
+    <img src="client/public/screenshots/description.JPG" alt="" width="800" height="600">
 </div>
 
 6) Filter products.
 <div align="center">
-    <img src="client/public/screenshots/filter.JPG" alt="" width="800" height="800">
+    <img src="client/public/screenshots/filter.JPG" alt="" width="800" height="600">
 </div>
 
 7) Search.
 <div align="center">
-    <img src="client/public/screenshots/search1.JPG" alt="" width="800" height="800">
+    <img src="client/public/screenshots/search1.JPG" alt="" width="800" height="600">
 </div>
 <div align="center">
-    <img src="client/public/screenshots/search2.JPG" alt="" width="800" height="800">
+    <img src="client/public/screenshots/search2.JPG" alt="" width="800" height="600">
 </div>
 
 8) Category page.
 <div align="center">
-    <img src="client/public/screenshots/categorypage.JPG" alt="" width="800" height="800">
+    <img src="client/public/screenshots/categorypage.JPG" alt="" width="800" height="600">
 </div>
 
 9) Add product page(admin).
 <div align="center">
-    <img src="client/public/screenshots/addproduct.JPG" alt="" width="800" height="800">
+    <img src="client/public/screenshots/addproduct.JPG" alt="" width="800" height="600">
 </div>
 
 10) Edit product page.
 <div align="center">
-    <img src="client/public/screenshots/editproduct.JPG" alt="" width="800" height="800">
+    <img src="client/public/screenshots/editproduct.JPG" alt="" width="800" height="600">
 </div>
 
 11) Remove product page.
 <div align="center">
-    <img src="client/public/screenshots/removeproduct.JPG" alt="" width="800" height="800">
+    <img src="client/public/screenshots/removeproduct.JPG" alt="" width="800" height="600">
 </div>
 
 12) Cart page.
 <div align="center">
-    <img src="client/public/screenshots/cart.JPG" alt="" width="800" height="800">
+    <img src="client/public/screenshots/cart.JPG" alt="" width="800" height="600">
 </div>
 
 13) Checkout page.
 <div align="center">
-    <img src="client/public/screenshots/checkout.JPG" alt="" width="800" height="800">
+    <img src="client/public/screenshots/checkout.JPG" alt="" width="800" height="600">
 </div>
 
 

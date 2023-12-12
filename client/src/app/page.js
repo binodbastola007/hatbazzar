@@ -105,18 +105,18 @@ const index = () => {
    }
 
    useEffect(()=>{
-
-      const products = new Array;
-
       if(categoryArr.length>0){
-         categoryArr.map(async(cate)=>{
-            const filteredData = await fetchProducts(cate);
-            products.push(...filteredData); 
+         categoryArr.map(async(items,index)=>{
+            const filteredData = await fetchProducts(items);
+            if(index == 0){
+               setData(filteredData);
+            }else{
+               setData((prev) => [...prev, ...filteredData]);
+            }
          })
-      } 
-    console.log(products);
-    const myData = [...products];
-    console.log("my data", myData);
+      }else{
+         setData([...allData]);
+      }
        
    },[categoryArr])
 

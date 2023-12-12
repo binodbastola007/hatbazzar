@@ -108,16 +108,16 @@ const index = () => {
       if(categoryArr.length>0){
          categoryArr.map(async(items,index)=>{
             const filteredData = await fetchProducts(items);
-            if(index == 0){
-               setData(filteredData);
+            if(index === 0){
+               setData([...filteredData]);
             }else{
                setData((prev) => [...prev, ...filteredData]);
             }
          })
-      }else{
+      }
+      if(categoryArr.length === 0){
          setData([...allData]);
       }
-       
    },[categoryArr])
 
    const handleCategoryFilter =async(e) => {

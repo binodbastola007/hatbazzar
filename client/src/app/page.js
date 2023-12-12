@@ -111,7 +111,7 @@ const index = () => {
       if(categoryArr.length>0){
          categoryArr.map(async(cate)=>{
             const filteredData = await fetchProducts(cate);
-            products.push(...filteredData);
+            products.push(...filteredData); 
          })
       } 
     console.log(products);

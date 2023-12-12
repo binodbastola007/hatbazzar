@@ -22,7 +22,7 @@ import { Avatar, Badge } from 'antd';
 const Navbar = ({searchedData, setSearchedData , setSearchBtnClick}) => {
 
   const router = useRouter();
-  const [user, setUser] = useState('admin');
+  const [user, setUser] = useState('customer');
   const [loadings, setLoadings] = useState([]);
   const [keyword, setKeyword] = useState('');
   const [selectedItem, setSelecetedItem] = useState(-1);
@@ -68,8 +68,8 @@ const Navbar = ({searchedData, setSearchedData , setSearchBtnClick}) => {
     },
     {
       label: <span onClick={()=>{
-        dispatch(handleLogout());
         router.push('/');  
+        dispatch(handleLogout());
         }
         }>Log out</span>,
       key: '3',

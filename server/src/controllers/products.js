@@ -24,6 +24,15 @@ const productsByCategory = async (req, res) => {
         res.json({msg: "No products found for this category"});
     }
 }
+const filterProducts = async (req, res) => {
+    const data = await ProductCard.find({category:req.query.category});
+    if (data.length > 0) {
+        res.json({data});
+    }
+    else {
+        res.json({msg: "No products found for this category"});
+    }
+}
 
 const addProducts = async (req, res) => {
     const product = {
@@ -136,7 +145,7 @@ const searchProducts = async (req, res) => {
     res.json({ productList: data })
 }
 
-module.exports = { allProducts,productsByCategory, addProducts, editProduct, deleteProduct, productDetails, deleteProductImage, searchProducts };
+module.exports = { allProducts,productsByCategory, filterProducts, addProducts, editProduct, deleteProduct, productDetails, deleteProductImage, searchProducts };
 
 
 

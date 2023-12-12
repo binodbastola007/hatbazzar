@@ -21,7 +21,9 @@ import Scroll from './components/Scroll';
 const index = () => {
 
    const [data, setData] = useState([]);
+   const [count, setCount] = useState(0);
    const [searchedData, setSearchedData] = useState([]);
+   const [categoryArr, setCategoryArr] = useState([]);
    const [minPrice, setMinPrice] = useState('');
    const [maxPrice, setMaxPrice] = useState('');
    const [rating, setRating] = useState('');
@@ -29,7 +31,7 @@ const index = () => {
    const [messageApi, contextHolder] = message.useMessage();
    const router = useRouter();
 
-   const { allData, category, categoryArr, search } = useSelector(state => state.navbar);
+   const { allData, category, search  } = useSelector(state => state.navbar);
    const dispatch = useDispatch();
 
    const [open, setOpen] = useState(false);
@@ -49,6 +51,7 @@ const index = () => {
             if (result.data.length > 0) {
                dispatch(setAllData(result.data));
                setData(result.data);
+               setCount(result.totalCount);
             }
             else {
                messageApi.open({
@@ -65,10 +68,8 @@ const index = () => {
          try {
             const res = await fetch(`http://localhost:4000/products?page=${page}&category=${category}`);
             const result = await res.json();
-            console.log(result);
             if (result.data.length > 0) {
                setData(result.data);
-               return result.data;
             }
             else {
                messageApi.open({
@@ -84,12 +85,52 @@ const index = () => {
 
    }
 
-   const handleCategoryFilter = (e) => {
+   const fetchProducts = async(cate) =>{
+      try {
+         const res = await fetch(`http://localhost:4000/filterProducts?category=${cate}`);
+         const result = await res.json();
+         if (result.data.length > 0) {
+            return result.data;
+         }
+         else {
+            messageApi.open({
+               type: 'error',
+               content: result.msg,
+            });
+         }
+      }
+      catch (err) {
+         console.log(err);
+      }
+   }
+
+   useEffect(()=>{
+
+      const products = new Array;
+
+      if(categoryArr.length>0){
+         categoryArr.map(async(cate)=>{
+            const filteredData = await fetchProducts(cate);
+            products.push(...filteredData);
+         })
+      } 
+    console.log(products);
+    const myData = [...products];
+    console.log("my data", myData);
+       
+   },[categoryArr])
+
+   const handleCategoryFilter =async(e) => {
       let value = e.target.value;
       if (e.target.checked) {
-         dispatch(setCategory(value));
+         if(!(categoryArr.includes(value))){
+            setCategoryArr((prev)=>[...prev,value]);
+         }
       } else {
-         dispatch(setCategory(''));
+         const index = categoryArr.indexOf(value);
+         const newCategoryArr = [...categoryArr] ;
+         newCategoryArr.splice(index,1);
+         setCategoryArr([...newCategoryArr]);
       }
    }
 
@@ -110,7 +151,7 @@ const index = () => {
    }
 
    useEffect(() => {
-      // 👇️ scroll to top on page load
+      //  scroll to top on page load
       window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
    }, [data]);
 
@@ -144,6 +185,13 @@ const index = () => {
             <div className='carousel'>
                {(search == '' && category == '') && <Advertisement />}
             </div>
+            {/* <div>
+               {
+                  products.map((items)=>{
+                     return <h2>{items.productName}</h2>
+                  })
+               }
+            </div> */}
             <div className='productHeading'>
                {category ? <h3>Category: {category}</h3>
                   :
@@ -166,7 +214,7 @@ const index = () => {
             </div>
             <br />
             <div className='pagination'>
-               <Pagination onChange={(page) => fetchDetails(category, page)} defaultCurrent={1} total={data?.length} />
+               <Pagination onChange={(page) => fetchDetails(category, page)} defaultCurrent={1} total={count} />
                <Scroll />
             </div>
             <br />

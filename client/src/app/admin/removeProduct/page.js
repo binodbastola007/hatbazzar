@@ -23,6 +23,7 @@ import { Pagination } from 'antd';
 const page = () => {
 
    const [data, setData] = useState([]);
+   const [count, setCount] = useState(0);
    const [searchedData, setSearchedData] = useState([]);
    const [minPrice, setMinPrice] = useState('');
    const [maxPrice, setMaxPrice] = useState('');
@@ -58,6 +59,7 @@ const page = () => {
             if (result.data.length > 0) {
                dispatch(setAllData(result.data));
                setData(result.data);
+               setCount(result.totalCount);
             }
             else {
                messageApi.open({
@@ -215,7 +217,7 @@ const page = () => {
             </div>
             <br/>
             <div className='pagination'>
-            <Pagination onChange={(page) => fetchDetails(category, page)} defaultCurrent={1} total={data.length} />
+            <Pagination onChange={(page) => fetchDetails(category, page)} defaultCurrent={1} total={count} />
             <Scroll/>
             </div>
             <br/>

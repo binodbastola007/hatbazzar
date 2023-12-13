@@ -63,7 +63,7 @@ const page = () => {
             <Navbar />
             <div className='body'>
                 <div className='shippingDetails'>
-                    <h3 style={{textAlign:'center',marginTop:'10px'}}>Enter your shipping details</h3>
+                    <h3 style={{ textAlign: 'center', marginTop: '10px' }}>Enter your shipping details</h3>
                     <div className='shippingContainer'>
                         <Form
                             className='checkoutForm'
@@ -229,8 +229,6 @@ const page = () => {
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
             <Footer />

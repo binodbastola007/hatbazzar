@@ -6,8 +6,12 @@ const page = () => {
 
     const inputRef = useRef(null);
 
+    var currentTime = new Date();
+    var formattedTime = currentTime.toISOString().slice(2, 10).replace(/-/g, '') + '-' + currentTime.getHours() + currentTime.getMinutes() + currentTime.getSeconds();
+
+
     const generateSignatures=()=>{
-      var hash =  CryptoJS.HmacSHA256(`total_amount=100,transaction_uuid=11-20012,product_code=EPAYTEST`, "8gBm/:&EnhH.1/q");
+      var hash =  CryptoJS.HmacSHA256(`total_amount=100,transaction_uuid=${formattedTime},product_code=EPAYTEST`, "8gBm/:&EnhH.1/q");
       var hashInBase64 =  CryptoJS.enc.Base64.stringify(hash);
       inputRef.current.value = hashInBase64;
     }
@@ -37,7 +41,7 @@ const page = () => {
         </tr>
         <tr>
           <td>Transaction UUID:</td>
-          <td><input type="text" id="transaction_uuid" name="transaction_uuid" defaultValue="11-20012" className="form" required /></td>
+          <td><input type="text" id="transaction_uuid" name="transaction_uuid" defaultValue={formattedTime} className="form" required /></td>
         </tr>
         <tr>
           <td>Product Code:</td>

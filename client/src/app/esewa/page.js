@@ -49,7 +49,6 @@ const page = () => {
       hiddenField.setAttribute("value", values[key]);
       form.appendChild(hiddenField);
     }
-
     document.body.appendChild(form);
     // form.submit();
     console.log(form);

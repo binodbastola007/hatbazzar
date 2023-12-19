@@ -1,58 +1,42 @@
 "use client";
 import React from 'react';
+import { useSelector } from 'react-redux';
+import cartSlice from '../GlobalRedux/Features/cart.slice';
 
 
 const page = () => {
 
-  const post = () => {
+  const { orderId, totalAmount } = useSelector(state => state.cart);
 
-    var form = null;
-    var currentTime = new Date();
-    var formattedTime = currentTime.toISOString().slice(2, 10).replace(/-/g, '') + '-' + currentTime.getHours() + currentTime.getMinutes() + currentTime.getSeconds();
-
-
-
-    var ESEWA_URL = "https://rc-epay.esewa.com.np/api/epay/main/v2/form";
-
-    var t_amount = "100";
-    var t_uidd = `${formattedTime}`;
-    var p_code = "EPAYTEST";
-    var s_key = "8gBm/:&EnhH.1/q";
-
-    var hash = CryptoJS.HmacSHA256(`total_amount=${t_amount},transaction_uuid=${t_uidd},product_code=${p_code}`, `${s_key}`);
-    var hashInBase64 = CryptoJS.enc.Base64.stringify(hash);
-
-    const values = {
-      amount: t_amount,
-      tax_amount: "0",
-      total_amount: t_amount,
-      transaction_uuid: t_uidd,
-      product_delivery_charge: "0",
-      product_service_charge: "0",
-      product_code: p_code,
-      secret: s_key,
-      signature: `${hashInBase64}`,
-      signed_field_names: "total_amount, transaction_uuid, product_code",
-      success_url: "https://esewa.com.np",
-      failure_url: "https://google.com"
+  function post() {
+    var path="https://uat.esewa.com.np/epay/main";
+    var params= {
+        amt: totalAmount,
+        psc: 0,
+        pdc: 500,
+        txAmt: 0,
+        tAmt: totalAmount + 500,
+        pid: orderId,
+        scd: "EPAYTEST",
+        su: "http://localhost:3000/esewa/esewa_success",
+        fu: "http://localhost:3000/esewa/esewa_failure"
     }
 
-
-    form = document.createElement("form");
-    form.setAttribute("method", "POST");
-    form.setAttribute("action", ESEWA_URL);
-
-    for (var key in values) {
-      var hiddenField = document.createElement("input");
-      hiddenField.setAttribute("type", "text");
-      hiddenField.setAttribute("name", key);
-      hiddenField.setAttribute("value", values[key]);
-      form.appendChild(hiddenField);
-    }
-    document.body.appendChild(form);
-    // form.submit();
-    console.log(form);
-  };
+      var form = document.createElement("form");
+      form.setAttribute("method", "POST");
+      form.setAttribute("action", path);
+  
+      for(var key in params) {
+          var hiddenField = document.createElement("input");
+          hiddenField.setAttribute("type", "hidden");
+          hiddenField.setAttribute("name", key);
+          hiddenField.setAttribute("value", params[key]);
+          form.appendChild(hiddenField);
+      }
+  
+      document.body.appendChild(form);
+      form.submit();
+  } 
 
 return (
   <div>

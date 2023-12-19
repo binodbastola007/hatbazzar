@@ -4,7 +4,8 @@ import { createSlice } from "@reduxjs/toolkit";
 export const initialState = {
   productList : [],
   productCount: 0,
-  orderId:''
+  orderId:'',
+  totalAmount:0
 };
 
 const CartSlice = createSlice({
@@ -28,9 +29,12 @@ const CartSlice = createSlice({
     },
     setOrderId : (state, actions)=>{
       state.orderId = actions.payload;
+    },
+    setTotalAmount : (state, actions)=>{
+      state.totalAmount = actions.payload;
     }
   }
 });
 
-export const { buyNow , addToCart , updateProductList , updateQuantity, setOrderId} = CartSlice.actions;
+export const { buyNow , addToCart , updateProductList , updateQuantity, setOrderId, setTotalAmount} = CartSlice.actions;
 export default CartSlice.reducer;

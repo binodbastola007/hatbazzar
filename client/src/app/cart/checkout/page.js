@@ -12,8 +12,7 @@ import '@/app/styles/cart.css';
 
 const page = () => {
 
-    const [total, setTotal] = useState(0);
-    const { productList, orderId } = useSelector(state => state.cart);
+    const { productList, orderId, totalAmount } = useSelector(state => state.cart);
     const { category } = useSelector(state => state.navbar);
     const router = useRouter();
     const { Option } = Select;
@@ -36,13 +35,6 @@ const page = () => {
         const data = res.json();
 
     };
-    const sumPrice = () => {
-        let totalPrice = 0;
-        productList.map((item) => {
-            totalPrice = totalPrice + (item.price * item.quantity);
-        })
-        setTotal(totalPrice);
-    }
 
 
     const hasPageBeenRendered = useRef(false);
@@ -53,10 +45,6 @@ const page = () => {
         hasPageBeenRendered.current = true;
     }, [category]);
 
-
-    useEffect(() => {
-        sumPrice();
-    }, [])
 
     return (
         <>
@@ -211,11 +199,11 @@ const page = () => {
                                 <div>
                                     <h3 style={{ textAlign: 'left' }}>PriceDetails</h3>
                                     <div className='priceDetails'>
-                                        <span >Total price : {total}</span>
+                                        <span >Total price : {totalAmount}</span>
                                         <span >Quantity: {productList.length} items </span>
                                         <span >Discount : 0 </span>
                                         <span > Delivery charge : 0 </span>
-                                        <span >Price payable : {total}</span>
+                                        <span >Price payable : {totalAmount}</span>
                                         <br />
                                         <span>Order id : {orderId}</span>
                                     </div>

@@ -8,7 +8,7 @@ import Products from '../components/Products';
 import '../styles/cart.css';
 import { useDispatch, useSelector } from "react-redux";
 import { setSearchBarClose } from '../GlobalRedux/Features/navbar.slice';
-import { setOrderId } from '../GlobalRedux/Features/cart.slice';
+import { setOrderId, setTotalAmount } from '../GlobalRedux/Features/cart.slice';
 import { message } from 'antd';
 import { BsFillCartXFill } from "react-icons/bs";
 import { useRouter } from 'next/navigation';
@@ -37,58 +37,11 @@ const page = () => {
     setTotal(totalPrice);
   }
 
-  const handlePayment = async (total) => {
-    const product_code = "EPAYTEST";
-    const signedFieldsName = 'total, orderId, product_code';
-
-    var hash = CryptoJS.HmacSHA256(signedFieldsName, "8gBm/:&EnhH.1/q");
-    var hashInBase64 = CryptoJS.enc.Base64.stringify(hash);
-
-
-    const value = {
-      amount: total,
-      failure_url: "https://google.com",
-      product_delivery_charge: 0,
-      product_service_charge: 0,
-      product_code: "EPAYTEST",
-      signature: hashInBase64,
-      signed_field_names: signedFieldsName,
-      success_url: "https://esewa.com.np",
-      tax_amount: 0,
-      total_amount: total,
-      transaction_uuid: orderId
-    }
-    try {
-      const res = await fetch('https://rc-epay.esewa.com.np/api/epay/main/v2/form', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*'
-        },
-        body: JSON.stringify(value)
-      })
-      const data = await res.json();
-      console.log(data);
-    } catch (err) {
-      console.log(err);
-    }
-
-
-  }
 
   useEffect(() => {
     sumPrice();
   }, [productList]);
 
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = "https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js";
-    script.async = true;
-    document.body.appendChild(script);
-    return () => {
-      document.body.removeChild(script);
-    }
-  })
 
   const handleSave = async (products) => {
     console.log(products);
@@ -99,6 +52,7 @@ const page = () => {
     })
     const data = await res.json();
     dispatch(setOrderId(data.orderId));
+    dispatch(setTotalAmount(total));
     messageApi.open({
       type: res.status == 200 ? 'success' : 'error',
       content: data.msg,

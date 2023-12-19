@@ -25,4 +25,18 @@ const addCheckoutDetails = async (req, res) => {
     }
 }
 
-module.exports = { saveOrder, addCheckoutDetails };     
+const getOrderForPayment = async (req,res,next) => {
+    try {
+    const order = await Order.findById(req.body.oid);
+    if (!order) {
+    return res.status(400).json({ error: 'No order found' });
+    }
+    req.order = order;
+    next();
+}
+    catch (err){
+    return res.status(400).json({error: err?.message ||'No Order found'});
+    }
+}
+
+module.exports = { saveOrder, addCheckoutDetails, getOrderForPayment };     

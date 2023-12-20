@@ -8,9 +8,10 @@ const orderSchema = new Schema({
     district:String,
     city:String,
     street:String,
+    userId:String,
     orderItems:[{type:Object,required:true}]
   })
-const Order = mongoose.model('order',orderSchema); 
+const Order = mongoose.model('Order',orderSchema); 
   
 
 module.exports=Order;

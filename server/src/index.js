@@ -6,6 +6,7 @@ const app = express();
 const userRoute = require('./routes/user');
 const productRoute = require('./routes/products');
 const orderRoute = require('./routes/order');
+const esewaRoute = require('./routes/esewa');
 const cors = require('cors');
 const port = process.env.PORT || 4000;
 
@@ -15,6 +16,7 @@ app.use(express.urlencoded({limit: '25mb'}));
 app.use(userRoute);
 app.use(productRoute);
 app.use(orderRoute);
+app.use(esewaRoute);
 
 connection();
 

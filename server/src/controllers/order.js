@@ -17,7 +17,7 @@ const saveOrder = async (req, res) => {
 }
 
 const addCheckoutDetails = async (req, res) => {
-    const data = await Order.findByIdAndUpdate({ _id: req.params.id }, req.body)
+    const data = await Order.findByIdAndUpdate({_id: req.params.id }, req.body)
     if (data) {
         res.json({ msg: 'Successfully added shipping details' });
     } else {

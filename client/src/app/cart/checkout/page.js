@@ -14,6 +14,7 @@ const page = () => {
 
     const { productList, orderId, totalAmount } = useSelector(state => state.cart);
     const { category } = useSelector(state => state.navbar);
+    const { userDetails } = useSelector(state => state.user);
     const router = useRouter();
     const { Option } = Select;
 
@@ -25,7 +26,8 @@ const page = () => {
             province: values.district.province,
             district: values.address.district,
             city: values.city,
-            street: values.street
+            street: values.street,
+            userId: userDetails._id
         }
         const res = await fetch(`http://localhost:4000/add-checkout-details/${orderId}`, {
             method: 'PUT',
@@ -33,6 +35,8 @@ const page = () => {
             body: JSON.stringify(shippingDetails)
         })
         const data = res.json();
+        
+        router.push('/esewa');
 
     };
 

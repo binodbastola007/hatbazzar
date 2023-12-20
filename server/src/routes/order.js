@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { saveOrder, addCheckoutDetails, getOrderForPayment } = require('../controllers/order');
+const { saveOrder, addCheckoutDetails } = require('../controllers/order');
 
 router.post('/save-order', saveOrder);
 

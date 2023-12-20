@@ -59,11 +59,11 @@ const Navbar = ({searchedData, setSearchedData , setSearchBtnClick}) => {
       key: '0',
     },
     {
-      label: <a href="https://www.aliyun.com">profile</a>,
+      label: <a href="https://www.aliyun.com">Profile & settings</a>,
       key: '1',
     },
     {
-      label: <a href="https://www.aliyun.com">settings</a>,
+      label: <a href="https://www.aliyun.com">My orders</a>,
       key: '2',
     },
     {

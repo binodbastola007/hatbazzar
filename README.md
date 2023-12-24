@@ -19,11 +19,9 @@ It is a MERN stack project where user retrive data stored in mongodb database.Ne
 The project is supossed to have the following pages inside the app:
 
 - [ ] Register and Login page .
-- [ ] Admin dashboard for managing products.
 - [ ] Browse through different products(Product description page).
 - [ ] Filter products based on category, price and ratings(Filter sideBar/Drawer).
-- [ ] Add products to cart(Add product page).
-- [ ] View list of all user(User view page).
+- [ ] Admin dashboard for managing products.
 
 1) Admin can do the following things in the app:
    *  Add products .

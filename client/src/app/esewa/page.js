@@ -1,12 +1,18 @@
 "use client";
-import React from 'react';
+import React,{useEffect,useRef} from 'react';
 import { useSelector } from 'react-redux';
 import cartSlice from '../GlobalRedux/Features/cart.slice';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import { useRouter } from 'next/navigation';
+import '@/app/styles/cart.css';
 
 
-const page = () => {
+const esewa = () => {
 
   const { orderId, totalAmount } = useSelector(state => state.cart);
+  const { category } = useSelector(state => state.navbar);
+  const router = useRouter();
 
   function post() {
     var path="https://uat.esewa.com.np/epay/main";
@@ -38,11 +44,29 @@ const page = () => {
       form.submit();
   } 
 
+  const hasPageBeenRendered = useRef(false);
+  useEffect(() => {
+      if (hasPageBeenRendered.current) {
+          router.push('/');
+      }
+      hasPageBeenRendered.current = true;
+  }, [category]);
+
 return (
-  <div>
-    <button onClick={() => post()}>Pay with esewa</button>
+  <>
+  <Navbar/>
+  <div className='body'>
+    <h3>Select your payment method</h3>
+    <div className='paymentOptions'>
+    <div className='paymentDiv'>
+     <span>* Esewa:</span>
+    <button className='epay' onClick={() => post()}>Pay via esewa</button>
+    </div>
+    </div>
   </div>
+  <Footer/>
+  </>
 )
 }
 
-export default page
+export default esewa;

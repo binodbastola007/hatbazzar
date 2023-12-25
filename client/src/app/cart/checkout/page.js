@@ -35,9 +35,6 @@ const page = () => {
             body: JSON.stringify(shippingDetails)
         })
         const data = res.json();
-        
-        router.push('/esewa');
-
     };
 
 

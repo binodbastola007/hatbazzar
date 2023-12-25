@@ -208,3 +208,27 @@
     color: black !important;
     background-color:rgba(0, 0, 0, 0.2) !important;
 }
+.paymentOptions{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    height: 500px;
+    width: 500px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.paymentDiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-left: 30px;
+    margin-top: 50px;
+}
+.epay{
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #60bb46;
+    color: white;
+}
